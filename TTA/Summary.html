@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Summary Financial</title>
 </head>
 <style>
@@ -11,18 +12,293 @@
             height: auto;
             border: 1px solid #040404;
         }
-        .group {
+        .nav {
             display: flex;
             align-items: center;
             background-color: rgba(35, 208, 15, 0.867);
             justify-content: flex-start;
         }
+        .container {
+            display: flex; /* ให้ .group1 และ .group3 อยู่ในแถวเดียวกัน */
+            justify-content: space-between; /* ทำให้ช่องว่างระหว่าง .group1 และ .group3 อยู่ห่างกัน */
+            align-items: center; /* จัดตำแหน่งแนวตั้งให้อยู่กลาง */
+        }
+        .group1 {
+            padding: 8px;
+            border: 1px solid #000000;
+            margin: 4px;
+            width: 50%; 
+        }
+        .group2 {
+            border: 1px solid #040404;
+            width: 52%;
+        }
+        .group3 {
+            border: 1px solid #000000;
+            width: 48%;
+            padding: 1%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .menu-item {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .menu-item1 {
+            margin-left: auto; /* ผลักปุ่มไปทางขวา */
+            text-decoration: none; /* เอาขีดเส้นใต้ลิงก์ออก */
+            color: rgb(0, 0, 0); /* เปลี่ยนสีข้อความของลิงก์ */
+            border: 1px solid #000000;
+            border-radius: 20px;
+        }
+        .menu-item1:hover {
+            color: rgb(253, 253, 253);
+            background-color: #d6d6d6;
+        }
+        a {
+            text-decoration: none; /* ลบขีดเส้นใต้จากลิงก์ */
+            margin: 1%;
+            padding: 0.5%;
+            border: 1px solid #000000;
+            background-color: #f1f1f1;
+            color: #000000;
+            border-radius: 20px;
+        }
+        a:hover {
+            color: rgb(253, 253, 253);
+            background-color: #d6d6d6;
+        }
+        .table-container {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table-container th, .table-container td {
+            padding: 15px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .table-container th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .table-container td {
+            background-color: #fff;
+        }
+
+        .table-container tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .table-container tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* คอนเทนเนอร์หลัก */
+        .chart-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
+            justify-content: center;
+            /* border: 1px solid #000000; */
+            width: 25%;
+            margin: 0.2%;
+        }
+        /* กราฟแต่ละกล่อง */
+        .chart-box {
+            width: 100%; /* ขนาดครึ่งหนึ่งของคอนเทนเนอร์ (2 กล่องในแถว) */
+            border: 1px solid #000000;
+            padding: 2%;
+            box-sizing: border-box;
+        }
+        /* การจัดตำแหน่งของกราฟ */
+        .main2 {
+            width: 100%; /* ใช้ความกว้างเต็ม */
+            height: 100%; /* ใช้ความสูงเต็ม */
+            /* border: 1px solid #000000; */
+        }
 </style>
 <body>
-    <div class="group">
+    <div class="nav">
         <img src="data:image/png;base64,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" alt="Logo" class="logo">
-        <div>Summary Financial</div>
+        <p style="color: aliceblue; padding: 0px 10px">Summary Financial</p>
+        <a href="index.html" class="menu-item1">Go home</a>
     </div>
     <p>As of 31 December 2023</p>
+    <div class="container">
+        <div class="group1">
+            1
+        </div>
+        <div class="group3">
+            <canvas id="myBarChart" class="main1"></canvas>
+        </div>
+    </div><br>
+
+    <div class="container">
+        <div class="group2">
+            <h3>TTA Group Revenue</h3><hr>
+            <p class="menu-item">In Million Bath <a href="index.html" class="menu-item">Go to Detail</a></p>
+            <table class="table-container">
+                <thead>
+                    <tr>
+                        <th>Group</th>
+                        <th>2021</th>
+                        <th>2022</th>
+                        <th>2023</th>
+                        <th>Change</th>
+                        <th>%Change</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="chart-container">
+            <!-- กล่องกราฟ 1 -->
+            <div class="chart-box">
+                <canvas id="myBarChart1" class="main2"></canvas>
+            </div>
+        
+            <!-- กล่องกราฟ 2 -->
+            <div class="chart-box">
+                <canvas id="myBarChart2" class="main2"></canvas>
+            </div>
+        </div>
+        <div class="chart-container">
+            <!-- กล่องกราฟ 3 -->
+            <div class="chart-box">
+                <canvas id="myBarChart3" class="main2"></canvas>
+            </div>
+        
+            <!-- กล่องกราฟ 4 -->
+            <div class="chart-box">
+                <canvas id="myBarChart4" class="main2"></canvas>
+            </div>
+        </div>
+        </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // สร้างกราฟแท่ง
+        const ctx = document.getElementById('myBarChart').getContext('2d');
+        const myBarChart = new Chart(ctx, {
+            type: 'bar', // กราฟประเภทแท่ง
+            data: {
+                labels: ['2020', '2021', '2022', '2023', '2024'], // ปี
+                datasets: [{
+                    label: 'Revenue (Million)', // ชื่อชุดข้อมูล
+                    data: [1000, 1200, 1500, 1800, 2000], // ยอดรายได้ในแต่ละปี
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)', // สีของแท่ง
+                    borderColor: 'rgba(54, 162, 235, 1)', // สีของเส้นขอบ
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                plugins: {
+                    datalabels: {
+                        anchor: 'end', // ตำแหน่งของตัวเลข
+                        align: 'top', // วางตัวเลขที่ด้านบนของแท่ง
+                        color: '#333', // สีของตัวเลข
+                        font: {
+                            weight: 'bold',
+                        },
+                        formatter: function(value) {
+                            return value + 'M'; // เพิ่ม 'M' เพื่อแสดงว่าเป็นล้าน
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true, // เริ่มที่ 0
+                    }
+                }
+            }
+        });
+        const charts = ['myBarChart1', 'myBarChart2', 'myBarChart3', 'myBarChart4'];
+
+    charts.forEach(function(chartId, index) {
+        const ctx = document.getElementById(chartId).getContext('2d');
+        new Chart(ctx, {
+            type: 'bar', // กราฟประเภทแท่ง
+            data: {
+                labels: ['1000M', '1200M', '1500M', '1800M', '2000M'], // ยอด
+                datasets: [{
+                    label: 'Revenue (Million)', // ชื่อชุดข้อมูล
+                    data: [2020, 2021, 2022, 2023, 2024], // ปี
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)', // สีของแท่ง
+                    borderColor: 'rgba(54, 162, 235, 1)', // สีของเส้นขอบ
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                plugins: {
+                    datalabels: {
+                        anchor: 'end', // ตำแหน่งของตัวเลข
+                        align: 'top', // วางตัวเลขที่ด้านบนของแท่ง
+                        color: '#333', // สีของตัวเลข
+                        font: {
+                            weight: 'bold',
+                        },
+                        formatter: function(value) {
+                            return value; // แสดงปีในแท่งกราฟ
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Revenue (Million)', // แสดงชื่อแกน X เป็นยอด
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Year' // แสดงชื่อแกน Y เป็นปี
+                        },
+                        beginAtZero: true, // เริ่มที่ 0
+                    }
+                }
+            }
+        });
+    });
+    </script>
 </body>
 </html>
