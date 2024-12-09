@@ -6,23 +6,32 @@
     <title>Detail Financial Data</title>
 </head>
 <style>
-        /* คอนเทนเนอร์ที่ห่อรวมทั้ง dropdown และปุ่ม "Go home" */
+        /* คอนเทนเนอร์ที่ห่อรวมทั้ง dropdown */
         .container {
             display: flex;               /* ใช้ Flexbox เพื่อจัดตำแหน่ง */
             align-items: center;         /* จัดตำแหน่งให้อยู่กลางในแนวตั้ง */
-            gap: 6px;                   /* เว้นระยะห่างระหว่าง dropdown และปุ่ม */
-            justify-content: flex-end;   /* จัดทุกอย่างให้ชิดขวา */
+            gap: 6px;                   /* เว้นระยะห่างระหว่าง dropdown */
         }
+
+        .logo-container {
+            display: flex;               /* ใช้ Flexbox เพื่อจัดตำแหน่ง */
+            align-items: center;         /* จัดตำแหน่งให้อยู่กลางในแนวตั้ง */
+        }
+
+        /* ปรับขนาดของ logo */
         .logo {
-            width: 70px; /* Adjust size as needed */
+            width: 80px; /* Adjust size as needed */
             height: auto;
             border: 1px solid #040404;
         }
+
         .nav {
             display: flex;
             align-items: center;
             background-color: rgba(35, 208, 15, 0.867);
-            justify-content: ;
+            justify-content: space-between;  /* จัดตำแหน่งให้อยู่ขอบทั้งสองข้าง */
+            width: 100%;  /* ใช้พื้นที่ทั้งหมดของ container */
+            /* padding: 10px; เพิ่ม padding ให้น่าดู */
         }
         /* การตั้งค่า select ให้ดูสวยงาม */
         select {
@@ -30,7 +39,6 @@
             font-size: 12px;
             border-radius: 4px;
             border: 1px solid #8a8989;
-            justify-content: flex-end;
         }
 
         /* การตั้งค่าเมนู "Go home" */
@@ -42,30 +50,302 @@
             border-radius: 5px;
             margin-left: 10px;  /* ทำให้ปุ่ม "Go home" ขยับไปทางขวา */
         }
+
+        /* ทำให้ .con-1 ใช้ Flexbox เพื่อให้ .L1 และ .R1 อยู่ในแนวนอน */
+        .container-1 {
+            display: flex;        /* ใช้ Flexbox */
+            gap: 10px;            /* เพิ่มช่องว่างระหว่าง .L1 และ .R1 */
+            margin-top: 0.5%;
+        }
+
+        .L1, .R1 {
+            padding: 10px;        /* เพิ่ม padding ให้แต่ละกล่อง */
+            background-color: rgb(209, 209, 209);  /* แค่ทำให้มองเห็นได้ง่าย */
+            border: 1px solid #000000; /* เพิ่มขอบเพื่อให้ดูชัด */
+            
+        }
+        .L1 {
+            width: 30%;
+            font-size: 14px;       /* ขนาดตัวอักษรปกติ */
+        }
+
+        .item1, .item2, .item3 {
+            text-align: center;           /* จัดข้อความให้ตรงกลาง */
+        }
+        .con-1 {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-evenly;
+        }
+        .item-1, .item-2, .item-3 {
+            text-align: center;           /* จัดข้อความให้ตรงกลาง */
+        }
+        
+        .R1 {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            width: 70%;
+        }
+        
+        .main {
+            display: flex;
+            justify-content: flex-end;
+        }
+        .off1  {
+            margin-top: 1%;
+            border: 1px solid black;
+            width: 27.2%;
+            text-align: center;
+            background-color: #f2f2f2;
+            padding: 5px;
+        }
+        .off2 {
+            margin-top: 1%;
+            border: 1px solid black;
+            width: 27.9%;
+            text-align: center;
+            background-color: #f2f2f2;
+            padding: 5px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid black;
+            /* margin-top: 0.5%; */
+        }
+        
+        th {
+            padding: 10px;
+            /* text-align: left; */
+            border: 1px solid #000000;
+        }
+        td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #000000;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;  /* สีพื้นหลังสำหรับแถวคู่ */
+        }
 </style>
 <body>
     <div class="nav">
-        <img src="data:image/png;base64,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" alt="Logo" class="logo">
-        <p style="color: aliceblue; padding: 0px 10px">Detail Financial Data</p>
+        <div class="logo-container">
+            <img src="data:image/png;base64,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" alt="Logo" class="logo">
+            <p style="color: aliceblue; margin-left: 10px;">Detail Financial Data</p>
+        </div>
         
         <div class="container">
             <!-- Dropdowns -->
-            <select>
-                <option value="">Year</option>
+            <label for="year">Year</label>
+            <select id="year">
+                <option value=""></option>
             </select>
-            <select>
-                <option value="">Quarter</option>
-            </select>
-            <select>
-                <option value="">Year Compare</option>
-            </select>
-            <select>
-                <option value="">Quarter Compare</option>
+            
+            <label for="quarter">Quarter</label>
+            <select id="quarter">
+                <option value=""></option>
             </select>
         
-            <!-- ปุ่ม Go home -->
+            <label for="yearCompare">Year Compare</label>
+            <select id="yearCompare">
+                <option value=""></option>
+            </select>
+        
+            <label for="quarterCompare">Quarter Compare</label>
+            <select id="quarterCompare">
+                <option value=""></option>
+            </select>
             <a href="index.html" class="menu-item1">Go home</a>
         </div>
     </div>
+    
+
+    <div class="container-1">
+        <div class="L1">
+            Key Highlight Performance 2023<br>
+            As of 31 December 2023   Unit : Million THB<br>
+
+            <div class="con-1">
+                <div class="item1">
+                    <img src="https://png.pngtree.com/png-vector/20220625/ourmid/pngtree-money-bag-icon-illustration-isolated-sign-symbol-png-image_5431959.png" alt="Example Image" width="100" height="70" /><br>
+                    Total Revenues<br>
+                    24,744.44
+                </div><br>
+                <div class="item2">
+                    <img src="https://images.emojiterra.com/google/noto-emoji/unicode-16.0/bw/1024px/1fa99.png" alt="Example Image" width="60" height="60" /><br>
+                    Net Profits<br>
+                    1,216.94
+                </div><br>
+                <div class="item3">
+                    <img src="https://cdn-icons-png.flaticon.com/512/102/102546.png" alt="Example Image" width="55" height="55" /><br>
+                    Total Assets<br>
+                    42,973.00
+                </div>
+            </div>
+        </div>
+        <div class="R1">
+            <div class="item-1">
+                Revenue Breakdown
+            </div>
+            <div class="item-1">
+                EBITDA Structure
+            </div>
+            <div class="item-1">
+                Contributed Net Proflts/(Losses) to TTA
+            </div>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="off1">
+            Quarter
+        </div>
+        <div class="off2">
+            Year
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Main</th>
+              <th>Category</th>
+              <th>2021/Q3</th>
+              <th>2021/Q4</th>
+              <th>QoQ</th>
+              <th>2021</th>
+              <th>2024</th>
+              <th>YoY</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Total Revenues</td>
+              <td>Total Revenues</td>
+              <td>2,117,080,339</td>
+              <td>2,595,849,194</td>
+              <td>22.61%</td>
+              <td>7,986,694,081</td>
+              <td>8,647,124,810</td>
+              <td>8.27%</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Shipping</td>
+              <td>244,030,872</td>
+              <td>942,330,657</td>
+              <td>286.15%</td>
+              <td>1,595,999,274</td>
+              <td>2,221,033,167</td>
+              <td>39.16%</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Mermaid</td>
+              <td>199,153,541</td>
+              <td>176,861,583</td>
+              <td>-11.19%</td>
+              <td>1,289,820,321</td>
+              <td>1,047,385,350</td>
+              <td>-18.80%</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>PMTA</td>
+              <td>333,882,762</td>
+              <td>507,350,031</td>
+              <td>51.95%</td>
+              <td>1,504,221,490</td>
+              <td>1,473,005,110</td>
+              <td>-2.08%</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Pizza</td>
+              <td>435,444,002</td>
+              <td>855,788,955</td>
+              <td>96.53%</td>
+              <td>933,355,867</td>
+              <td>2,311,989,530</td>
+              <td>147.71%</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Others</td>
+              <td>904,569,762</td>
+              <td>113,517,968</td>
+              <td>-87.45%</td>
+              <td>2,663,297,129</td>
+              <td>1,593,711,653</td>
+              <td>-40.16%</td>
+            </tr>
+            <tr>
+              <td>Total Costs of Sales and Services</td>
+              <td>Total Costs of Sales and Services</td>
+              <td>1,733,552,374</td>
+              <td>2,510,558,539</td>
+              <td>44.82%</td>
+              <td>8,132,881,590</td>
+              <td>11,216,085,599</td>
+              <td>37.91%</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Shipping</td>
+              <td>917,054,145</td>
+              <td>785,511,970</td>
+              <td>-14.34%</td>
+              <td>2,757,099,423</td>
+              <td>2,031,062,361</td>
+              <td>-26.33%</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Mermaid</td>
+              <td>280,215,804</td>
+              <td>557,082,961</td>
+              <td>98.80%</td>
+              <td>1,771,736,778</td>
+              <td>2,674,790,674</td>
+              <td>50.97%</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>PMTA</td>
+              <td>101,687,120</td>
+              <td>192,965,020</td>
+              <td>89.76%</td>
+              <td>814,436,745</td>
+              <td>1,514,183,297</td>
+              <td>85.92%</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Pizza</td>
+              <td>219,290,100</td>
+              <td>801,254,630</td>
+              <td>265.39%</td>
+              <td>1,974,138,248</td>
+              <td>2,744,389,039</td>
+              <td>39.02%</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
 </body>
 </html>
+
+            
+            

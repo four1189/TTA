@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .menu-container {
+            display: flex; /* ใช้ flexbox เพื่อให้เมนูเรียงกันในแนวนอน */
+            gap: 20px; /* เว้นระยะระหว่างเมนู */
+        }
+
+        .menu-item {
+            position: relative; /* ใช้ตำแหน่ง relative เพื่อให้เมนูย่อยอยู่ภายใน */
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        /* ตั้งค่าปุ่มเมนูย่อย */
+        .submenu {
+            display: none; /* ซ่อนเมนูย่อย */
+            background-color: #f1f1f1;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            position: absolute;
+            top: 100%; /* ให้เมนูย่อยแสดงอยู่ด้านล่างของเมนูหลัก */
+            left: 0;
+            width: 200px;
+            padding: 10px;
+        }
+
+        .submenu a {
+            display: block;
+            background-color: #ddd;
+            padding: 10px;
+            text-decoration: none;
+            color: black;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+
+        .submenu a:hover {
+            background-color: #bbb; /* เปลี่ยนสีเมื่อเมาส์อยู่บนลิงก์ */
+        }
+
+        /* เมื่อเมาส์อยู่เหนือเมนูหลัก */
+        .menu-item.active .submenu {
+            display: block; /* แสดงเมนูย่อย */
+        }
+
+        /* ตั้งค่าการแสดงปุ่มเมนูย่อย */
+        .submenu-buttons button, .submenu-buttons2 button, .submenu-buttons3 button {
+            display: flex;
+            flex-direction: column; /* เปลี่ยนให้ปุ่มแสดงในแนวตั้ง */
+            gap: 10px;
+            
+        }
+
+        /* สไตล์ของปุ่มเมนูหลัก */
+        .submenu-buttons button, .submenu-buttons2 button, .submenu-buttons3 button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: rgb(255, 255, 255);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* การเปลี่ยนสีเมื่อ hover บนปุ่มเมนู */
+        .submenu-buttons button:hover, .submenu-buttons2 button:hover, .submenu-buttons3 button:hover {
+            background-color: #3e8e41;
+        }
+
+        /* ซ่อนเมนูย่อยเริ่มต้น */
+        .submenu-dropdown {
+            display: none; /* ซ่อนเมนูย่อย */
+            margin-top: 10px; /* ระยะห่างจากปุ่มหลัก */
+            border-radius: 5px;
+            position: relative; /* ใช้ relative เพื่อให้เมนูย่อยแสดงอยู่ด้านล่าง */
+            width: 100%; /* หรือคุณสามารถกำหนดความกว้าง */
+        }
+
+
+        /* สไตล์ของปุ่มในเมนูย่อย */
+        .submenu-dropdown button {
+            display: block; /* แสดงปุ่มในบรรทัดใหม่ */
+            margin: 5px 0;
+            padding: 8px;
+            background-color: #4CAF50;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        /* การเปลี่ยนสีเมื่อ hover บนปุ่มเมนูย่อย */
+        .submenu-dropdown button:hover {
+            background-color: #a3a3a3;
+        }
+</style>
+<body>
+    <div class="menu-container">
+        <div class="menu-item" id="companyMenu">
+            บริษัท
+            <div class="submenu">
+                <div class="submenu-buttons">
+                    <button onclick="toggleSubMenu('infoCompany')">ข้อมูลเกี่ยวกับบริษัท</button>
+                    <div id="infoCompany" class="submenu-dropdown">
+                        <button onclick="window.location.href='#'">ประวัติบริษัท</button>
+                        <button onclick="window.location.href='#'">วิสัยทัศน์และพันธกิจ</button>
+                        <button onclick="window.location.href='#'">โครงสร้างบริษัท</button>
+                    </div>
+                </div>
+                <div class="submenu-buttons2">
+                    <button onclick="toggleSubMenu('location')">2</button>
+                    <div id="location" class="submenu-dropdown">
+                        <button onclick="window.location.href='#'">1</button>
+                        <button onclick="window.location.href='#'">2</button>
+                        <button onclick="window.location.href='#'">3</button>
+                    </div>
+                </div>
+                <div class="submenu-buttons3">
+                    <button onclick="toggleSubMenu('services')">บริการ</button>
+                    <div id="services" class="submenu-dropdown">
+                        <button onclick="window.location.href='#'">1</button>
+                        <button onclick="window.location.href='#'">2</button>
+                        <button onclick="window.location.href='#'">3</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // ฟังก์ชันทำให้เมนูย่อยแสดงหรือซ่อน
+        function toggleSubMenu(menuId) {
+            var submenu = document.getElementById(menuId);
+
+            // เช็คสถานะของเมนูย่อย
+            if (submenu.style.display === 'none' || submenu.style.display === '') {
+                // ถ้าเมนูย่อยถูกซ่อนอยู่ ก็แสดงมันขึ้นมา
+                submenu.style.display = 'block';
+            } else {
+                // ถ้าเมนูย่อยถูกแสดงอยู่ ก็ซ่อนมัน
+                submenu.style.display = 'none';
+            }
+        }
+
+        // ให้เมนูหลัก "บริษัท" มีการเปิดหรือปิดเมนูย่อยเมื่อคลิก
+        document.getElementById('companyMenu').addEventListener('click', function(event) {
+            // ตรวจสอบว่าไม่ใช่การคลิกที่เมนูย่อย
+            if (event.target.closest('.submenu') === null) {
+                this.classList.toggle('active');
+            }
+        });
+    </script>
+</body>
+</html>
