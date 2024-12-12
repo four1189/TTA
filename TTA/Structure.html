@@ -15,9 +15,9 @@
             display: flex;
             align-items: center;
             background-color: rgba(35, 208, 15, 0.867);
-            justify-content: space-between;
-            width: 100%;
-            /* padding: 10px; */
+            justify-content: space-between;  /* จัดตำแหน่งให้อยู่ขอบทั้งสองข้าง */
+            width: 100%;  /* ใช้พื้นที่ทั้งหมดของ container */
+            /* padding: 10px; เพิ่ม padding ให้น่าดู */
         }
 
         /* ปรับการจัดตำแหน่งของ .con1 ให้อยู่กลางหน้าจอ */
@@ -26,49 +26,6 @@
             justify-content: center;   /* จัดกลางในแนวนอน */
             align-items: center;       /* จัดกลางในแนวตั้ง */
             /* height: calc(100vh - 60px); ความสูงของ .con1 จะเต็มหน้าจอลบกับพื้นที่ที่ .nav ใช้ (ประมาณ 60px) */
-        }
-
-        /* กำหนดให้ .con1 เป็นปุ่มที่สามารถคลิกได้ */
-        .con1 {
-            background: linear-gradient(45deg, #cdccff, #cce5ff, #d9f7be, #fff2cc, #e6e6e6); /* ใช้ linear-gradient สำหรับหลายๆ สี */
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            color: #3a3a3a;
-            width: 40%;
-            cursor: pointer; /* ทำให้ดูเหมือนปุ่ม */
-        }
-
-        /* ซ่อนเมนู dropdown */
-        .dropdown-content {
-            display: none; /* เริ่มต้นซ่อน */
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-            position: absolute;
-            z-index: 1;
-        }
-
-        /* ลักษณะของเมนูใน dropdown */
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        /* เปลี่ยนสีเมื่อเมาส์อยู่เหนือ */
-        .dropdown-content a:hover {
-            background-color: #ddd;
-        }
-
-        /* เมื่อเปิด dropdown, แสดงเมนู */
-        .show {
-            display: block;
-        }
-
-        h3 {
-            font-size: 1.5em;
         }
 
         .logo-container {
@@ -82,9 +39,248 @@
             border: 1px solid #040404;
         }
 
+        .menu-item1 {
+            text-decoration: none;
+            color: white;
+            background-color: #333;
+            padding: 8px 8px;
+            border-radius: 5px;
+            margin-left: 8px;  /* ทำให้ปุ่ม "Go home" ขยับไปทางขวา */
+        }
+
+        h1 {
+            font-size: 1.5em;
+            padding: 2%;
+            /* margin: 0 auto; จัดให้กลางในแนวนอน */
+            display: flex; /* ใช้ flexbox */
+            justify-content: center; /* จัดกลางในแนวนอน */
+            align-items: center; /* จัดกลางในแนวตั้ง */
+            height: 20px; /* กำหนดความสูงของ h3 */
+        }
         h2 {
             text-align: center;
             color: rgba(35, 208, 15, 0.867);
+        }
+        h3 {
+            background-color: #8d8d8d;
+            border: 1px solid black;
+            padding: 2%;
+            width: 30%;
+            border-radius: 25px;
+            margin: 0 auto; /* จัดให้กลางในแนวนอน */
+            display: flex; /* ใช้ flexbox */
+            justify-content: center; /* จัดกลางในแนวนอน */
+            align-items: center; /* จัดกลางในแนวตั้ง */
+            height: 20px; /* กำหนดความสูงของ h3 */
+        }
+
+        /* เมนูหลัก */
+        .menu-container {
+            display: flex;
+            background: linear-gradient(45deg, #cdccff, #cce5ff, #d9f7be, #fff2cc, #e6e6e6); /* ใช้ linear-gradient สำหรับหลายๆ สี */
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            width: 40%;
+            cursor: pointer; /* ทำให้ดูเหมือนปุ่ม */
+            margin-inline: auto;
+        }
+        
+        .menu-item {
+            position: relative;
+            padding: 10px 20px;
+            color: rgb(0, 0, 0);
+            cursor: pointer;
+            border-radius: 6px;
+            text-align: center;
+        }
+        
+        /* เมนูย่อยที่แสดงเมื่อเมาส์อยู่เหนือ */
+        .submenu {
+            display: flex;
+            background-color: #f1f1f1;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            position: absolute;
+            top: 120%;
+            left: -50%;
+            width: 210%;
+            min-width: 100px;
+            padding: 8px;
+            white-space: nowrap;
+            gap: 4%;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: stretch;
+        }
+
+        .submenu button {
+            padding: 8px;
+            background-color: #4CAF50;
+            color: rgb(255, 255, 255);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            /* width: 100%; ให้ปุ่มขยายเต็มความกว้างของเมนู */
+            white-space: nowrap; /* ป้องกันการตัดคำในปุ่ม */
+            margin-bottom: 10px; /* เพิ่มระยะห่างระหว่างปุ่มแต่ละอัน */
+        }
+        /* .menu-item:hover .submenu {
+            display: flex; /* แสดงเมนูย่อยเมื่อเมาส์อยู่เหนือ */
+         */
+
+        /* การจัดระเบียบปุ่มภายในเมนูย่อย */
+        .submenu-buttons,
+        .submenu-buttons2,
+        .submenu-buttons3,
+        .submenu-buttons4,
+        .submenu-buttons5,
+        .submenu-buttons6,
+        .submenu-buttons7,
+        .submenu-buttons8 {
+            display: block;
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .submenu-buttons button, 
+        .submenu-buttons2 button, 
+        .submenu-buttons3 button,
+        .submenu-buttons4 button,
+        .submenu-buttons5 button,
+        .submenu-buttons6 button,
+        .submenu-buttons7 button,
+        .submenu-buttons8 button {
+            padding: 4px;
+            background-color: #5cc95f;
+            color: rgb(255, 255, 255);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            height: 50px; /* Adjust the height as needed */
+            flex-shrink: 0;
+        }
+
+        .submenu-buttons button:hover, 
+        .submenu-buttons2 button:hover, 
+        .submenu-buttons3 button:hover,
+        .submenu-buttons4 button:hover,
+        .submenu-buttons5 button:hover,
+        .submenu-buttons6 button:hover,
+        .submenu-buttons7 button:hover,
+        .submenu-buttons8 button:hover {
+            background-color: #3e8e41;
+        }
+
+        /* เมนูย่อยที่แสดงเมื่อคลิก */
+        .submenu-dropdown {
+            display: none;
+            margin-top: -5px;
+            border-radius: 5px;
+            position: relative;
+            width: 100%;
+        }
+
+        .submenu-dropdown button {
+            display: block;
+            margin: 5px 0;
+            padding: 8px;
+            background-color: #4CAF50;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .submenu-dropdown button:hover {
+            background-color: #a3a3a3;
+        }
+
+        /* เมนูย่อยระดับ 1 */
+        .submenu-dropdown-1 {
+            display: none;
+            margin-left: 10px;
+            border-radius: 5px;
+            position: relative;
+        }
+        /* เมนูย่อยระดับ 2 */
+        .submenu-dropdown-2 {
+            display: none;
+            margin-left: 10px;
+            border-radius: px;
+            position: relative;
+        }
+        /* เมนูย่อยระดับ 3 */
+        .submenu-dropdown-3 {
+            display: none;
+            margin-left: 10px;
+            border-radius: 5px;
+            position: relative;
+        }
+        /* เมนูย่อยระดับ 4 */
+        .submenu-dropdown-4 {
+            display: none;
+            margin-left: 10px;
+            border-radius: 5px;
+            position: relative;
+        }
+        /* เมนูย่อยระดับ 5 */
+        .submenu-dropdown-5 {
+            display: none;
+            margin-left: 10px;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .submenu-dropdown-1 button {
+            display: flex;
+            margin: 5px 0;
+            padding: 8px;
+            background-color: #ff0000;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+        .submenu-dropdown-2 button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 5px 0;
+            padding: 8px;
+            background-color: #1100ff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+        .submenu-dropdown-3 button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 5px 0;
+            padding: 8px;
+            background-color: #ffe600;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+        .submenu-dropdown-4 button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 5px 0;
+            padding: 8px;
+            background-color: #ff00dd;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .submenu-dropdown-1 button:hover, 
+        .submenu-dropdown-2 button:hover, 
+        .submenu-dropdown-3 button:hover, 
+        .submenu-dropdown-4 button:hover {
+            background-color: #a3a3a3;
         }
 </style>
 <body>
@@ -93,38 +289,249 @@
             <img src="data:image/png;base64,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" alt="Logo" class="logo">
             <p style="color: aliceblue; margin-left: 10px;">TTA Group Structure & info</p>
         </div>
-    </div>
-    <h2>โครงสร้างการถือหุ้นของกลุ่มบริษัท</h2>
-
-    <div class="main-container">
-        <div class="con1" onclick="toggleDropdown()"> 
-            <h3>บริษัท โทริเซนไทย เอเยนต์ซีส์ จำกัด (มหาชน)<br>
-            (ไทย)</h3>
+        <div class="container">
+            <!-- Dropdowns -->
+            <label for="year">Year</label>
+            <select id="year">
+                <option value=""></option>
+            </select>
+            
+            <label for="quarter">Quarter</label>
+            <select id="quarter">
+                <option value=""></option>
+            </select>
+        
+            <label for="yearCompare">Year Compare</label>
+            <select id="yearCompare">
+                <option value=""></option>
+            </select>
+        
+            <label for="quarterCompare">Quarter Compare</label>
+            <select id="quarterCompare">
+                <option value=""></option>
+            </select>
+            <a href="index.html" class="menu-item1">Go home</a>
         </div>
-        <!-- เมนู dropdown ที่จะถูกซ่อนไว้ -->
-        <div class="dropdown-content">
-            <a href="#">กลุ่มธุระกิจขนส่งทางเรือ</a>
-            <a href="#">กลุ่มธุระกิจบริการนอกชายฝั่ง</a>
-            <a href="#">กลุ่มธุระกิจเคมีภัณฑ์เพื่อการเกษตร</a>
-        </div>
     </div>
+    <h2>โครงสร้างการถือหุ้นของกลุ่มบริษัท</h2><hr>
+        <div class="menu-container">
+            <div class="menu-item" id="companyMenu">
+                <h1>บริษัท โทริเซนไทย เอเยนต์ซีส์ จำกัด (มหาชน)<br>
+                    (ไทย)</h1>
+                <div class="submenu">
+                    <div class="submenu-buttons">
+                        <button onclick="toggleSubMenu('Premo-shipping')">Shipping <br></button>
+                        <div id="Premo-shipping" class="submenu-dropdown-1">
+                            <button onclick="window.location.href='#'">Premo shipping Plc.<br>(Thailand)</button>
+                            <button onclick="toggleSubMenu('Singapore-shipping')">Thoresen Shipping Singapore Pte. Ltd<br>(Singapore)</button>
+                                <div id="Singapore-shipping" class="submenu-dropdown-2" style="display: none;">
+                                    <button onclick="window.location.href='#'">Thoresen Shipping Company Pte. Ltd. <br>(Singapore)</button>
+                                    <button onclick="window.location.href='#'">Thoresen & Company (Bangkok) Limited (TCB) <br>(Thailand)</button>
+                                    <button onclick="toggleSubMenu('TST-shipping')">Thoresen Shipping (Thailand) Co., Ltd. (TST) <br>(Thailand) <br> Invested by TTA (51%), TSS (49%)</button>
+                                    
+                                    <div id="TST-shipping" class="submenu-dropdown-3" style="display: none;">
+                                        <button onclick="window.location.href='#'">Thoresen Klong Padung <br> Krungkasem Joint Venture (Thailand)<br> Invested by TST (95%), TCB (5%)</button>
+                                    </div>
+                                    <button onclick="window.location.href='#'">Thoresen Shipping Dry Bulk DMCC <br>(UAE)</button>
+                                </div>
+    
+                            <button onclick="window.location.href='#'">Thoresen Chartering (HK) Limited <br>(Hong Kong)</button>
+                            <button onclick="window.location.href='#'">Thoresen Shipping Germany GmbH <br>(Germany)</button>
+                        </div>
+                    </div>
+                    
+                    <div class="submenu-buttons2">
+                        <button onclick="toggleSubMenu('Mermaid')">Offshore Service</button>
+                        <div id="Mermaid" class="submenu-dropdown-1">
+                            <button onclick="toggleSubMenu('Mermaid01')">Mermaid Maritime Plc. <br>( lncorporated in Thailand but listed in Singapore )<!--<br>Invested by TTA (49.53%), SOH (7.22%), ATH(1.47%)--></button>
+                            <div id="Mermaid01" class="submenu-dropdown-2" style="display: none;">
+                                <button onclick="window.location.href='#'">Mermaid Drilling Ltd. <br>(Thailand)</button>
+                                <button onclick="toggleSubMenu('Mermaid1')">Mermaid Subsea Services (Thailand) Ltd. <br>(Thailand)</button>
+                                    <div id="Mermaid1" class="submenu-dropdown-3" style="display: none;">
+                                        <button onclick="window.location.href='#'">Seascape Surveys Pte.Ltd <br>(Singapore)</button>
+                                        <button onclick="window.location.href='#'">Mermaid Offshore Servives Pte.Ltd<br>(Singapore)</button>
+                                        <button onclick="window.location.href='#'">Mermaid Subsea Services (Malaysia) Sdn. Bhd.<br>(Malaysia)</button>
+                                        <button onclick="window.location.href='#'">Mermaid Subsea Services (UK) Limited<br>(United Kingdom)</button>
+                                        <button onclick="window.location.href='#'">ZeaQuest Company Limited<br>(Thailand)</button>
+                                        <button onclick="toggleSubMenu('Mermaid2')">Mermaid Subsea Oil and Gas Services DMCEST <br>(UAE)</button>
+                                            <div id="Mermaid2" class="submenu-dropdown-4" style="display: none;">
+                                                <button onclick="window.location.href='#'">Millennium 3 Ship Management and Operations DMCCO <br>(UAE)</button>
+                                            </div>
+                                        <button onclick="window.location.href='#'">Mermaid Decom Co., Ltd. <br>(Thailand)</button>
+                                    </div>
+                                    <button onclick="toggleSubMenu('Mermaid3')">Mermaid Maritime Mauritius Ltd. <br>(Mauritius)</button>        
+                                    <div id="Mermaid3" class="submenu-dropdown-1" style="display: none;">
+                                        <button onclick="toggleSubMenu('Mermaid4')">Mermaid International Ventures<br>(Cayman Islands)</button>
+                                            <div id="Mermaid4" class="submenu-dropdown-3" style="display: none;">
+                                                <button onclick="toggleSubMenu('Mermaid5')">Mermaid Subsea Services <br>(International) Ltd.<br>(Seychelles)</button>        
+                                                    <div id="Mermaid5" class="submenu-dropdown-4" style="display: none;">
+                                                        <button onclick="window.location.href='#'">Mermaid Subsea Services <br>Saudi Arabia Co., Ltd. <br>(Saudi Arabia)</button>
+                                                        <button onclick="window.location.href='#'">Mermaid Subsea Services LLC<br>(Qatar)</button>
+                                                    </div>
+                                            </div>
+                                    </div>              
+                            <button onclick="window.location.href='#'">Zamil Mermaid Offshore Services Company LLC <br>(Saudi Arabia)</button>
+                            <button onclick="window.location.href='#'">PTGC Co., Ltd. <br>(Cambodia)</button>
+                            <button onclick="window.location.href='#'">Mermaid Ventures Co., Ltd. <br>(Thailand)</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="submenu-buttons3">
+                        <button onclick="toggleSubMenu('PM-Thoresen')">Agrochemical</button>
+                            <div id="PM-Thoresen" class="submenu-dropdown-1">
+                                <button onclick="toggleSubMenu('PM-Thoresen1')">PM Thoresen Asia Holdings Plc. <br>(Thailand)</button>
+                                <div id="PM-Thoresen1" class="submenu-dropdown-2">
+                                    <button onclick="window.location.href='#'">PM Thoresen Asia (Singapore) Pte. Ltd.<br>(Singapore)</button>
+                                    <button onclick="window.location.href='#'">Baconco Co., Ltd.<br>(Vietnam)</button>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="submenu-buttons4">
+                        <button onclick="toggleSubMenu('PH-Capital')">Food and Beverage</button>
+                        <div id="PH-Capital" class="submenu-dropdown-1">
+                            <button onclick="toggleSubMenu('PH-Capital1')">PH Capital Co., Ltd. <br>(Thailand)</button>
+                            <div id="PH-Capital1" class="submenu-dropdown-2">
+                                <button onclick="window.location.href='#'">PH Capital Co., Ltd. <br>(Thailand)</button>
+                                <button onclick="window.location.href='#'">Siam Taco Company Limited <br>(Thailand)</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="submenu-buttons5">
+                        <button class="Thoresen2" onclick="toggleSubMenu('Thoresen')">Investments</button>
+                        <div id="Thoresen" class="submenu-dropdown-1">
+                            <h3>Logistics</h3>
+                            <button class="Thoresen1" onclick="toggleSubMenu('Thoresen1')">Thoresen (Indochina) S.A. <br>(Panama)</button>
+                                <div id="Thoresen1" class="submenu-dropdown-2" style="display: none;">
+                                    <button onclick="toggleSubMenu('Thoresen11')">Thoresen-Vinama Co., Ltd. <br>(Vietnam)</button>
+                                        <div id="Thoresen11" class="submenu-dropdown-3" style="display: none;">
+                                            <button onclick="toggleSubMenu('Thoresen12')">Thoresen-Vinama Logistics Co., Ltd. <br>(Vietnam)</button>
+                                                <div id="Thoresen12" class="submenu-dropdown-4" style="display: none;">
+                                                    <button onclick="toggleSubMenu('Thoresen12')">Thoresen-Vi Na Ma Tug<br>Joint Stock Company<br>(Vietnam)<br>Invested by SOH (34%), TVL (51%)</button>
+                                                </div>
+                                        </div>
+                                </div>
+                        <button onclick="window.location.href='#'">Gulf Agency Company (Thailand) Ltd. <br>(Thailand)</button>
+                        <button onclick="window.location.href='#'">GAC Thoresen Logistics Ltd. <br>(Thailand)</button>
+                        <button onclick="window.location.href='#'">Chidlom Marine Services & Supplies Ltd. <br>(Thailand)</button>
+                        <button onclick="window.location.href='#'">Thoresen Shipping FZE <br>(UAE)</button>
+                        <button onclick="window.location.href='#'">Titan Tanker Co., Ltd. <br>(Thailand)</button>
+                        <h3>Water</h3>
+    
+                            <button onclick="toggleSubMenu('Thoresen21')">Asia Infrastructure Management (Thailand) Co., Ltd. <br>(Thailand)</button>
+                                <div id="Thoresen21" class="submenu-dropdown-2" style="display: none;">
+                                    <button onclick="window.location.href='#'">Asia Nampapa Luang Prabang Sole Co., Ltd.<br>(Laos)</button>
+                                    <button onclick="window.location.href='#'">Asia Infrastructure (Cambodia) Co., Ltd.<br>(Cambodia)</button>
+                                    <button onclick="window.location.href='#'">Asia Svayrieng Water Co., Ltd.<br>(Cambodia)</button>
+                                </div>
+                        <h3>Other</h3>
+    
+                            <button onclick="toggleSubMenu('Thoresen22')">TTA Mariner Co., Ltd. <br>(Thailand)</button>
+                                <div id="Thoresen22" class="submenu-dropdown-2" style="display: none;">
+                                    <button onclick="window.location.href='#'">TTA Chao Phraya Express Boat Joint Venture<br>(Thailand)</button>
+                                </div>
+    
+                                <button onclick="toggleSubMenu('Thoresen23')">V Ventures Technologies Co., Ltd.<br>(formerly Asia Coating Services Ltd.) <br>(Thailand)</button>
+                                    <div id="Thoresen23" class="submenu-dropdown-2" style="display: none;">
+    
+                                        <button onclick="window.location.href='#'">Laser Game Asia Ltd. <br>(Thailand)</button>
+                                        <button onclick="window.location.href='#'">Praneat Co., Ltd. <br>(Thailand)</button>
+    
+                                        <button onclick="toggleSubMenu('Thoresen24')">Skootar Beyond Co., Ltd. <br>(Thailand)</button>
+                                            <div id="Thoresen24" class="submenu-dropdown-3" style="display: none;">
+                                                <button onclick="window.location.href='#'">Skootar Logistics Co., Ltd. <br>(Thailand)</button>
+                                            </div>
+                                        <button onclick="window.location.href='#'">KK Venture Co., Ltd. <br>(Thailand)</button>
+                                            <button onclick="toggleSubMenu('Thoresen25')">V Venture INT Pte. Ltd. <br>(Singapore)</button>
+                                                <div id="Thoresen25" class="submenu-dropdown-3" style="display: none;">
+                                                    <button onclick="toggleSubMenu('Thoresen26')">DWP Cityspace Ltd. <br>(Thailand)</button>
+                                                        <div id="Thoresen26" class="submenu-dropdown-4" style="display: none;">
+                                                            <button onclick="window.location.href='#'">Dwp Architecture Co., Ltd. <br>(Thailand)</button>
+                                                            <button onclick="window.location.href='#'">Dwp (Thailand) Co., Ltd. <br>(Thailand)</button>
+                                                            <button onclick="window.location.href='#'">Dwp Buzz Co., Ltd. <br>(Thailand)</button>
+                                                            <button onclick="window.location.href='#'">Dwp Bahrain Company WLL <br>(Bahrain)</button>
+                                                        </div>
+                                                    <button onclick="window.location.href='#'">V Ventures Labs Ltd. <br>(British Virgin Islands)</button>
+                                                    <button onclick="window.location.href='#'">Grid Entertainment Coporation <br>(Korea)</button>
+                                                    <button onclick="window.location.href='#'">East Meta Capital Pte. Ltd. <br>(Singapore)</button>
+                                                    <button onclick="window.location.href='#'">V Ventures Partners Ltd. <br>(British Virgin Islands)</button>
+                                                </div>
+                                            <button onclick="window.location.href='#'">P80 Go Co., Ltd.  <br>(Thailand)</button>
+                                            <button onclick="window.location.href='#'">High Cloud Music Co., Ltd.  <br>(Thailand)</button>
+                                            <button onclick="window.location.href='#'">Strom (Thailand) Co., Ltd.  <br>(Thailand)</button>
+                                            <button onclick="window.location.href='#'">V Smart City Co., Ltd. <br>(Thailand)</button>
+                                        </div>
+    
+                                        <button onclick="window.location.href='#'">PMT Property Co., Ltd. <br>(Thailand)</button>
+                                        <button onclick="window.location.href='#'">Thoresen FSO Co., Ltd. <br>(Thailand)</button>
+                                        <button onclick="window.location.href='#'">P80 Air Ltd. <br>(Thailand)</button>
+                                        <button onclick="window.location.href='#'">P80 Jet Co., Ltd.  <br>(Thailand)</button>
+                                        <button onclick="window.location.href='#'">Thoresen Jutal Offshore Engineering <br>Heavy Industries (Thailand) Limited <br>(Thailand)</button>
+                        
+    
+    
+                            <br><hr><br>
+                            <button class="Thoresen2" onclick="toggleSubMenu('Thoresen2')">Soleado Holdings Pte. Ltd. (SOH) <br>(Singapore)</button>
+                                <div id="Thoresen2" class="submenu-dropdown-2" style="display: none;">
+                                    <h3>Logistics</h3>
+                                    <button onclick="window.location.href='#'">Baria Serece<br>(Vietnam)</button>
+                                    <h3>Other</h3>
+                                    <button onclick="window.location.href='#'">P80 Sky Ltd. <br>(British Virgin Island)</button>
+                                </div>
+    
+                            <button class="Thoresen3" onclick="toggleSubMenu('Thoresen3')">Athene Holdings Ltd. (ATH)<br>(Thailand)</button>
+                                <div id="Thoresen3" class="submenu-dropdown-2" style="display: none;">
+                                    <h3>Other</h3>
+                                    <button onclick="toggleSubMenu('Thoresen4')">Unique Mining Services Plc. <br>(Thailand)</button>
+                                        <div id="Thoresen4" class="submenu-dropdown-3" style="display: none;">
+                                            <button onclick="window.location.href='#'">UMS Distribution Co., Ltd.<br>(Thailand)</button>
+                                            <button onclick="window.location.href='#'">UMS Litghter Co., Ltd.<br>(Thailand)</button>
+                                            <button onclick="window.location.href='#'">UMS Pellet Energy Co., Ltd.<br>(Thailand)</button>
+                                            <button onclick="window.location.href='#'">UMS Port Services Co., Ltd.<br>(Thailand)</button>
+                                            <button onclick="window.location.href='#'">UMS Clean Energy 1 Company Limited<br>(Thailand)</button>
+                                            <button onclick="window.location.href='#'">UMS Clean Energy 2 Company Limited<br>(Thailand)</button>
+                                        </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+<script>
+    function toggleSubMenu(menuId) {
+        var submenu = document.getElementById(menuId);
+        var allSubmenus = document.querySelectorAll('.submenu-dropdown-1, .submenu-dropdown-2, .submenu-dropdown-3, .submenu-dropdown-4'); 
 
-    <script>
-        // ฟังก์ชันในการเปิดและปิด dropdown
-        function toggleDropdown() {
-            var dropdown = document.querySelector(".dropdown-content");
-            dropdown.classList.toggle("show");
-        }
+        // เช็คสถานะเมนูปัจจุบันว่าถูกเปิดอยู่หรือไม่
+        var isCurrentlyOpen = submenu.style.display === 'block';
 
-        // ปิด dropdown หากคลิกที่ที่อื่นในหน้า
-        window.onclick = function(event) {
-            if (!event.target.matches('.con1, .con1 *')) {
-                var dropdowns = document.querySelectorAll(".dropdown-content");
-                dropdowns.forEach(function(dropdown) {
-                    dropdown.classList.remove("show");
-                });
-            }
+        // // ปิดเมนูย่อยอื่นๆ ทั้งหมด ยกเว้นเมนูที่กำลังคลิกอยู่ 
+        // allSubmenus.forEach(function(sub) {
+        //     if (sub !== submenu) {
+        //         sub.style.display = 'none';
+        //     }
+        // });
+
+        // เปิด/ปิดเมนูที่คลิก
+        if (!isCurrentlyOpen) {
+            submenu.style.display = 'block';
+        } else {
+            submenu.style.display = 'none';
         }
-    </script>
+    }
+
+// ป้องกันการปิดเมนูย่อยเมื่อคลิกที่เมนูย่อย
+document.querySelectorAll('.submenu-dropdown').forEach(function(submenu) {
+    submenu.addEventListener('click', function(event) {
+        event.stopPropagation();  // ป้องกันการปิดเมนูเมื่อคลิกเมนูย่อย
+    });
+});
+
+// ป้องกันการปิดเมนูหลักเมื่อคลิกเมนูย่อย
+document.getElementById('companyMenu').addEventListener('click', function(event) {
+    event.stopPropagation();  // หยุดการคลิกกระจาย
+});
+
+</script>
 </body>
 </html>
