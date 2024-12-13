@@ -1,157 +1,140 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>เมนูปุ่มย่อย</title>
+    <title>Document</title>
     <style>
-        /* ตั้งค่ารูปแบบของเมนู */
-        .menu-container {
-            display: flex; /* ใช้ flexbox เพื่อให้เมนูเรียงกันในแนวนอน */
-            gap: 20px; /* เว้นระยะระหว่างเมนู */
-        }
-
-        .menu-item {
-            position: relative; /* ใช้ตำแหน่ง relative เพื่อให้เมนูย่อยอยู่ภายใน */
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        /* ตั้งค่าปุ่มเมนูย่อย */
-        .submenu {
-            display: none; /* ซ่อนเมนูย่อย */
-            background-color: #f1f1f1;
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-            border-radius: 5px;
-            position: absolute;
-            top: 100%; /* ให้เมนูย่อยแสดงอยู่ด้านล่างของเมนูหลัก */
-            left: 0;
-            width: 200px;
-            padding: 10px;
-        }
-
-        .submenu a {
-            display: block;
-            background-color: #ddd;
-            padding: 10px;
-            text-decoration: none;
-            color: black;
-            margin: 5px 0;
-            border-radius: 5px;
-        }
-
-        .submenu a:hover {
-            background-color: #bbb; /* เปลี่ยนสีเมื่อเมาส์อยู่บนลิงก์ */
-        }
-
-        /* เมื่อเมาส์อยู่เหนือเมนูหลัก */
-        .menu-item.active .submenu {
-            display: block; /* แสดงเมนูย่อย */
-        }
-
-        /* ตั้งค่าการแสดงปุ่มเมนูย่อย */
-        .submenu-buttons {
+        /* General table styling */
+        .main-container {
             display: flex;
-            /* flex-direction: row; เปลี่ยนให้ปุ่มแสดงในแนวตั้ง */
-            gap: 10px;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 12px;
         }
 
-        /* สไตล์ของปุ่มเมนูหลัก */
-        .submenu-buttons button {
-            padding: 10px;
-            background-color: #4CAF50;
-            color: rgb(255, 255, 255);
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        table {
+            border-collapse: collapse;
+            width: auto;
+            margin-top: 1.5%;
         }
 
-        /* การเปลี่ยนสีเมื่อ hover บนปุ่มเมนู */
-        .submenu-buttons button:hover {
-            background-color: #3e8e41;
-        }
-
-        /* ซ่อนเมนูย่อยเริ่มต้น */
-        .submenu-dropdown {
-            display: none; /* ซ่อนเมนูย่อย */
-            /* margin-top: 10px; ระยะห่างจากปุ่มหลัก */
-            padding: 5px;
-            border-radius: 5px;
-        }
-
-        /* สไตล์ของปุ่มในเมนูย่อย */
-        .submenu-dropdown button {
-            display: block; /* แสดงปุ่มในบรรทัดใหม่ */
-            margin: 5px 0;
+        th, td {
+            border: 1px solid black;
             padding: 8px;
-            background-color: #4CAF50;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            text-align: center;
+        }
+
+        th {
+            background: #f2f2f2;
+            font-weight: bold;
+        }
+
+        /* Styling for individual tables */
+        .table-summary {
             width: 100%;
         }
-
-        /* การเปลี่ยนสีเมื่อ hover บนปุ่มเมนูย่อย */
-        .submenu-dropdown button:hover {
-            background-color: #a3a3a3;
+        .table-cash-flow, .table-summary {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        /* Styling for individual tables */
+        .table-summary-1 {
+            width: 20%;
+        }
+        .table-cash-flow, .table-summary-1 {
+            width: 20%;
+            border-collapse: collapse;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="menu-container">
-        <div class="menu-item" id="companyMenu">
-            บริษัท
-            <div class="submenu">
-                <div class="submenu-buttons">
-                    <button onclick="toggleSubMenu('infoCompany')">ข้อมูลเกี่ยวกับบริษัท</button>
-                    <div id="infoCompany" class="submenu-dropdown">
-                        <button onclick="window.location.href='#'">ประวัติบริษัท</button>
-                        <button onclick="window.location.href='#'">วิสัยทัศน์และพันธกิจ</button>
-                        <button onclick="window.location.href='#'">โครงสร้างบริษัท</button>
-                    </div>
-    
-                    <button onclick="toggleSubMenu('location')">สถานที่ตั้ง</button>
-                    <div id="location" class="submenu-dropdown">
-                        <button onclick="window.location.href='#'">22</button>
-                        <button onclick="window.location.href='#'">33</button>
-                        <button onclick="window.location.href='#'">44</button>
-                    </div>
-
-                    <button onclick="toggleSubMenu('services')">บริการ</button>
-                    <div id="services" class="submenu-dropdown">
-                        <button onclick="window.location.href='#'">1</button>
-                        <button onclick="window.location.href='#'">2</button>
-                        <button onclick="window.location.href='#'">3</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="main-container">
+        <table class="table-summary">
+            <thead>
+                <tr>
+                    <td>TTA Ending Cash Balance</td>
+                    <td>May-24</td>
+                    <td>Jun-24</td>
+                    <td>Jul-24</td>
+                    <td>Aug-24</td>
+                    <td>Sep-24</td>
+                    <td>Oct-24</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Cash only</td>
+                    <td>3,451</td>
+                    <td>3,097</td>
+                    <td>3,022</td>
+                    <td>3,126</td>
+                    <td>3,050</td>
+                    <td>2,927</td>
+                </tr>
+                <tr>
+                    <td>Cash + Short Term Investment</td>
+                    <td>4,538</td>
+                    <td>4,184</td>
+                    <td>4,109</td>
+                    <td>4,213</td>
+                    <td>4,137</td>
+                    <td>4,014</td>
+                </tr>
+                <tr>
+                    <td>Cash + Cryptocurrency</td>
+                    <td>10,852</td>
+                    <td>10,497</td>
+                    <td>10,422</td>
+                    <td>10,527</td>
+                    <td>10,451</td>
+                    <td>10,327</td>
+                </tr>
+                <tr>
+                    <td>Cash + Short Term Investment. + Cryptocurrency</td>
+                    <td>11,938</td>
+                    <td>11,584</td>
+                    <td>11,509</td>
+                    <td>11,614</td>
+                    <td>11,538</td>
+                    <td>11,414</td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table-summary-1">
+            <thead>
+                <tr>
+                    <td>2024</td>
+                    <td>2025</td>
+                    <td>2026</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2,672</td>
+                    <td>1,851</td>
+                    <td>1,184</td>
+                </tr>
+                <tr>
+                    <td>3,759</td>
+                    <td>2,938</td>
+                    <td>2,271</td>
+                </tr>
+                <tr>
+                    <td>10,073</td>
+                    <td>9,251</td>
+                    <td>8,585</td>
+                </tr>
+                <tr>
+                    <td>11,159</td>
+                    <td>10,338</td>
+                    <td>9,671</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    
-    <script>
-        // ฟังก์ชันทำให้เมนูย่อยแสดงหรือซ่อน
-        function toggleSubMenu(menuId) {
-            var submenu = document.getElementById(menuId);
-
-            // เช็คสถานะของเมนูย่อย
-            if (submenu.style.display === 'none' || submenu.style.display === '') {
-                // ถ้าเมนูย่อยถูกซ่อนอยู่ ก็แสดงมันขึ้นมา
-                submenu.style.display = 'block';
-            } else {
-                // ถ้าเมนูย่อยถูกแสดงอยู่ ก็ซ่อนมัน
-                submenu.style.display = 'none';
-            }
-        }
-
-        // ให้เมนูหลัก "บริษัท" มีการเปิดหรือปิดเมนูย่อยเมื่อคลิก
-        document.getElementById('companyMenu').addEventListener('click', function(event) {
-            // ตรวจสอบว่าไม่ใช่การคลิกที่เมนูย่อย
-            if (event.target.closest('.submenu') === null) {
-                this.classList.toggle('active');
-            }
-        });
-    </script>
 </body>
 </html>
