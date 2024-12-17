@@ -42,8 +42,7 @@
         .menu-item1 {
             text-decoration: none;
             color: white;
-            background-color: rgba(35, 208, 15, 0.867);
-            border: 0px solid rgba(35, 208, 15, 0.867);;
+            background-color: rgb(43, 219, 23);
             padding: 8px 8px;
             border-radius: 5px;
             margin-left: 8px;  /* ทำให้ปุ่ม "Go home" ขยับไปทางขวา */
@@ -51,7 +50,7 @@
         }
         .menu-item1:hover {
             color: rgb(253, 253, 253);
-            background-color: rgba(140, 204, 132, 0.867);
+            background-color: rgba(135, 228, 125, 0.867);
         }
         
         .menu-item-1,
@@ -66,13 +65,13 @@
         .menu-item-10 {
             margin: 5px;
             display: block;
-            width: 85%;
-            padding: 8px;
+            /* width: 85%; */
+            padding: 20px;
             background-color: rgba(27, 218, 248, 0.1);
             color: rgb(0, 0, 0);
             border: 2px solid #000000;
             text-decoration: none;
-            text-align: center;
+            /* text-align: center; */
             border-radius: 10px;
             transition: background-color 0.3s;
         }
@@ -89,13 +88,114 @@
             background-color: rgba(18, 93, 255, 0.5);
             color: #000000;
         }
+        
         .main {
-            /* border: 2px solid #000000; */
-            padding: 2%;
             display: flex;
-            align-items: center;
-            flex-direction: column;
-            width: 20%;
+            align-items: stretch;
+        }
+
+        /* ลิงก์หลัก */
+        .menu-item-1,
+        .menu-item-2,
+        .menu-item-3,
+        .menu-item-4,
+        .menu-item-5,
+        .menu-item-6,
+        .menu-item-7,
+        .menu-item-8,
+        .menu-item-9,
+        .menu-item-10 {
+            position: relative;
+            display: inline-block;
+            width: 300px;                 /* ขนาดกล่อง */
+            height: 200px;
+        }
+        /* รูปภาพในลิงก์ */
+        .menu-image {
+            width: 100%;               /* ขนาดรูปภาพ */
+            height: 100%;
+            object-fit: cover;         /* ปรับให้รูปไม่บิดเบี้ยว */
+            border-radius: 5px;        /* มุมโค้งเล็กน้อย (ถ้าต้องการ) */
+        }
+        /* ข้อความซ้อนบนรูป */
+        .menu-text {
+            position: absolute;
+            bottom: 10px;             /* ห่างจากด้านล่าง */
+            left: 10px;               /* ห่างจากด้านซ้าย */
+            background: rgba(0, 0, 0, 0); /* พื้นหลังโปร่งใส */
+            padding: 5px 10px;        /* ระยะห่างด้านใน */
+            border-radius: 5px;       /* มุมโค้ง */
+        }
+
+        .menu-item-1 {
+            background-image: url('https://cdn.prod.website-files.com/60a4a4fb42c31d8c7ae0d7bd/62ff68cad3bc763b782bde1c_shipping%20lingo%20.jpg');
+            background-size: cover;       /* ป้องกันการแตก */
+            background-position: center;  /* จัดตำแหน่งตรงกลาง */
+            background-repeat: no-repeat;
+            text-decoration: none;
+        }
+        .menu-item-2 {
+            background-image: url('https://www.orbcomm.com/img/solutions/matitime/vessel/Overview-VesselConnect.webp');
+            background-size: cover;       
+            background-position: center;  
+            background-repeat: no-repeat;
+            text-decoration: none;
+        }
+        .menu-item-3 {
+            background-image: url('');
+            background-size: cover;       
+            background-position: center;  
+            background-repeat: no-repeat;
+            text-decoration: none;
+        }
+        .menu-item-4 {
+            background-image: url('https://cdn.qlc.co.th/wp-content/uploads/2023/09/warehouse.jpg');
+            background-size: cover;       
+            background-position: center;  
+            background-repeat: no-repeat;
+            text-decoration: none;
+        }
+        .menu-item-5 {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS63GebCTnMZYM8GfT3wdP3JQUbFEZoUhPj6w&s');
+            background-size: cover;       
+            background-position: center;  
+            background-repeat: no-repeat;
+            text-decoration: none;
+        }
+        .menu-item-6 {
+            background-image: url('https://www.allrecipes.com/thmb/aefJMDXKqs42oAP71dQuYf_-Qdc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/6776_Pizza-Dough_ddmfs_4x3_1724-fd91f26e0bd6400a9e89c6866336532b.jpg');
+            background-size: cover;       
+            background-position: center;  
+            background-repeat: no-repeat;
+            text-decoration: none;
+        }
+        .menu-item-7 {
+            background-image: url('');
+            background-size: cover;       
+            background-position: center;  
+            background-repeat: no-repeat;
+            text-decoration: none;
+        }
+        .menu-item-8 {
+            background-image: url('');
+            background-size: cover;       
+            background-position: center;  
+            background-repeat: no-repeat;
+            text-decoration: none;
+        }
+        .menu-item-9 {
+            background-image: url('');
+            background-size: cover;       
+            background-position: center;  
+            background-repeat: no-repeat;
+            text-decoration: none;
+        }
+        .menu-item-10 {
+            background-image: url('');
+            background-size: cover;       
+            background-position: center;  
+            background-repeat: no-repeat;
+            text-decoration: none;
         }
 </style>
 <body>
@@ -109,18 +209,41 @@
         </div>
     </div>
     <div class="main-con">
-        
         <div class="main">
-            <a href="#" class="menu-item-1">SHIPPING - Vessel</a>
-            <a href="#" class="menu-item-2">MML - Vessel</a>
-            <a href="#" class="menu-item-3">MML - ROV</a>
-            <a href="#" class="menu-item-4">Warehouse</a>
-            <a href="#" class="menu-item-5">Land</a>
-            <a href="#" class="menu-item-6">Pizza - Store</a>
-            <a href="#" class="menu-item-7">Tacobell - Store</a>
-            <a href="#" class="menu-item-8">Truck - IT</a>
-            <a href="#" class="menu-item-9">Truck - VTL</a>
-            <a href="#" class="menu-item-10">TI - Barg</a>
+            <a href="table-ship.html" class="menu-item-1">
+                <span class="menu-text">SHIPPING - Vessel</span>
+            </a>
+            <a href="table-mmlv.html" class="menu-item-2">
+                <span class="menu-text">MML - Vessel</span>
+            </a>
+            <a href="#" class="menu-item-3">
+                <span class="menu-text">MML - ROV</span>
+            </a>
+        </div>
+        <div class="main">
+            <a href="table-pmta.html" class="menu-item-4">
+                <span class="menu-text">Warehouse</span>
+            </a>
+            <a href="table-stc.html" class="menu-item-5">
+                <span class="menu-text">Land</span>
+            </a>
+            <a href="table-phc.html" class="menu-item-6">
+                <span class="menu-text">Pizza - Store</span>
+            </a>
+        </div>
+        <div class="main">
+            <a href="#" class="menu-item-7">
+                <span class="menu-text">Tacobell - Store</span>
+            </a>
+            <a href="#" class="menu-item-8">
+                <span class="menu-text">Truck - IT</span>
+            </a>
+            <a href="#" class="menu-item-9">
+                <span class="menu-text">Truck - VTL</span>
+            </a>
+            <a href="#" class="menu-item-10">
+                <span class="menu-text">TI - Barg</span>
+            </a>
         </div>
     </div>
 </body>

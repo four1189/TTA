@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Financial Data</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <style>
         /* คอนเทนเนอร์ที่ห่อรวมทั้ง dropdown */
@@ -11,6 +12,8 @@
             display: flex;               /* ใช้ Flexbox เพื่อจัดตำแหน่ง */
             align-items: center;         /* จัดตำแหน่งให้อยู่กลางในแนวตั้ง */
             gap: 6px;                   /* เว้นระยะห่างระหว่าง dropdown */
+            max-width: 800px;
+            margin: inherit;                   /* เว้นระยะห่างระหว่าง dropdown */
         }
 
         .logo-container {
@@ -57,8 +60,7 @@
         .menu-item1 {
             text-decoration: none;
             color: white;
-            background-color: rgba(35, 208, 15, 0.867);
-            border: 0px solid rgba(35, 208, 15, 0.867);;
+            background-color: rgb(43, 219, 23);
             padding: 8px 8px;
             border-radius: 5px;
             margin-left: 8px;  /* ทำให้ปุ่ม "Go home" ขยับไปทางขวา */
@@ -66,7 +68,7 @@
         }
         .menu-item1:hover {
             color: rgb(253, 253, 253);
-            background-color: rgba(140, 204, 132, 0.867);
+            background-color: rgba(135, 228, 125, 0.867);
         }
 
         /* ทำให้ .con-1 ใช้ Flexbox เพื่อให้ .L1 และ .R1 อยู่ในแนวนอน */
@@ -101,9 +103,9 @@
         
         .R1 {
             display: flex;
-            align-items: flex-start;
             justify-content: space-between;
-            width: 70%;
+            gap: 30px;
+            align-items: center;
         }
         
         .main {
@@ -155,8 +157,10 @@
         tbody tr:nth-child(even) {
             background-color: #f9f9f9;  /* สีพื้นหลังสำหรับแถวคู่ */
         }
-        
-
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
 </style>
 <body>
     <div class="nav">
@@ -223,14 +227,16 @@
             </div>
         </div>
         <div class="R1">
-            <div class="item-1">
-                Revenue Breakdown
+            <div>
+                <canvas id="pieChart"></canvas>
             </div>
-            <div class="item-1">
-                EBITDA Structure
+            <!-- กราฟแท่งแนวนอนปกติ -->
+            <div>
+                <canvas id="barChart"></canvas>
             </div>
-            <div class="item-1">
-                Contributed Net Proflts/(Losses) to TTA
+            <!-- กราฟแท่งกลับหัว (หันตกลงมาจากด้านบน) -->
+            <div>
+                <canvas id="fallingBarChart"></canvas>
             </div>
         </div>
     </div>
@@ -372,6 +378,124 @@
           </tbody>
         </table>
     </div>
+    <script>
+        window.onload = function () {
+            // กราฟวงกลม
+            const ctx1 = document.getElementById('pieChart').getContext('2d');
+            new Chart(ctx1, {
+                type: 'pie',
+                data: {
+                    // labels: ['Product A', 'Product B', 'Product C', 'Product D', 'Product s', 'Product e'], // เพิ่ม label
+                    datasets: [{
+                        data: [30, 20, 25, 25, 10, 15], // เพิ่มค่าให้ครบกับจำนวน label
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.6)',
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(255, 206, 86, 0.6)',
+                            'rgba(75, 192, 192, 0.6)',
+                            'rgba(153, 102, 255, 0.6)', // สีสำหรับ Product s
+                            'rgba(255, 159, 64, 0.6)'  // สีสำหรับ Product e
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)', // สีขอบสำหรับ Product s
+                            'rgba(255, 159, 64, 1)'   // สีขอบสำหรับ Product e
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'top' },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    return `${label}: ${value}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+
+            // กราฟแท่งแนวนอนปกติ
+            const ctx2 = document.getElementById('barChart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['shipping', 'offshore', 'agroche', 'food&bevera', 'other', 'net', 'one-off', 'norma'], // กำหนดชื่อหมวดหมู่
+                    datasets: [{
+                        data: [1, 2, 3, 4, 5, 6, 7, 8], // กำหนดข้อมูล
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)',  // กำหนดสีพื้นหลังของกราฟแท่ง
+                        borderWidth: 0  // ลบขอบออก
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },  // ซ่อน legend ที่แสดงข้อมูล
+                        tooltip: { 
+                            enabled: false // ซ่อน tooltip
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            display: true
+                        },
+                        y: {
+                            beginAtZero: true,
+                            reverse: false
+                        }
+                    },
+                    barPercentage: 0.6,
+                    categoryPercentage: 0.7
+                }
+            });
+
+            // กราฟแท่งกลับหัว (มุมตกลงมาจากด้านบน) โดยไม่มีเส้นขอบ
+            const ctx3 = document.getElementById('fallingBarChart').getContext('2d');
+            new Chart(ctx3, {
+                type: 'bar',
+                data: {
+                    labels: ['shipping', 'offshore', 'agroche', 'food&bevera', 'other', 'net', 'one-off', 'norma'],
+                    datasets: [{
+                        data: [1, 2, 3, 4, 5, 6, 7, 8],
+                        backgroundColor: 'rgba(153, 102, 255, 0.6)',  // กำหนดสีพื้นหลังของกราฟแท่ง
+                        borderWidth: 0  // ลบขอบออก
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },  // ซ่อน legend ที่แสดงข้อมูล
+                        tooltip: { 
+                            enabled: false // ซ่อน tooltip
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            display: true
+                        },
+                        y: {
+                            beginAtZero: true,
+                            reverse: true
+                        }
+                    },
+                    barPercentage: 0.6,
+                    categoryPercentage: 0.7
+                }
+            });
+        };
+    </script>
 </body>
 </html>
 

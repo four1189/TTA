@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHIPPING</title>
+</head>
+<style>
+        .con-1{
+            display: flex;
+            justify-content: flex-end;
+        }
+        .menu-item1 {
+            text-decoration: none;
+            color: white;
+            background-color: #5b79db;
+            padding: 8px;
+            border-radius: 5px;
+        }
+        .menu-item1:hover {
+            color: rgb(253, 253, 253);
+            background-color: #002292;
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+        
+        table {
+            margin-top: 10px;
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid black;
+            /* margin-top: 0.5%; */
+        }
+        
+        th {
+            background-color: #002292;
+            color: aliceblue;
+            padding: 10px;
+            border: 1px solid #000000;
+        }
+        td {
+            padding: 4px;
+            text-align: left;
+            border: 1px solid #000000;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #eeeeee;  /* สีพื้นหลังสำหรับแถวคู่ */
+        }
+        .s1 {
+            float: right; 
+            justify-content: space-between;
+            color: #757575;
+        }
+        .z1 {
+            text-align: left;
+        }
+        
+        .table-container td:nth-child(8),
+        .table-container td:nth-child(9) { 
+            text-align: right; /* ชิดขวา */
+        }
+        .table-container td:nth-child(1),
+        .table-container td:nth-child(3), /* คอลัมน์ที่ 3 */
+        .table-container td:nth-child(4), 
+        .table-container td:nth-child(5),
+        .table-container td:nth-child(6),
+        .table-container td:nth-child(10) {
+            text-align: center;
+        }
+
+
+</style>
+<body>
+    <div class="con-1">
+        <a href="Key.html" class="menu-item1">Go home</a>
+    </div>
+    <h2>SHIPPING</h2>
+    <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Vessel Name</th>
+              <th>Year Built</th>
+              <th>Year Delivered</th>
+              <th>Type</th>
+              <th>Classification</th>
+              <th>Type</th>
+              <th>Dwt</th>
+              <th>Lightship(MT)</th>
+              <th>Age</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+                <td>1</td>
+                <td>Thor Achiever</td>
+                <td>5/Jan/10</td>
+                <td>22/Jul/10</td>
+                <td>SUPRAMAX</td>
+                <td>BV</td>
+                <td>Bulk Carrier<span class="s1">Standard</span></td>
+                <td>57,015</td>
+                <td>10,665</td>
+                <td>14</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Thor Brave</td>
+                <td>15/Nov/12</td>
+                <td>22/Nov/12</td>
+                <td>SUPRAMAX</td>
+                <td>ABS</td>
+                <td>Bulk Carrier<span class="s1">Standard</span></td>
+                <td>53,506</td>
+                <td>11,624</td>
+                <td>11</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Thor Breeze</td>
+                <td>13/Aug/13</td>
+                <td>20/Aug/13</td>
+                <td>SUPRAMAX</td>
+                <td>ABS</td>
+                <td>Bulk Carrier<span class="s1">Standard</span></td>
+                <td>53,572</td>
+                <td>11,624</td>
+                <td>11</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Thor Fearless</td>
+                <td>9/Nov/05</td>
+                <td>6/Jun/13</td>
+                <td>SUPRAMAX</td>
+                <td>NKK</td>
+                <td>Bulk Carrier<span class="s1">Open Hatch / Box Shape</span></td>
+                <td>54,881</td>
+                <td>8,998</td>
+                <td>18</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Thor Fortune</td>
+                <td>15/Jun/11</td>
+                <td>15/Jun/11</td>
+                <td>SUPRAMAX</td>
+                <td>NKK</td>
+                <td>Bulk Carrier<span class="s1">Open Hatch / Box Shape</span></td>
+                <td>54,123</td>
+                <td>9,336</td>
+                <td>13</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Thor Friendship</td>
+                <td>13/Jan/10</td>
+                <td>13/Jan/10</td>
+                <td>SUPRAMAX</td>
+                <td>NKK</td>
+                <td>Bulk Carrier<span class="s1">Open Hatch / Box Shape</span></td>
+                <td>54,123</td>
+                <td>9,336</td>
+                <td>14</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Thor Future</td>
+                <td>3/Mar/06</td>
+                <td>16/May/17</td>
+                <td>SUPRAMAX</td>
+                <td>NKK</td>
+                <td>Bulk Carrier<span class="s1">Open Hatch / Box Shape</span></td>
+                <td>54,170</td>
+                <td>9,267</td>
+                <td>18</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>Thor Independence</td>
+                <td>23/Oct/01</td>
+                <td>20/Dec/10</td>
+                <td>SUPRAMAX</td>
+                <td>NKK</td>
+                <td>Bulk Carrier<span class="s1">Standard</span></td>
+                <td>52,407</td>
+                <td>8,365</td>
+                <td>23</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>Thor Infinity</td>
+                <td>1/Feb/02</td>
+                <td>21/Dec/10</td>
+                <td>SUPRAMAX</td>
+                <td>NKK</td>
+                <td>Bulk Carrier<span class="s1">Standard</span></td>
+                <td>52,383</td>
+                <td>8,389</td>
+                <td>22</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>Thor Insuvi</td>
+                <td>16/Nov/05</td>
+                <td>2/Jul/12</td>
+                <td>SUPRAMAX</td>
+                <td>NKK</td>
+                <td>Bulk Carrier<span class="s1">Standard</span></td>
+                <td>52,489</td>
+                <td>8,283</td>
+                <td>18</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>Thor Integrity</td>
+                <td>2/Apr/01</td>
+                <td>9/Dec/04</td>
+                <td>SUPRAMAX</td>
+                <td>BV</td>
+                <td>Bulk Carrier<span class="s1">Standard</span></td>
+                <td>52,375</td>
+                <td>8,397</td>
+                <td>23</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>Thor Madoc</td>
+                <td>15/Jul/05</td>
+                <td>13/Jun/14</td>
+                <td>SUPRAMAX</td>
+                <td>KR</td>
+                <td>Bulk Carrier<span class="s1">Standard</span></td>
+                <td>55,695</td>
+                <td>8,468</td>
+                <td>19</td>
+            </tr>
+            <tr>
+                <td>13</td>
+                <td>Thor Magnhild</td>
+                <td>28/Jun/06</td>
+                <td>19/Feb/14</td>
+                <td>SUPRAMAX</td>
+                <td>NKK</td>
+                <td>Bulk Carrier<span class="s1">Standard</span></td>
+                <td>56,023</td>
+                <td>8,534</td>
+                <td>18</td>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td>Thor Maximus</td>
+                <td>7/Oct/05</td>
+                <td>23/May/14</td>
+                <td>SUPRAMAX</td>
+                <td>KR</td>
+                <td>Bulk Carrier<span class="s1">Standard</span></td>
+                <td>55,695</td>
+                <td>8,468</td>
+                <td>19</td>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td>Thor Menelaus</td>
+                <td>25/Aug/06</td>
+                <td>3/Jun/14</td>
+                <td>SUPRAMAX</td>
+                <td>KR</td>
+                <td>Bulk Carrier<span class="s1">Standard</span></td>
+                <td>55,710</td>
+                <td>8,478</td>
+                <td>18</td>
+            </tr>
+            <tr>
+                <td>16</td>
+                <td>Thor Mercury</td>
+                <td>11/Oct/05</td>
+                <td>20/Jan/14</td>
+                <td>SUPRAMAX</td>
+                <td>ABS</td>
+                <td>Bulk Carrier<span class="s1">Standard</span></td>
+                <td>55,862</td>
+                <td>8,561</td>
+                <td>19</td>
+            </tr>
+            <tr>
+                <td>17</td>
+                <td>Thor Monadic</td>
+                <td>5/Sep/06</td>
+                <td>7/Jul/14</td>
+                <td>SUPRAMAX</td>
+                <td>NKK</td>
+                <td>Bulk Carrier<span class="s1">Standard</span></td>
+                <td>56,026</td>
+                <td>8,531</td>
+                <td>18</td>
+            </tr>
+            <tr>
+                <td>18</td>
+                <td>Thor Confidence</td>
+                <td>25/Jun/08</td>
+                <td>12/Jul/17</td>
+                <td>SUPRAMAX</td>
+                <td>KR</td>
+                <td>Bulk Carrier<span class="s1">Standard</span></td>
+                <td>58,781</td>
+                <td>9,033</td>
+                <td>16</td>
+            </tr>
+            <tr>
+                <td>19</td>
+                <td>Thor Courage</td>
+                <td>22/Apr/09</td>
+                <td>17/Oct/17</td>
+                <td>SUPRAMAX</td>
+                <td>DNV-GL</td>
+                <td>Bulk Carrier<span class="s1">Standard</span></td>
+                <td>58,693</td>
+                <td>9,121</td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td>20</td>
+                <td>Thor Caliber</td>
+                <td>19/Dec/08</td>
+                <td>29/Mar/18</td>
+                <td>SUPRAMAX</td>
+                <td>NKK</td>
+                <td>Bulk Carrier<span class="s1">Standard</span></td>
+                <td>58,732</td>
+                <td>9,082</td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td>21</td>
+                <td>Thor Chaiyo </td>
+                <td>16/Jul/08</td>
+                <td>1/May/18</td>
+                <td>SUPRAMAX</td>
+                <td>NKK</td>
+                <td>Bulk Carrier<span class="s1">Standard</span></td>
+                <td>58,731</td>
+                <td>9,083</td>
+                <td>16</td>
+            </tr>
+            <tr>
+                <td>22</td>
+                <td>Thor Chaichana</td>
+                <td>26/Feb/13</td>
+                <td>1/Apr/20</td>
+                <td>SUPRAMAX</td>
+                <td>NKK</td>
+                <td>Bulk Carrier<span class="s1">Standard</span></td>
+                <td>58,605</td>
+                <td>10,575</td>
+                <td>11</td>
+            </tr>
+            <tr>
+                <td>23</td>
+                <td>Thor Niramit</td>
+                <td>1/May/16</td>
+                <td>3/Dec/20</td>
+                <td>ULTRMAX</td>
+                <td>NKK</td>
+                <td>Bulk Carrier<span class="s1">Fully fitted logger</span></td>
+                <td>61,171</td>
+                <td>11,226</td>
+                <td>8</td>
+            </tr>
+            <tr>
+                <td>24</td>
+                <td>Thor Nitnirund</td>
+                <td>1/Jul/16</td>
+                <td>21/Jan/21</td>
+                <td>ULTRMAX</td>
+                <td>NKK</td>
+                <td>Bulk Carrier<span class="s1">Fully fitted logger</span></td>
+                <td>61,144</td>
+                <td>11,253</td>
+                <td>8</td>
+            </tr>
+            <tr style="background-color: #afb9d8;">
+                <td style="text-align: left; " colspan="7">TOTAL</td> <!-- ขยายไป 7 คอลัมน์ -->
+                <td style="text-align: right;">1,341,912</td>
+                <td style="text-align: right;">224,698</td>
+                <td>385</td>
+            </tr>            
+            <tr style="background-color: #6a83d6;">
+                <td style="text-align: left;" colspan="7">Average Fleet</td>
+                <td style="text-align: right;">55,913</td>
+                <td></td>
+                <td>16</td>
+            </tr>            
+          </tbody>
+        </table>
+    </div>
+</body>
+</html>

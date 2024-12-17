@@ -3,138 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Reversed Bar Chart Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* General table styling */
-        .main-container {
+        .chart-container {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            gap: 20px;
-            padding: 12px;
+            gap: 30px;
+            margin: 20px;
         }
-
-        table {
-            border-collapse: collapse;
-            width: auto;
-            margin-top: 1.5%;
-        }
-
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: center;
-        }
-
-        th {
-            background: #f2f2f2;
-            font-weight: bold;
-        }
-
-        /* Styling for individual tables */
-        .table-summary {
-            width: 100%;
-        }
-        .table-cash-flow, .table-summary {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        /* Styling for individual tables */
-        .table-summary-1 {
-            width: 20%;
-        }
-        .table-cash-flow, .table-summary-1 {
-            width: 20%;
-            border-collapse: collapse;
-            margin-top: 20px;
+        canvas {
+            max-width: 100%;
+            height: auto;
         }
     </style>
 </head>
 <body>
-    <div class="main-container">
-        <table class="table-summary">
-            <thead>
-                <tr>
-                    <td>TTA Ending Cash Balance</td>
-                    <td>May-24</td>
-                    <td>Jun-24</td>
-                    <td>Jul-24</td>
-                    <td>Aug-24</td>
-                    <td>Sep-24</td>
-                    <td>Oct-24</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Cash only</td>
-                    <td>3,451</td>
-                    <td>3,097</td>
-                    <td>3,022</td>
-                    <td>3,126</td>
-                    <td>3,050</td>
-                    <td>2,927</td>
-                </tr>
-                <tr>
-                    <td>Cash + Short Term Investment</td>
-                    <td>4,538</td>
-                    <td>4,184</td>
-                    <td>4,109</td>
-                    <td>4,213</td>
-                    <td>4,137</td>
-                    <td>4,014</td>
-                </tr>
-                <tr>
-                    <td>Cash + Cryptocurrency</td>
-                    <td>10,852</td>
-                    <td>10,497</td>
-                    <td>10,422</td>
-                    <td>10,527</td>
-                    <td>10,451</td>
-                    <td>10,327</td>
-                </tr>
-                <tr>
-                    <td>Cash + Short Term Investment. + Cryptocurrency</td>
-                    <td>11,938</td>
-                    <td>11,584</td>
-                    <td>11,509</td>
-                    <td>11,614</td>
-                    <td>11,538</td>
-                    <td>11,414</td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table-summary-1">
-            <thead>
-                <tr>
-                    <td>2024</td>
-                    <td>2025</td>
-                    <td>2026</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>2,672</td>
-                    <td>1,851</td>
-                    <td>1,184</td>
-                </tr>
-                <tr>
-                    <td>3,759</td>
-                    <td>2,938</td>
-                    <td>2,271</td>
-                </tr>
-                <tr>
-                    <td>10,073</td>
-                    <td>9,251</td>
-                    <td>8,585</td>
-                </tr>
-                <tr>
-                    <td>11,159</td>
-                    <td>10,338</td>
-                    <td>9,671</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="chart-container">
+        <!-- กราฟวงกลม -->
+        <div>
+            <canvas id="pieChart"></canvas>
+        </div>
+        <!-- กราฟแท่งแนวนอนปกติ -->
+        <div>
+            <canvas id="barChart"></canvas>
+        </div>
+        <!-- กราฟแท่งกลับหัว (หันตกลงมาจากด้านบน) -->
+        <div>
+            <canvas id="fallingBarChart"></canvas>
+        </div>
     </div>
+
+    <script>
+        window.onload = function () {
+            // กราฟวงกลม
+            const ctx1 = document.getElementById('pieChart').getContext('2d');
+            new Chart(ctx1, {
+                type: 'pie',
+                data: {
+                    // labels: ['Product A', 'Product B', 'Product C', 'Product D', 'Product s', 'Product e'], // เพิ่ม label
+                    datasets: [{
+                        data: [30, 20, 25, 25, 10, 15], // เพิ่มค่าให้ครบกับจำนวน label
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.6)',
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(255, 206, 86, 0.6)',
+                            'rgba(75, 192, 192, 0.6)',
+                            'rgba(153, 102, 255, 0.6)', // สีสำหรับ Product s
+                            'rgba(255, 159, 64, 0.6)'  // สีสำหรับ Product e
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)', // สีขอบสำหรับ Product s
+                            'rgba(255, 159, 64, 1)'   // สีขอบสำหรับ Product e
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'top' },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    return `${label}: ${value}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+
+            // กราฟแท่งแนวนอนปกติ
+            const ctx2 = document.getElementById('barChart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['shipping', 'offshore', 'agroche', 'food&bevera', 'other', 'net', 'one-off', 'norma'], // กำหนดชื่อหมวดหมู่
+                    datasets: [{
+                        data: [1, 2, 3, 4, 5, 6, 7, 8], // กำหนดข้อมูล
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)',  // กำหนดสีพื้นหลังของกราฟแท่ง
+                        borderWidth: 0  // ลบขอบออก
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },  // ซ่อน legend ที่แสดงข้อมูล
+                        tooltip: { 
+                            enabled: false // ซ่อน tooltip
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            display: true
+                        },
+                        y: {
+                            beginAtZero: true,
+                            reverse: false
+                        }
+                    },
+                    barPercentage: 0.6,
+                    categoryPercentage: 0.7
+                }
+            });
+
+            // กราฟแท่งกลับหัว (มุมตกลงมาจากด้านบน) โดยไม่มีเส้นขอบ
+            const ctx3 = document.getElementById('fallingBarChart').getContext('2d');
+            new Chart(ctx3, {
+                type: 'bar',
+                data: {
+                    labels: ['shipping', 'offshore', 'agroche', 'food&bevera', 'other', 'net', 'one-off', 'norma'],
+                    datasets: [{
+                        data: [1, 2, 3, 4, 5, 6, 7, 8],
+                        backgroundColor: 'rgba(153, 102, 255, 0.6)',  // กำหนดสีพื้นหลังของกราฟแท่ง
+                        borderWidth: 0  // ลบขอบออก
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },  // ซ่อน legend ที่แสดงข้อมูล
+                        tooltip: { 
+                            enabled: false // ซ่อน tooltip
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            display: true
+                        },
+                        y: {
+                            beginAtZero: true,
+                            reverse: true
+                        }
+                    },
+                    barPercentage: 0.6,
+                    categoryPercentage: 0.7
+                }
+            });
+        };
+    </script>
 </body>
 </html>

@@ -210,113 +210,76 @@
         </div>
 
         <div class="chart-container">
-            <!-- กล่องกราฟ 1 -->
             <div class="chart-box">
-                <canvas id="myBarChart1" class="main2"></canvas>
+                <canvas id="Revenue" class="main2"></canvas>
             </div>
-        
-            <!-- กล่องกราฟ 2 -->
             <div class="chart-box">
-                <canvas id="myBarChart2" class="main2"></canvas>
+                <canvas id="Net Profit" class="main2"></canvas>
             </div>
         </div>
         <div class="chart-container">
-            <!-- กล่องกราฟ 3 -->
             <div class="chart-box">
-                <canvas id="myBarChart3" class="main2"></canvas>
+                <canvas id="EBITDA" class="main2"></canvas>
             </div>
-        
-            <!-- กล่องกราฟ 4 -->
             <div class="chart-box">
-                <canvas id="myBarChart4" class="main2"></canvas>
+                <canvas id="Net Profit to TTA" class="main2"></canvas>
             </div>
-        </div>
+        </div>        
         </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // สร้างกราฟแท่ง
-        const ctx = document.getElementById('myBarChart').getContext('2d');
-        const myBarChart = new Chart(ctx, {
-            type: 'bar', // กราฟประเภทแท่ง
-            data: {
-                labels: ['2020', '2021', '2022', '2023', '2024'], // ปี
-                datasets: [{
-                    label: 'Revenue (Million)', // ชื่อชุดข้อมูล
-                    data: [1000, 1200, 1500, 1800, 2000], // ยอดรายได้ในแต่ละปี
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)', // สีของแท่ง
-                    borderColor: 'rgba(54, 162, 235, 1)', // สีของเส้นขอบ
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                plugins: {
-                    datalabels: {
-                        anchor: 'end', // ตำแหน่งของตัวเลข
-                        align: 'top', // วางตัวเลขที่ด้านบนของแท่ง
-                        color: '#333', // สีของตัวเลข
-                        font: {
-                            weight: 'bold',
-                        },
-                        formatter: function(value) {
-                            return value + 'M'; // เพิ่ม 'M' เพื่อแสดงว่าเป็นล้าน
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true, // เริ่มที่ 0
-                    }
-                }
-            }
-        });
-        const charts = ['myBarChart1', 'myBarChart2', 'myBarChart3', 'myBarChart4'];
+        // กำหนดข้อมูลกราฟแต่ละตัว
+    const chartData = [
+    {
+        element: 'Revenue',
+        labels: ['2021', '2022', '2023'],
+        data: [200, 400, 600],
+        backgroundColor: 'rgba(255, 99, 132, 0.5)'
+    },
+    {
+        element: 'Net Profit',
+        labels: ['2021', '2022', '2023'],
+        data: [15, 25, 35],
+        backgroundColor: 'rgba(54, 162, 235, 0.5)'
+    },
+    {
+        element: 'EBITDA',
+        labels: ['2021', '2022', '2023'],
+        data: [20, 30, 40],
+        backgroundColor: 'rgba(75, 192, 192, 0.5)'
+    },
+    {
+        element: 'Net Profit to TTA',
+        labels: ['2021', '2022', '2023'],
+        data: [25, 35, 45],
+        backgroundColor: 'rgba(255, 206, 86, 0.5)'
+    }
+];
 
-    charts.forEach(function(chartId, index) {
-        const ctx = document.getElementById(chartId).getContext('2d');
-        new Chart(ctx, {
-            type: 'bar', // กราฟประเภทแท่ง
-            data: {
-                labels: ['1000M', '1200M', '1500M', '1800M', '2000M'], // ยอด
-                datasets: [{
-                    label: 'Revenue (Million)', // ชื่อชุดข้อมูล
-                    data: [2020, 2021, 2022, 2023, 2024], // ปี
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)', // สีของแท่ง
-                    borderColor: 'rgba(54, 162, 235, 1)', // สีของเส้นขอบ
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                plugins: {
-                    datalabels: {
-                        anchor: 'end', // ตำแหน่งของตัวเลข
-                        align: 'top', // วางตัวเลขที่ด้านบนของแท่ง
-                        color: '#333', // สีของตัวเลข
-                        font: {
-                            weight: 'bold',
-                        },
-                        formatter: function(value) {
-                            return value; // แสดงปีในแท่งกราฟ
-                        }
-                    }
-                },
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Revenue (Million)', // แสดงชื่อแกน X เป็นยอด
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Year' // แสดงชื่อแกน Y เป็นปี
-                        },
-                        beginAtZero: true, // เริ่มที่ 0
-                    }
+// สร้างกราฟแต่ละตัว
+chartData.forEach(chart => {
+    new Chart(document.getElementById(chart.element), {
+        type: 'bar',
+        data: {
+            labels: chart.labels,
+            datasets: [{
+                label: `${chart.element}`,
+                data: chart.data,
+                backgroundColor: chart.backgroundColor,
+                borderColor: 'rgba(0, 0, 0, 0.5)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
             }
-        });
+        }
     });
+});
     </script>
 </body>
 </html>
