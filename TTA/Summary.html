@@ -12,6 +12,7 @@
             display: flex;               /* ใช้ Flexbox เพื่อจัดตำแหน่ง */
             align-items: center;         /* จัดตำแหน่งให้อยู่กลางในแนวตั้ง */
             gap: 6px;                   /* เว้นระยะห่างระหว่าง dropdown */
+            margin-top: 6px;
         }
 
         .logo-container {
@@ -49,8 +50,8 @@
             width: 48%;
             padding: 1%;
             display: flex;
-            justify-content: flex-end;
-            align-items: center;
+            justify-content: flex-start;
+            align-items: flex-start;
         }
         .menu-item {
             display: flex;
@@ -72,25 +73,25 @@
             background-color: rgba(140, 204, 132, 0.867);
         }
         a {
-            text-decoration: none; /* ลบขีดเส้นใต้จากลิงก์ */
-            padding: 0.5%;
-            border: 1px solid #000000;
+            font-size: 12px;
+            padding: 0.8%;
+            /* border: 1px solid #000000; */
             background-color: #f1f1f1;
-            color: #000000;
             border-radius: 20px;
         }
         a:hover {
-            color: rgb(253, 253, 253);
+            color: rgb(6, 6, 6);
             background-color: #d6d6d6;
         }
         .table-container {
             width: 100%;
             border-collapse: collapse;
+            margin-top: -10px;
         }
 
         .table-container th, .table-container td {
             padding: 15px;
-            border: 1px solid #ddd;
+            border: 1px solid #000000;
             text-align: center;
         }
 
@@ -100,7 +101,7 @@
         }
 
         .table-container td {
-            background-color: #fff;
+            background-color: #f1f1f1;
         }
 
         .table-container tr:nth-child(even) {
@@ -135,7 +136,63 @@
             height: 100%; /* ใช้ความสูงเต็ม */
             /* border: 1px solid #000000; */
         }
-        
+        p {
+            font-size: 12px;
+            font-family: sans-serif;
+        }
+        .menu-con {
+            border: 1px solid black;
+            background-color: #f1f1f1;
+            padding: 6px;
+            margin-top: 6px;
+        }
+        .chart-description {
+            /* margin-top: 25px; ช่องว่างระหว่างกราฟและคำอธิบาย */
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+        }
+
+        .label {
+            display: flex;
+            align-items: center;
+            /* gap: 16px; ระยะห่างระหว่างแต่ละกลุ่มคำอธิบาย */
+            flex-wrap: wrap; /* แยกบรรทัดถ้าพื้นที่ไม่พอ */
+        }
+
+        .color-box {
+            width: 12px; /* ขนาดกล่องสี */
+            height: 12px;
+            display: inline-block;
+            border-radius: 2px; /* ปรับมุมกล่อง */
+            border: 1px solid black;
+        }
+
+        .label p {
+            margin: 0 60px 0 2px; /*ระยะห่างระหว่างกล่องสีและข้อความ */
+            font-size: 12px; /* ปรับขนาดตัวอักษร */
+            font-weight: 400; /* ตัวหนา */
+            font-family: sans-serif;
+        }
+
+        .head {
+            display: flex;
+            align-items: center;
+            padding: 6px;
+            margin-top: -8px;
+            gap: 16px;
+            font-size: 18px;
+            font-weight: bold;
+            justify-content: space-between;
+        }
+        .menu-item-1 {
+            font-size: 14px;            /* ขนาดตัวอักษรสำหรับเมนูย่อย */
+            color: black;             /* สีลิงก์ */
+            text-decoration: none;      /* เอาเส้นใต้ลิงก์ออก */
+        }
+        .menu-item-1:hover {
+            text-decoration: underline; /* เพิ่มเส้นใต้เมื่อวางเมาส์ */
+        }
 </style>
 <body>
     <div class="nav">
@@ -147,139 +204,196 @@
             <a href="index.html" class="menu-item1">Go home</a>
         </div>
     </div>
-    <p>As of 31 December 2023</p>
-    <div class="container">
-        <div class="group1">
-            1
-        </div>
-        <div class="group3">
-            <canvas id="myBarChart" class="main1"></canvas>
-        </div>
-    </div><br>
-
-    <div class="container">
-        <div class="group2">
-            <h3>TTA Group Revenue</h3><hr>
-            <p class="menu-item">In Million Bath <a href="index.html" class="menu-item">Go to Detail</a></p>
-            <table class="table-container">
-                <thead>
-                    <tr>
-                        <th>Group</th>
-                        <th>2021</th>
-                        <th>2022</th>
-                        <th>2023</th>
-                        <th>Change</th>
-                        <th>%Change</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="chart-container">
-            <div class="chart-box">
-                <canvas id="Revenue" class="main2"></canvas>
+    
+    <div class="menu-con">
+        <p>As of 31 December 2023</p>
+        <div class="container">
+            <div class="group1">
+                1
             </div>
-            <div class="chart-box">
-                <canvas id="Net Profit" class="main2"></canvas>
+            <div class="group3">
+                <div>
+                    <p>Proprtion Revenue</p>
+                    <canvas id="myBarChart" class="main1" style="height: 220px; width: 625px;"></canvas>
+                </div>
             </div>
         </div>
-        <div class="chart-container">
-            <div class="chart-box">
-                <canvas id="EBITDA" class="main2"></canvas>
+        <div class="container">
+            <div class="group2">
+                <div class="head">
+                    <span>TTA Group Revenue</span>
+                    <p class="menu-item-1">In Million Bath</p>
+                    <a href="Detail.html" class="menu-item-1">Go to Detail</a>
+                </div>                
+                <table class="table-container" style="height: 320px;">
+                    <thead>
+                        <tr>
+                            <th>Group</th>
+                            <th>2021</th>
+                            <th>2022</th>
+                            <th>2023</th>
+                            <th>Change</th>
+                            <th>%Change</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="chart-box">
-                <canvas id="Net Profit to TTA" class="main2"></canvas>
+            <div class="chart-container">
+                <div class="chart-box">
+                    <p>Revenue</p>
+                    <canvas id="Revenue" class="main2"></canvas>
+                </div>
+                <div class="chart-box">
+                    <p>Net Profit</p>
+                    <canvas id="Net Profit" class="main2"></canvas>
+                </div>
             </div>
-        </div>        
+            <div class="chart-container">
+                <div class="chart-box">
+                    <p>EBITDA</p>
+                    <canvas id="EBITDA" class="main2"></canvas>
+                </div>
+                <div class="chart-box">
+                    <p>Net Profit to TTA</p>
+                    <canvas id="Net Profit to TTA" class="main2"></canvas>
+                </div>
+            </div>
         </div>
+        <div class="chart-description">
+            <div class="chart-description">
+                <div class="label">
+                    <span class="color-box" style="background-color: #02a027;"></span>
+                    <p>Shipping</p>
+                    <span class="color-box" style="background-color: #00dc28;"></span>
+                    <p>Mermaid</p>
+                    <span class="color-box" style="background-color: #02dbb7;"></span>
+                    <p>PMTA</p>
+                    <span class="color-box" style="background-color: #eaff00;"></span>
+                    <p>Pizza</p>
+                    <span class="color-box" style="background-color: #feae00;"></span>
+                    <p>Other</p>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // กำหนดข้อมูลกราฟแต่ละตัว
-    const chartData = [
-    {
-        element: 'Revenue',
-        labels: ['2021', '2022', '2023'],
-        data: [200, 400, 600],
-        backgroundColor: 'rgba(255, 99, 132, 0.5)'
-    },
-    {
-        element: 'Net Profit',
-        labels: ['2021', '2022', '2023'],
-        data: [15, 25, 35],
-        backgroundColor: 'rgba(54, 162, 235, 0.5)'
-    },
-    {
-        element: 'EBITDA',
-        labels: ['2021', '2022', '2023'],
-        data: [20, 30, 40],
-        backgroundColor: 'rgba(75, 192, 192, 0.5)'
-    },
-    {
-        element: 'Net Profit to TTA',
-        labels: ['2021', '2022', '2023'],
-        data: [25, 35, 45],
-        backgroundColor: 'rgba(255, 206, 86, 0.5)'
-    }
-];
-
-// สร้างกราฟแต่ละตัว
-chartData.forEach(chart => {
-    new Chart(document.getElementById(chart.element), {
-        type: 'bar',
-        data: {
-            labels: chart.labels,
-            datasets: [{
-                label: `${chart.element}`,
-                data: chart.data,
-                backgroundColor: chart.backgroundColor,
-                borderColor: 'rgba(0, 0, 0, 0.5)',
-                borderWidth: 1
-            }]
+        const chartData = [
+        {
+            element: 'Revenue',
+            labels: ['2021', '2022', '2023'],
+            data: [100, 4000, 600],
+            backgroundColor: 'rgba(255, 99, 132, 0.5)'
         },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
+        {
+            element: 'Net Profit',
+            labels: ['2021', '2022', '2023'],
+            data: [2000, 250, 500],
+            backgroundColor: 'rgba(54, 162, 235, 0.5)'
+        },
+        {
+            element: 'EBITDA',
+            labels: ['2021', '2022', '2023'],
+            data: [200, 300, -600],
+            backgroundColor: 'rgba(75, 192, 192, 0.5)'
+        },
+        {
+            element: 'Net Profit to TTA',
+            labels: ['2021', '2022', '2023'],
+            data: [250, 350, 450],
+            backgroundColor: 'rgba(255, 206, 86, 0.5)'
+        }
+    ];
+
+        // สร้างกราฟใน group3
+        new Chart(document.getElementById('myBarChart'), {
+            type: 'bar',
+            data: {
+                labels: chartData[0].labels,
+                datasets: chartData.map(chart => ({
+                    label: chart.element,
+                    data: chart.data,
+                    backgroundColor: chart.backgroundColor,
+                    borderWidth: 0
+                }))
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
                 }
             }
-        }
-    });
-});
+        });
+
+        // สร้างกราฟใน chart-container
+        chartData.forEach(chart => {
+            new Chart(document.getElementById(chart.element), {
+                type: 'bar',
+                data: {
+                    labels: chart.labels,
+                    datasets: [{
+                        label: chart.element,
+                        data: chart.data,
+                        backgroundColor: chart.backgroundColor,
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false // ปิดการแสดง legend
+                        }
+                    }
+                }
+            });
+        });
     </script>
 </body>
 </html>

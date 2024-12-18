@@ -21,62 +21,79 @@
 <body>
     <div class="chart-container">
         <!-- กราฟวงกลม -->
-        <div>
+        <div style="background-color: aqua;">
             <canvas id="pieChart"></canvas>
         </div>
         <!-- กราฟแท่งแนวนอนปกติ -->
-        <div>
+        <!-- <div>
             <canvas id="barChart"></canvas>
         </div>
         <!-- กราฟแท่งกลับหัว (หันตกลงมาจากด้านบน) -->
-        <div>
+        <!-- <div>
             <canvas id="fallingBarChart"></canvas>
-        </div>
+        </div> -->
     </div>
 
     <script>
+        Chart.register({
+            id: 'percentageLabels',
+            afterDatasetsDraw(chart) {
+                const {ctx, data} = chart;
+
+                data.datasets.forEach((dataset, i) => {
+                    const meta = chart.getDatasetMeta(i);
+                    meta.data.forEach((bar, index) => {
+                        const value = dataset.data[index];
+                        const label = `${value}%`;
+
+                        ctx.fillStyle = '#000';  // สีตัวอักษร
+                        ctx.font = '12px Arial'; // ขนาดฟอนต์
+                        ctx.textAlign = 'center'; 
+                        ctx.textBaseline = 'middle';
+
+                        if (chart.canvas.id === 'pieChart') {
+                            // วางตัวเลขไว้ที่ขอบวงกลม
+                            const model = bar.tooltipPosition();
+                            const angle = bar.startAngle + (bar.endAngle - bar.startAngle) / 2;
+                            const distance = bar.outerRadius + -50;  // ระยะห่างจากขอบวงกลม
+                            const xPos = model.x + Math.cos(angle) * distance;
+                            const yPos = model.y + Math.sin(angle) * distance;
+                            ctx.fillText(label, xPos, yPos);
+                        } 
+                        else if (chart.canvas.id === 'barChart') {
+                            // ป้องกันเลขทะลุในกราฟแท่ง
+                            const textY = Math.max(bar.y - 10, chart.chartArea.top + 10);
+                            ctx.fillText(label, bar.x, textY);
+                        } 
+                        else if (chart.canvas.id === 'fallingBarChart') {
+                            // วางตัวเลขใต้แท่งกราฟกลับหัว
+                            ctx.fillText(label, bar.x, bar.y + 10);
+                        }
+                    });
+                });
+            }
+        });
+
         window.onload = function () {
-            // กราฟวงกลม
             const ctx1 = document.getElementById('pieChart').getContext('2d');
             new Chart(ctx1, {
                 type: 'pie',
                 data: {
-                    // labels: ['Product A', 'Product B', 'Product C', 'Product D', 'Product s', 'Product e'], // เพิ่ม label
                     datasets: [{
-                        data: [30, 20, 25, 25, 10, 15], // เพิ่มค่าให้ครบกับจำนวน label
+                        data: [30, 20, 25, 25, 10, 15],
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.6)',
                             'rgba(54, 162, 235, 0.6)',
                             'rgba(255, 206, 86, 0.6)',
                             'rgba(75, 192, 192, 0.6)',
-                            'rgba(153, 102, 255, 0.6)', // สีสำหรับ Product s
-                            'rgba(255, 159, 64, 0.6)'  // สีสำหรับ Product e
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)', // สีขอบสำหรับ Product s
-                            'rgba(255, 159, 64, 1)'   // สีขอบสำหรับ Product e
-                        ],
-                        borderWidth: 1
+                            'rgba(153, 102, 255, 0.6)',
+                            'rgba(255, 159, 64, 0.6)'
+                        ]
                     }]
                 },
                 options: {
                     responsive: true,
-                    plugins: {
-                        legend: { position: 'top' },
-                        tooltip: {
-                            callbacks: {
-                                label: function (context) {
-                                    const label = context.label || '';
-                                    const value = context.raw || 0;
-                                    return `${label}: ${value}%`;
-                                }
-                            }
-                        }
-                    }
+                    plugins: { legend: { position: 'top' } }
                 }
             });
 

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TTA Group Structure & info</title>
+    <script src="scripts.js"></script>
 </head>
 <style>
         .logo-container {
@@ -95,16 +96,8 @@
             color: rgba(35, 208, 15, 0.867);
         }
         h3 {
-            background-color: #8d8d8d;
-            border: 1px solid black;
-            padding: 2%;
-            width: 30%;
-            border-radius: 25px;
-            margin: 0 auto; /* จัดให้กลางในแนวนอน */
-            display: flex; /* ใช้ flexbox */
-            justify-content: center; /* จัดกลางในแนวนอน */
-            align-items: center; /* จัดกลางในแนวตั้ง */
-            height: 20px; /* กำหนดความสูงของ h3 */
+            display: flex;
+            justify-content: flex-start;
         }
 
         /* เมนูหลัก */
@@ -273,12 +266,12 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             width: 100%;
-            justify-content: flex-start;
+            justify-content: center;
             align-items: center;
         }
         .submenu-dropdown-2 button {
             display: flex;
-            justify-content: flex-start;
+            justify-content: center;
             align-items: center;
             margin: 5px 0;
             padding: 8px;
@@ -289,7 +282,7 @@
         }
         .submenu-dropdown-3 button {
             display: flex;
-            justify-content: flex-start;
+            justify-content: center;
             align-items: center;
             margin: 5px 0;
             padding: 8px;
@@ -300,7 +293,7 @@
         }
         .submenu-dropdown-4 button {
             display: flex;
-            justify-content: flex-start;
+            justify-content: center;
             align-items: center;
             margin: 5px 0;
             padding: 8px;
@@ -367,11 +360,11 @@
                         <button onclick="toggleSubMenu('Premo-shipping')">Shipping <br></button>
                         <div id="Premo-shipping" class="submenu-dropdown-1">
                             <button onclick="window.location.href='#'">Premo shipping Plc.<br>(Thailand)</button>
-                            <button onclick="toggleSubMenu('Singapore-shipping')">Thoresen Shipping Singapore Pte. Ltd<br>(Singapore)</button>
+                            <button onclick="toggleSubMenu1('Singapore-shipping')">Thoresen Shipping Singapore Pte. Ltd<br>(Singapore)</button>
                                 <div id="Singapore-shipping" class="submenu-dropdown-2" style="display: none;">
                                     <button onclick="window.location.href='#'">Thoresen Shipping Company Pte. Ltd. <br>(Singapore)</button>
                                     <button onclick="window.location.href='#'">Thoresen & Company (Bangkok) Limited (TCB) <br>(Thailand)</button>
-                                    <button onclick="toggleSubMenu('TST-shipping')">Thoresen Shipping (Thailand) Co., Ltd. (TST) <br>(Thailand) <br> Invested by TTA (51%), TSS (49%)</button>
+                                    <button onclick="toggleSubMenu2('TST-shipping')">Thoresen Shipping (Thailand) Co., Ltd. (TST) <br>(Thailand) <br> Invested by TTA (51%), TSS (49%)</button>
                                     
                                     <div id="TST-shipping" class="submenu-dropdown-3" style="display: none;">
                                         <button onclick="window.location.href='#'">Thoresen Klong Padung <br> Krungkasem Joint Venture (Thailand)<br> Invested by TST (95%), TCB (5%)</button>
@@ -387,27 +380,27 @@
                     <div class="submenu-buttons2">
                         <button onclick="toggleSubMenu('Mermaid')">Offshore Service</button>
                         <div id="Mermaid" class="submenu-dropdown-1">
-                            <button onclick="toggleSubMenu('Mermaid01')">Mermaid Maritime Plc. <br>( lncorporated in Thailand but listed in Singapore )<!--<br>Invested by TTA (49.53%), SOH (7.22%), ATH(1.47%)--></button>
+                            <button onclick="toggleSubMenu1('Mermaid01')">Mermaid Maritime Plc. <br>( lncorporated in Thailand but listed in Singapore )<!--<br>Invested by TTA (49.53%), SOH (7.22%), ATH(1.47%)--></button>
                             <div id="Mermaid01" class="submenu-dropdown-2" style="display: none;">
                                 <button onclick="window.location.href='#'">Mermaid Drilling Ltd. <br>(Thailand)</button>
-                                <button onclick="toggleSubMenu('Mermaid1')">Mermaid Subsea Services (Thailand) Ltd. <br>(Thailand)</button>
+                                <button onclick="toggleSubMenu2('Mermaid1')">Mermaid Subsea Services (Thailand) Ltd. <br>(Thailand)</button>
                                     <div id="Mermaid1" class="submenu-dropdown-3" style="display: none;">
                                         <button onclick="window.location.href='#'">Seascape Surveys Pte.Ltd <br>(Singapore)</button>
                                         <button onclick="window.location.href='#'">Mermaid Offshore Servives Pte.Ltd<br>(Singapore)</button>
                                         <button onclick="window.location.href='#'">Mermaid Subsea Services (Malaysia) Sdn. Bhd.<br>(Malaysia)</button>
                                         <button onclick="window.location.href='#'">Mermaid Subsea Services (UK) Limited<br>(United Kingdom)</button>
                                         <button onclick="window.location.href='#'">ZeaQuest Company Limited<br>(Thailand)</button>
-                                        <button onclick="toggleSubMenu('Mermaid2')">Mermaid Subsea Oil and Gas Services DMCEST <br>(UAE)</button>
+                                        <button onclick="toggleSubMenu3('Mermaid2')">Mermaid Subsea Oil and Gas Services DMCEST <br>(UAE)</button>
                                             <div id="Mermaid2" class="submenu-dropdown-5" style="display: none;">
                                                 <button onclick="window.location.href='#'">Millennium 3 Ship Management and Operations DMCCO <br>(UAE)</button>
                                             </div>
                                         <button onclick="window.location.href='#'">Mermaid Decom Co., Ltd. <br>(Thailand)</button>
                                     </div>
-                                    <button onclick="toggleSubMenu('Mermaid3')">Mermaid Maritime Mauritius Ltd. <br>(Mauritius)</button>        
+                                    <button onclick="toggleSubMenu4('Mermaid3')">Mermaid Maritime Mauritius Ltd. <br>(Mauritius)</button>        
                                     <div id="Mermaid3" class="submenu-dropdown-3" style="display: none;">
-                                        <button onclick="toggleSubMenu('Mermaid4')">Mermaid International Ventures<br>(Cayman Islands)</button>
+                                        <button onclick="toggleSubMenu5('Mermaid4')">Mermaid International Ventures<br>(Cayman Islands)</button>
                                             <div id="Mermaid4" class="submenu-dropdown-2" style="display: none;">
-                                                <button onclick="toggleSubMenu('Mermaid5')">Mermaid Subsea Services <br>(International) Ltd.<br>(Seychelles)</button>        
+                                                <button onclick="toggleSubMenu6('Mermaid5')">Mermaid Subsea Services <br>(International) Ltd.<br>(Seychelles)</button>        
                                                     <div id="Mermaid5" class="submenu-dropdown-5" style="display: none;">
                                                         <button style="background-color: #3e8e41;" onclick="window.location.href='#'">Mermaid Subsea Services <br>Saudi Arabia Co., Ltd. <br>(Saudi Arabia)</button>
                                                         <button style="background-color: #3e8e41;" onclick="window.location.href='#'">Mermaid Subsea Services LLC<br>(Qatar)</button>
@@ -420,74 +413,76 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="submenu-buttons3">
                         <button onclick="toggleSubMenu('PM-Thoresen')">Agrochemical</button>
                             <div id="PM-Thoresen" class="submenu-dropdown-1">
-                                <button onclick="toggleSubMenu('PM-Thoresen1')">PM Thoresen Asia Holdings Plc. <br>(Thailand)</button>
+                                <button onclick="toggleSubMenu1('PM-Thoresen1')">PM Thoresen Asia Holdings Plc. <br>(Thailand)</button>
                                 <div id="PM-Thoresen1" class="submenu-dropdown-2">
                                     <button onclick="window.location.href='#'">PM Thoresen Asia (Singapore) Pte. Ltd.<br>(Singapore)</button>
                                     <button onclick="window.location.href='#'">Baconco Co., Ltd.<br>(Vietnam)</button>
                                 </div>
                             </div>
                     </div>
+
                     <div class="submenu-buttons4">
                         <button onclick="toggleSubMenu('PH-Capital')">Food and Beverage</button>
                         <div id="PH-Capital" class="submenu-dropdown-1">
-                            <button onclick="toggleSubMenu('PH-Capital1')">PH Capital Co., Ltd. <br>(Thailand)</button>
+                            <button onclick="toggleSubMenu1('PH-Capital1')">PH Capital Co., Ltd. <br>(Thailand)</button>
                             <div id="PH-Capital1" class="submenu-dropdown-2">
                                 <button onclick="window.location.href='#'">PH Capital Co., Ltd. <br>(Thailand)</button>
                                 <button onclick="window.location.href='#'">Siam Taco Company Limited <br>(Thailand)</button>
                             </div>
                         </div>
                     </div>
+                    
                     <div class="submenu-buttons5">
                         <button class="Thoresen2" onclick="toggleSubMenu('Thoresen')">Investments</button>
                         <div id="Thoresen" class="submenu-dropdown-1">
                             <h3>Logistics</h3>
-                            <button class="Thoresen1" onclick="toggleSubMenu('Thoresen1')">Thoresen (Indochina) S.A. <br>(Panama)</button>
+                            <button class="Thoresen1" onclick="toggleSubMenu1('Thoresen1')">Thoresen (Indochina) S.A. <br>(Panama)</button>
                                 <div id="Thoresen1" class="submenu-dropdown-2" style="display: none;">
-                                    <button onclick="toggleSubMenu('Thoresen11')">Thoresen-Vinama Co., Ltd. <br>(Vietnam)</button>
+                                    <button onclick="toggleSubMenu2('Thoresen11')">Thoresen-Vinama Co., Ltd. <br>(Vietnam)</button>
                                         <div id="Thoresen11" class="submenu-dropdown-3" style="display: none;">
-                                            <button onclick="toggleSubMenu('Thoresen12')">Thoresen-Vinama Logistics Co., Ltd. <br>(Vietnam)</button>
+                                            <button onclick="toggleSubMenu3('Thoresen12')">Thoresen-Vinama Logistics Co., Ltd. <br>(Vietnam)</button>
                                                 <div id="Thoresen12" class="submenu-dropdown-4" style="display: none;">
-                                                    <button onclick="toggleSubMenu('Thoresen12')">Thoresen-Vi Na Ma Tug<br>Joint Stock Company<br>(Vietnam)<br>Invested by SOH (34%), TVL (51%)</button>
+                                                    <button onclick="toggleSubMenu4('Thoresen12')">Thoresen-Vi Na Ma Tug<br>Joint Stock Company<br>(Vietnam)<br>Invested by SOH (34%), TVL (51%)</button>
                                                 </div>
                                         </div>
                                 </div>
-                        <button onclick="window.location.href='#'">Gulf Agency Company (Thailand) Ltd. <br>(Thailand)</button>
-                        <button onclick="window.location.href='#'">GAC Thoresen Logistics Ltd. <br>(Thailand)</button>
-                        <button onclick="window.location.href='#'">Chidlom Marine Services & Supplies Ltd. <br>(Thailand)</button>
-                        <button onclick="window.location.href='#'">Thoresen Shipping FZE <br>(UAE)</button>
-                        <button onclick="window.location.href='#'">Titan Tanker Co., Ltd. <br>(Thailand)</button>
-                        <h3>Water</h3>
-    
-                            <button onclick="toggleSubMenu('Thoresen21')">Asia Infrastructure Management (Thailand) Co., Ltd. <br>(Thailand)</button>
+                            <button onclick="window.location.href='#'">Gulf Agency Company (Thailand) Ltd. <br>(Thailand)</button>
+                            <button onclick="window.location.href='#'">GAC Thoresen Logistics Ltd. <br>(Thailand)</button>
+                            <button onclick="window.location.href='#'">Chidlom Marine Services & Supplies Ltd. <br>(Thailand)</button>
+                            <button onclick="window.location.href='#'">Thoresen Shipping FZE <br>(UAE)</button>
+                            <button onclick="window.location.href='#'">Titan Tanker Co., Ltd. <br>(Thailand)</button>
+                            <h3>Water</h3>
+
+                            <button onclick="toggleSubMenu2('Thoresen21')">Asia Infrastructure Management (Thailand) Co., Ltd. <br>(Thailand)</button>
                                 <div id="Thoresen21" class="submenu-dropdown-2" style="display: none;">
                                     <button onclick="window.location.href='#'">Asia Nampapa Luang Prabang Sole Co., Ltd.<br>(Laos)</button>
                                     <button onclick="window.location.href='#'">Asia Infrastructure (Cambodia) Co., Ltd.<br>(Cambodia)</button>
                                     <button onclick="window.location.href='#'">Asia Svayrieng Water Co., Ltd.<br>(Cambodia)</button>
                                 </div>
-                        <h3>Other</h3>
+                            <h3>Other</h3>
     
-                            <button onclick="toggleSubMenu('Thoresen22')">TTA Mariner Co., Ltd. <br>(Thailand)</button>
+                            <button onclick="toggleSubMenu2('Thoresen22')">TTA Mariner Co., Ltd. <br>(Thailand)</button>
                                 <div id="Thoresen22" class="submenu-dropdown-2" style="display: none;">
                                     <button onclick="window.location.href='#'">TTA Chao Phraya Express Boat Joint Venture<br>(Thailand)</button>
                                 </div>
     
-                                <button onclick="toggleSubMenu('Thoresen23')">V Ventures Technologies Co., Ltd.<br>(formerly Asia Coating Services Ltd.) <br>(Thailand)</button>
+                                <button onclick="toggleSubMenu2('Thoresen23')">V Ventures Technologies Co., Ltd.<br>(formerly Asia Coating Services Ltd.) <br>(Thailand)</button>
                                     <div id="Thoresen23" class="submenu-dropdown-2" style="display: none;">
-    
                                         <button onclick="window.location.href='#'">Laser Game Asia Ltd. <br>(Thailand)</button>
                                         <button onclick="window.location.href='#'">Praneat Co., Ltd. <br>(Thailand)</button>
     
-                                        <button onclick="toggleSubMenu('Thoresen24')">Skootar Beyond Co., Ltd. <br>(Thailand)</button>
+                                        <button onclick="toggleSubMenu2('Thoresen24')">Skootar Beyond Co., Ltd. <br>(Thailand)</button>
                                             <div id="Thoresen24" class="submenu-dropdown-3" style="display: none;">
                                                 <button onclick="window.location.href='#'">Skootar Logistics Co., Ltd. <br>(Thailand)</button>
                                             </div>
                                         <button onclick="window.location.href='#'">KK Venture Co., Ltd. <br>(Thailand)</button>
-                                            <button onclick="toggleSubMenu('Thoresen25')">V Venture INT Pte. Ltd. <br>(Singapore)</button>
+                                            <button onclick="toggleSubMenu3('Thoresen25')">V Venture INT Pte. Ltd. <br>(Singapore)</button>
                                                 <div id="Thoresen25" class="submenu-dropdown-3" style="display: none;">
-                                                    <button onclick="toggleSubMenu('Thoresen26')">DWP Cityspace Ltd. <br>(Thailand)</button>
+                                                    <button onclick="toggleSubMenu3('Thoresen26')">DWP Cityspace Ltd. <br>(Thailand)</button>
                                                         <div id="Thoresen26" class="submenu-dropdown-4" style="display: none;">
                                                             <button onclick="window.location.href='#'">Dwp Architecture Co., Ltd. <br>(Thailand)</button>
                                                             <button onclick="window.location.href='#'">Dwp (Thailand) Co., Ltd. <br>(Thailand)</button>
@@ -514,7 +509,7 @@
     
     
                             <br><hr><br>
-                            <button class="Thoresen2" onclick="toggleSubMenu('Thoresen2')">Soleado Holdings Pte. Ltd. (SOH) <br>(Singapore)</button>
+                            <button class="Thoresen2" onclick="toggleSubMenu1('Thoresen2')">Soleado Holdings Pte. Ltd. (SOH) <br>(Singapore)</button>
                                 <div id="Thoresen2" class="submenu-dropdown-2" style="display: none;">
                                     <h3>Logistics</h3>
                                     <button onclick="window.location.href='#'">Baria Serece<br>(Vietnam)</button>
@@ -522,10 +517,10 @@
                                     <button onclick="window.location.href='#'">P80 Sky Ltd. <br>(British Virgin Island)</button>
                                 </div>
     
-                            <button class="Thoresen3" onclick="toggleSubMenu('Thoresen3')">Athene Holdings Ltd. (ATH)<br>(Thailand)</button>
+                            <button class="Thoresen3" onclick="toggleSubMenu2('Thoresen3')">Athene Holdings Ltd. (ATH)<br>(Thailand)</button>
                                 <div id="Thoresen3" class="submenu-dropdown-2" style="display: none;">
                                     <h3>Other</h3>
-                                    <button onclick="toggleSubMenu('Thoresen4')">Unique Mining Services Plc. <br>(Thailand)</button>
+                                    <button onclick="toggleSubMenu3('Thoresen4')">Unique Mining Services Plc. <br>(Thailand)</button>
                                         <div id="Thoresen4" class="submenu-dropdown-3" style="display: none;">
                                             <button onclick="window.location.href='#'">UMS Distribution Co., Ltd.<br>(Thailand)</button>
                                             <button onclick="window.location.href='#'">UMS Litghter Co., Ltd.<br>(Thailand)</button>
@@ -540,42 +535,5 @@
                 </div>
             </div>
         </div>
-    
-<script>
-    function toggleSubMenu(menuId) {
-        var submenu = document.getElementById(menuId);
-        var allSubmenus = document.querySelectorAll('.submenu-dropdown-1, .submenu-dropdown-2, .submenu-dropdown-3, .submenu-dropdown-4'); 
-
-        // เช็คสถานะเมนูปัจจุบันว่าถูกเปิดอยู่หรือไม่
-        var isCurrentlyOpen = submenu.style.display === 'block';
-
-        // // ปิดเมนูย่อยอื่นๆ ทั้งหมด ยกเว้นเมนูที่กำลังคลิกอยู่ 
-        // allSubmenus.forEach(function(sub) {
-        //     if (sub !== submenu) {
-        //         sub.style.display = 'none';
-        //     }
-        // });
-
-        // เปิด/ปิดเมนูที่คลิก
-        if (!isCurrentlyOpen) {
-            submenu.style.display = 'block';
-        } else {
-            submenu.style.display = 'none';
-        }
-    }
-
-// ป้องกันการปิดเมนูย่อยเมื่อคลิกที่เมนูย่อย
-document.querySelectorAll('.submenu-dropdown').forEach(function(submenu) {
-    submenu.addEventListener('click', function(event) {
-        event.stopPropagation();  // ป้องกันการปิดเมนูเมื่อคลิกเมนูย่อย
-    });
-});
-
-// ป้องกันการปิดเมนูหลักเมื่อคลิกเมนูย่อย
-document.getElementById('companyMenu').addEventListener('click', function(event) {
-    event.stopPropagation();  // หยุดการคลิกกระจาย
-});
-
-</script>
 </body>
 </html>
