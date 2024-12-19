@@ -83,13 +83,10 @@
         }
 
         h1 {
-            font-size: 1.5em;
-            padding: 2%;
-            /* margin: 0 auto; จัดให้กลางในแนวนอน */
-            display: flex; /* ใช้ flexbox */
-            justify-content: center; /* จัดกลางในแนวนอน */
-            align-items: center; /* จัดกลางในแนวตั้ง */
-            height: 20px; /* กำหนดความสูงของ h3 */
+            font-size: 1.8em;
+            text-align: center; /* จัดข้อความให้อยู่กลาง */
+            margin: 0; /* ลบระยะห่างของ h1 */
+            line-height: 1.5; /* ปรับระยะห่างระหว่างบรรทัด */
         }
         h2 {
             text-align: center;
@@ -104,20 +101,22 @@
         .menu-container {
             display: flex;
             background: linear-gradient(45deg, #cdccff, #cce5ff, #d9f7be, #fff2cc, #e6e6e6); /* ใช้ linear-gradient สำหรับหลายๆ สี */
-            padding: 10px;
+            padding: 6px;
             border-radius: 10px;
-            text-align: center;
             width: 40%;
-            cursor: pointer; /* ทำให้ดูเหมือนปุ่ม */
-            margin-inline: auto;
+            cursor: pointer;
+            justify-content: center;
+            align-items: center; /* จัดกลางแนวตั้ง */
+            margin: auto; /* จัดกลางแนวนอน */
+            position: absolute;
+            top: 23%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* จัดกลางจอ */
         }
-        
+
         .menu-item {
-            position: relative;
             padding: 10px 20px;
             color: rgb(0, 0, 0);
-            cursor: pointer;
-            border-radius: 6px;
             text-align: center;
         }
         
@@ -128,7 +127,7 @@
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
             border-radius: 5px;
             position: absolute;
-            top: 120%;
+            top: 105%;
             left: -50%;
             width: 210%;
             min-width: 100px;

@@ -141,7 +141,6 @@
         .cash-con {
             text-align: left;
             margin-top: 20px;
-            /* border: 1px solid black; */
         }
         .cash {
             margin-left: 25px;
@@ -154,34 +153,42 @@
             margin: 2px 0;
             font-weight: normal;
         }
-        .table-cash-flow, .table-summary {
-            width: 260%;
+        .table-cash-flow {
+            width: 100%;
             border-collapse: collapse;
+        }
+        
+        .table-summary-1,
+        .table-summary-2,
+        .table-summary-3,
+        .table-summary-4 {
+            width: 17%;
         }
         
         .table-cash-flow th, .table-cash-flow td, .table-summary th, .table-summary td {
             border: 1px solid #000;
             padding: 8px;
             text-align: center;
+            
         }
-        /* กำหนดขอบด้านบนและด้านล่างให้กับทุก <td> ในแถวที่มีคลาส .red-border */
+        /* .red-border */
         .red-border td {
-            border-top: 2px solid rgb(165, 6, 6);   /* ขอบด้านบนสีแดง */
-            border-bottom: 2px solid rgb(165, 6, 6); /* ขอบด้านล่างสีแดง */
-            border-left: 2px solid rgb(165, 6, 6);   /* ขอบด้านซ้ายสีแดง */
-            border-right: 2px solid rgb(165, 6, 6);  /* ขอบด้านขวาสีแดง */
+            border-top: 2px solid rgb(255, 31, 31);   /* ขอบด้านบนสีแดง */
+            border-bottom: 2px solid rgb(255, 31, 31); /* ขอบด้านล่างสีแดง */
+            border-left: 2px solid rgb(255, 31, 31);   /* ขอบด้านซ้ายสีแดง */
+            border-right: 2px solid rgb(255, 31, 31);  /* ขอบด้านขวาสีแดง */
         }
         .red-border-1 td {
-            border-bottom: 2px solid rgb(165, 6, 6); /* ขอบด้านล่างสีแดง */
+            border-bottom: 2px solid rgb(255, 31, 31); /* ขอบด้านล่างสีแดง */
         }
         .green-border td {
-            border-top: 2px solid #006834;   /* ขอบด้านบนสีแดง */
-            border-bottom: 2px solid #006834; /* ขอบด้านล่างสีแดง */
-            border-left: 2px solid #006834;   /* ขอบด้านซ้ายสีแดง */
-            border-right: 2px solid #006834;  /* ขอบด้านขวาสีแดง */
+            border-top: 2px solid #00ff80;   /* ขอบด้านบนสีแดง */
+            border-bottom: 2px solid #00ff80; /* ขอบด้านล่างสีแดง */
+            border-left: 2px solid #00ff80;   /* ขอบด้านซ้ายสีแดง */
+            border-right: 2px solid #00ff80;  /* ขอบด้านขวาสีแดง */
         }
         .g-border-1 td {
-            border-bottom: 2px solid #006834; /* ขอบด้านล่างสีแดง */
+            border-bottom: 2px solid #00ff80; /* ขอบด้านล่างสีแดง */
         }
 
         /* หัวตาราง */
@@ -271,8 +278,8 @@
         /* การจัดการตารางในแถวเดียว */
         .main-container {
             display: flex;
-            gap: 10px; /* เว้นช่องว่างระหว่างตาราง */
-            padding: 12px;
+            /* gap: 10px; เว้นช่องว่างระหว่างตาราง
+            padding: 12px; */
             /* justify-content: space-between; จัดตารางให้ห่างกันตามต้องการ */
         }
         /* ปรับระยะห่างของตาราง */
@@ -296,6 +303,7 @@
             background-color: #006834; /* สีม่วงอ่อน */
             color: rgb(255, 255, 255); /* สีตัวอักษร */
             font-weight: bold; /* ตัวหนา */
+            height: 10px;
         }
         /* ปรับสีเฉพาะแถวที่ 6 ใน tbody */
         .table-cash-flow-1 tbody tr:nth-child(6) td {
@@ -334,14 +342,14 @@
         }
         /* ปรับความสูงของแถวใน thead */
         .table-cash-flow-1 thead th {
-            height: 39px; /* ความสูงของเซลล์ */
+            height: 40px; /* ความสูงของเซลล์ */
             padding: 15px; /* เพิ่มระยะห่างด้านใน */
             text-align: center; /* จัดข้อความกลางแนวตั้งและแนวนอน */
         }
         /* ปรับความสูงของแถวใน tbody */
         .table-cash-flow-1 tbody th {
-            height: 57px; /* ความสูงของเซลล์ */
-            padding: 15px; /* เพิ่มระยะห่างด้านใน */
+            height: 53px; /* ความสูงของเซลล์ */
+            padding: 17px; /* เพิ่มระยะห่างด้านใน */
             text-align: center; /* จัดข้อความกลางแนวตั้งและแนวนอน */
         }
 
@@ -365,18 +373,107 @@
         }
         
 
-    /* ตารางที่2 */
-        .main-container {
+    /* ตารางเเรก */
+    .main-container {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 4px;
-            padding: 4px;
+            gap: -1%;
+            margin-top: -0.2%;
         }
+
+        .cash-con {
+            text-align: left;
+            /* margin-top: 20px; */
+            /* border: 1px solid black; */
+        }
+        .cash {
+            margin-left: 25px;
+        }
+        
+        .table-cash-flow, .table-summary {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .table-cash-flow td {
+            background-color: #ffffff;
+            text-align: left; /* ชิดซ้ายข้อความ */
+        }
+        .table-summary td:nth-child(n+2) {
+            text-align: right;
+            width: 9.1%;
+        }
+        .table-summary td:nth-child(n+3) {
+            text-align: right;
+            width: 8.75%;
+        }
+        .table-summary td:nth-child(n+4) {
+            text-align: right;
+            width: 8.2%;
+        }
+        .table-summary td:nth-child(n+5) {
+            text-align: right;
+            width: 9.05%;
+        }
+        .table-summary td:nth-child(n+6) {
+            text-align: right;
+            width: 8.97%;
+        }
+        .table-summary td:nth-child(n+7) {
+            text-align: right;
+            width: 8.6%;
+        }
+        
+        /* จัดตัวเลขในเซลล์ชิดขวา */
+        .table-cash-flow td:nth-child(n+2) {
+            text-align: right; /* ตัวเลขชิดขวา */
+        }
+
+        /* จัดข้อความทั่วไปในเซลล์ชิดซ้าย */
+        .table-cash-flow td {
+            text-align: left; /* ข้อความทั่วไปชิดซ้าย */
+        }
+        
+        /* ปรับตัวหนังสือในตาราง */
+        .table-cash-flow th, 
+        .table-cash-flow td {
+            font-weight: 300; /* ความหนาของตัวหนังสือ (100-900) */
+            font-family: Arial, sans-serif; /* ฟอนต์ที่ดูบาง */
+        }
+        
+        /* ฟอนต์ตัวบาง */
+        .thin-text {
+            font-weight: 300;
+            font-family: Arial, sans-serif;
+        }
+        
+
+        /* ปรับสีแถวใน thead */
+        .table-cash-flow-1 thead tr th {
+            background-color: #530494; /* สีม่วงเข้ม */
+            color: white;
+            font-weight: bold;
+        }
+        /* ปรับสีแถวใน tbody */
+        .table-cash-flow-1 tbody tr th {
+            background-color: #9554b1; /* สีม่วงกลาง */
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+        }
+        
+        /* จัดตัวเลขในเซลล์ชิดขวา */
+        .table-cash-flow-1 td:nth-child(n+1) {
+            text-align: right; /* ตัวเลขชิดขวา */
+        }
+        /* ปรับตัวหนังสือในตาราง */
+        .table-cash-flow-1 th, 
+        .table-cash-flow-1 td {
+            font-weight: 300; /* ความหนาของตัวหนังสือ (100-900) */
+            font-family: Arial, sans-serif; /* ฟอนต์ที่ดูบาง */
+        }
+
         table {
             border-collapse: collapse;
-            width: 80%;
-            /* margin-top: 1.5%; */
+            width: 20%;
         }
         th, td {
             border: 1px solid black;
@@ -386,75 +483,6 @@
         th {
             background: #f2f2f2;
             font-weight: bold;
-        }
-        /* Styling for individual tables */
-        .table-summary {
-            width: 80px;
-        }
-        .table-summary {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        /* Styling for individual tables */
-        .table-summary-1 {
-            width: 20%;
-        }
-        .table-summary-1 {
-            width: 20%;
-            border-collapse: collapse;
-        }
-        /* เพิ่มสีพื้นหลังและข้อความใน thead */
-        .table-summary thead td {
-            background-color: #5292e6;  /* สีฟ้า */
-            color: rgb(0, 0, 0);  /* สีตัวอักษรดำ */
-            font-weight: bold;  /* ตัวหนา */
-            font-family: Arial, sans-serif;
-            text-align: left;  /* จัดข้อความใน thead ชิดซ้าย */
-        }
-
-        /* เพิ่มสีพื้นหลังให้กับแถวสลับใน tbody */
-        .table-summary tbody tr:nth-child(even) {
-            background-color: #f2f2f2;  /* สีเทาอ่อน */
-        }
-
-        /* ปรับการจัดวางตัวอักษรใน tbody */
-        .table-summary tbody td {
-            padding: 8px;  /* ระยะห่างภายใน */
-            /* text-align: right;  ตัวเลขใน tbody ชิดขวา */
-        }
-
-        /* จัดข้อความใน thead ชิดซ้าย */
-        .table-summary td {
-            text-align: left;  /* ตัวอักษรใน tbody ชิดซ้าย */
-        }
-
-        /* จัดตัวเลขใน tbody ชิดขวา */
-        .table-summary tbody td:nth-child(n+2) {
-            text-align: right; /* ตัวเลขใน tbody ชิดขวา */
-        }
-        /* ให้ข้อความใน <td> ชิดซ้าย */
-        .table-summary td {
-            text-align: left;  /* ชิดซ้ายสำหรับข้อความ */
-            padding: 8px;  /* ระยะห่างภายใน */
-        }
-        /* ให้ตัวเลขใน <td> ชิดขวา */
-        .table-summary td:nth-child(n+2) {
-            text-align: right; /* ตัวเลขในแถวอื่นๆ ชิดขวา */
-        }
-
-
-        /* เพิ่มสีพื้นหลังและข้อความใน thead */
-        .table-summary-1 thead td {
-            background-color: #5292e6;  /* สีเขียว */
-            color: rgb(0, 0, 0);  /* สีตัวอักษรขาว */
-            font-weight: bold;  /* ตัวหนา */
-            font-weight: 300;
-            font-family: Arial, sans-serif;
-            text-align: left;  /* จัดข้อความชิดซ้าย */
-        }
-        /* จัดตัวเลขในเซลล์ชิดขวา */
-        .table-summary-1 td:nth-child(n+1) {
-            text-align: right; /* ตัวเลขชิดขวา */
         }
 </style>
 <body>
@@ -651,7 +679,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr class="green-border">
                     <td>Cash Inflow</td>
                     <td>23</td>
                     <td>375</td>
@@ -660,7 +688,7 @@
                     <td>30</td>
                     <td>-</td>
                 </tr>
-                <tr>
+                <tr class="green-border">
                     <td>Dividend</td>
                     <td>23</td>
                     <td>175</td>
@@ -669,7 +697,7 @@
                     <td>30</td>
                     <td>-</td>
                 </tr>
-                <tr>
+                <tr class="green-border">
                     <td>Loan and Loan Repayment from Sub/Asso/JV</td>
                     <td>-</td>
                     <td>100</td>
@@ -687,7 +715,7 @@
                     <td>-</td>
                     <td>-</td>
                 </tr>
-                <tr>
+                <tr class="red-border">
                     <td>Cash Outflow</td>
                     <td>127</td>
                     <td>729</td>
@@ -985,7 +1013,7 @@
                         <th>######</th>
                         <th>######</th>
                     </tr>
-                    <tr>
+                    <tr class="green-border">
                         <td>1,195</td>
                         <td>1,690</td>
                         <td>4,788</td>
@@ -1005,7 +1033,7 @@
                         <td>800</td>
                         <td>3,974</td>
                     </tr>
-                    <tr>
+                    <tr class="red-border">
                         <td>1,980</td>
                         <td>2,511</td>
                         <td>5,455</td>
@@ -1168,13 +1196,13 @@
         <table class="table-summary">
             <thead>
                 <tr>
-                    <td style="font-weight: 700;">TTA Ending Cash Balance</td>
-                    <td style="font-weight: 700;">May-24</td>
-                    <td style="font-weight: 700;">Jun-24</td>
-                    <td style="font-weight: 700;">Jul-24</td>
-                    <td style="font-weight: 700;">Aug-24</td>
-                    <td style="font-weight: 700;">Sep-24</td>
-                    <td style="font-weight: 700;">Oct-24</td>
+                    <td style="font-weight: 700; background-color: #35a8eb;">TTA Ending Cash Balance</td>
+                    <td style="font-weight: 700; background-color: #35a8eb;">May-24</td>
+                    <td style="font-weight: 700; background-color: #35a8eb;">Jun-24</td>
+                    <td style="font-weight: 700; background-color: #35a8eb;">Jul-24</td>
+                    <td style="font-weight: 700; background-color: #35a8eb;">Aug-24</td>
+                    <td style="font-weight: 700; background-color: #35a8eb;">Sep-24</td>
+                    <td style="font-weight: 700; background-color: #35a8eb;">Oct-24</td>
                 </tr>
             </thead>
             <tbody>
@@ -1218,7 +1246,7 @@
         </table>
         <table class="table-summary-1">
             <thead>
-                <tr>
+                <tr style="background-color: #35a8eb;">
                     <td style="font-weight: 700;">2024</td>
                     <td style="font-weight: 700;">2025</td>
                     <td style="font-weight: 700;">2026</td>
