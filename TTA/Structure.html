@@ -101,15 +101,16 @@
         .menu-container {
             display: flex;
             background: linear-gradient(45deg, #cdccff, #cce5ff, #d9f7be, #fff2cc, #e6e6e6); /* ใช้ linear-gradient สำหรับหลายๆ สี */
-            padding: 6px;
+            padding: 2px;
             border-radius: 10px;
-            width: 40%;
+            width: 30%;
             cursor: pointer;
             justify-content: center;
             align-items: center; /* จัดกลางแนวตั้ง */
-            margin: auto; /* จัดกลางแนวนอน */
+            /* margin: auto; จัดกลางแนวนอน */
+            font-size: 12px;
             position: absolute;
-            top: 23%;
+            top: 30%;
             left: 50%;
             transform: translate(-50%, -50%); /* จัดกลางจอ */
         }
@@ -308,7 +309,6 @@
         .submenu-dropdown-4 button:hover {
             background-color: #a3a3a3;
         }
-        
 </style>
 <body>
     <div class="nav">
@@ -349,11 +349,10 @@
             <a href="index.html" class="menu-item1">Go home</a>
         </div>
     </div>
-    <h2>โครงสร้างการถือหุ้นของกลุ่มบริษัท</h2><hr>
+    <h2>โครงสร้างการถือหุ้นของกลุ่มบริษัท<hr></h2>
         <div class="menu-container">
             <div class="menu-item" id="companyMenu">
-                <h1>บริษัท โทริเซนไทย เอเยนต์ซีส์ จำกัด (มหาชน)<br>
-                    (ไทย)</h1>
+                <h1>บริษัท โทริเซนไทย เอเยนต์ซีส์ จำกัด (มหาชน)(ไทย)</h1>
                 <div class="submenu">
                     <div class="submenu-buttons">
                         <button onclick="toggleSubMenu('Premo-shipping')">Shipping <br></button>

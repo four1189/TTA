@@ -80,44 +80,38 @@
     tbody tr:nth-child(even) {
         background-color: #eeeeee;  /* สีพื้นหลังสำหรับแถวคู่ */
     }
-    .table-container-1 td:nth-child(1),
-    .table-container-1 td:nth-child(4),
-    .table-container-1 td:nth-child(5) {
+
+    /* ตั้งค่าทั่วไปของตาราง */
+    .table-cash-flow {
+        width: 100%;
+        border-collapse: collapse;
         text-align: center;
     }
 
-    /* ตั้งค่าทั่วไปของตาราง */
-.table-cash-flow {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: center;
-}
+    .table-cash-flow th, .table-cash-flow td {
+        border: 1px solid black;
+        padding: 8px;
+        font-family: Arial, sans-serif;
+    }
 
-.table-cash-flow th, .table-cash-flow td {
-    border: 1px solid black;
-    padding: 8px;
-    font-family: Arial, sans-serif;
-}
+    /* หัวตาราง */
+    .table-cash-flow thead th {
+        background-color: #530494;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+        padding: 8px;
+    }
 
-/* หัวตาราง */
-.table-cash-flow thead th {
-    background-color: #530494;
-    color: white;
-    font-weight: bold;
-    text-align: center;
-    padding: 8px;
-}
+    /* สีสลับแถว */
+    .table-cash-flow tbody tr:nth-child(even) {
+        background-color: #d7d5d5;
+    }
 
-/* สีสลับแถว */
-.table-cash-flow tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-/* จัดตัวเลขในเซลล์ให้ชิดขวา */
-.table-cash-flow td:nth-child(n+2) {
-    text-align: right;
-}
-
+    /* จัดตัวเลขในเซลล์ให้ชิดขวา */
+    .table-cash-flow td:nth-child(n+2) {
+        text-align: center;
+    }
 </style>
 <body>
     <div class="con-1">
@@ -153,7 +147,7 @@
               </tr>
             </thead>
             <tr>
-                <td colspan="16"></td>
+                <td colspan="16" style="background-color: #5b79db;">Substantial entities</td>
             </tr>
             <tbody>
               <tr>
@@ -167,12 +161,12 @@
                 <td>391</td>
                 <td>4,330</td>
                 <td>5,193</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>1,528</td>
+                <td>1,500</td>
+                <td>2,588</td>
+                <td>20%</td>
+                <td>0</td>
+                <td>0%</td>
               </tr>
             </tbody>
           <tbody>
@@ -185,14 +179,14 @@
                 <td>3,113</td>
                 <td>(437)</td>
                 <td>(2,001)</td>
+                <td>(294)</td>
                 <td>9</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>200</td>
+                <td>625</td>
+                <td>(292)</td>
+                <td>-4%</td>
+                <td>718</td>
+                <td>10%</td>
             </tr>
             <tr>
                 <td>UMS</td>
@@ -203,14 +197,14 @@
                 <td>759</td>
                 <td>(39)</td>
                 <td>(53)</td>
+                <td>(49)</td>
                 <td>(69)</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>(34)</td>
+                <td>(7)</td>
+                <td>(42)</td>
+                <td>-9%</td>
+                <td>27</td>
+                <td>1%</td>
             </tr>
             <tr>
                 <td>PMTA</td>
@@ -221,14 +215,14 @@
                 <td>0</td>
                 <td>30</td>
                 <td>64</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>91</td>
+                <td>54</td>
+                <td>40</td>
+                <td>69</td>
+                <td>64</td>
+                <td>9%</td>
+                <td>757</td>
+                <td>104%</td>
             </tr>
             <tr>
                 <td>PHC</td>
@@ -239,14 +233,14 @@
                 <td>0</td>
                 <td>12</td>
                 <td>(0)</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>1</td>
+                <td>(76)</td>
+                <td>(66)</td>
+                <td>14</td>
+                <td>(25)</td>
+                <td>-5%</td>
+                <td>0</td>
+                <td>0%</td>
             </tr>
             <tr>
                 <td>AIM</td>
@@ -257,14 +251,14 @@
                 <td>172</td>
                 <td>(112)</td>
                 <td>(8)</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>24</td>
+                <td>(52)</td>
+                <td>(80)</td>
+                <td>17</td>
+                <td>(20)</td>
+                <td>-3%</td>
+                <td>0</td>
+                <td>0%</td>
             </tr>
             <tr>
                 <td>STC</td>
@@ -275,14 +269,14 @@
                 <td>0</td>
                 <td>(12)</td>
                 <td>(20)</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>(23)</td>
+                <td>(11)</td>
+                <td>8</td>
+                <td>4</td>
+                <td>(9)</td>
+                <td>-5%</td>
+                <td>0</td>
+                <td>0%</td>
             </tr>
             <tr>
                 <td>P80 Air</td>
@@ -293,14 +287,14 @@
                 <td>0</td>
                 <td>0</td>
                 <td>0</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>0</td>
+                <td>(12)</td>
+                <td>(18)</td>
+                <td>(43)</td>
+                <td>(15)</td>
+                <td>-7%</td>
+                <td>0</td>
+                <td>0%</td>
             </tr>
             <tr>
                 <td>Titan Tanker</td>
@@ -311,14 +305,14 @@
                 <td>558</td>
                 <td>0</td>
                 <td>0</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>0</td>
+                <td>0</td>
+                <td>(19)</td>
+                <td>(40)</td>
+                <td>(12)</td>
+                <td>-3%</td>
+                <td>0</td>
+                <td>0%</td>
             </tr>
             <tr>
                 <td>Thoresen Indochina</td>
@@ -329,14 +323,14 @@
                 <td>0</td>
                 <td>41</td>
                 <td>45</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>72</td>
+                <td>82</td>
+                <td>87</td>
+                <td>101</td>
+                <td>77</td>
+                <td>881%</td>
+                <td>326</td>
+                <td>3720%</td>
             </tr>
             <tr>
                 <td>Baria Serece</td>
@@ -347,17 +341,449 @@
                 <td>0</td>
                 <td>66</td>
                 <td>72</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>78</td>
+                <td>87</td>
+                <td>78</td>
+                <td>78</td>
+                <td>79</td>
+                <td>16%</td>
+                <td>650</td>
+                <td>135%</td>
             </tr>
             <tr>
-                <td colspan="16">Small entities</td>
+                <td colspan="16" style="background-color: #5b79db;">Small entities</td>
+            </tr>
+            <tr>
+                <td>Thoresen Shipping FZE</td>
+                <td>100%</td>
+                <td>7</td>
+                <td>0</td>
+                <td>7</td>
+                <td>0</td>
+                <td>(26)</td>
+                <td>(11)</td>
+                <td>1</td>
+                <td>2</td>
+                <td>(5)</td>
+                <td>(4)</td>
+                <td>(3)</td>
+                <td>-49%</td>
+                <td>318</td>
+                <td>4821%</td>
+            </tr>
+            <tr>
+                <td>DWP Cityspace</td>
+                <td>35%</td>
+                <td>64</td>
+                <td>0</td>
+                <td>64</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>5</td>
+                <td>30</td>
+                <td>7</td>
+                <td>8</td>
+                <td>13%</td>
+                <td>10</td>
+                <td>15%</td>
+            </tr>
+            <tr>
+                <td>Gulf Agency Company (GAC)</td>
+                <td>51%</td>
+                <td>11</td>
+                <td>0</td>
+                <td>11</td>
+                <td>0</td>
+                <td>(1)</td>
+                <td>(7)</td>
+                <td>6</td>
+                <td>12</td>
+                <td>5</td>
+                <td>10</td>
+                <td>5</td>
+                <td>46%</td>
+                <td>30</td>
+                <td>269%</td>
+            </tr>
+            <tr>
+                <td>GAC Thoresen Logistics (GTL)</td>
+                <td>51%</td>
+                <td>94</td>
+                <td>0</td>
+                <td>94</td>
+                <td>101</td>
+                <td>4</td>
+                <td>3</td>
+                <td>4</td>
+                <td>4</td>
+                <td>2</td>
+                <td>(2)</td>
+                <td>2</td>
+                <td>2%</td>
+                <td>0</td>
+                <td>0%</td>
+            </tr>
+            <tr>
+                <td>Thoresen FSO</td>
+                <td>100%</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>(0)</td>
+                <td>(0)</td>
+                <td>(0)</td>
+                <td>(0)</td>
+                <td>(0)</td>
+                <td>-1%</td>
+                <td>0</td>
+                <td>0%</td>
+            </tr>
+            <tr>
+                <td>TTA Chao Phraya Express Boat JV</td>
+                <td>50%</td>
+                <td>10</td>
+                <td>0</td>
+                <td>10</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>2</td>
+                <td>1</td>
+                <td>2</td>
+                <td>1</td>
+                <td>11%</td>
+                <td>0</td>
+                <td>0%</td>
+            </tr>
+            <tr>
+                <td>P80 Go</td>
+                <td>100%</td>
+                <td>11</td>
+                <td>0</td>
+                <td>11</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>(0)</td>
+                <td>(2)</td>
+                <td>(1)</td>
+                <td>(1)</td>
+                <td>-7%</td>
+                <td>0</td>
+                <td>0%</td>
+            </tr>
+            <tr>
+                <td>Skootar</td>
+                <td>49%</td>
+                <td>100</td>
+                <td>0</td>
+                <td>100</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>(1)</td>
+                <td>2</td>
+                <td>(1)</td>
+                <td>(1)</td>
+                <td>(0)</td>
+                <td>0%</td>
+                <td>0</td>
+                <td>0%</td>
+            </tr>
+            <tr>
+                <td>High Cloud Music</td>
+                <td>40%</td>
+                <td>40</td>
+                <td>0</td>
+                <td>40</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>(5)</td>
+                <td>5</td>
+                <td>(6)</td>
+                <td>(1)</td>
+                <td>-3%</td>
+                <td>0</td>
+                <td>0%</td>
+            </tr>
+            <tr>
+                <td>CMSS</td>
+                <td>100%</td>
+                <td>70</td>
+                <td>0</td>
+                <td>70</td>
+                <td>0</td>
+                <td>(2)</td>
+                <td>1</td>
+                <td>3</td>
+                <td>3</td>
+                <td>(2)</td>
+                <td>(5)</td>
+                <td>0</td>
+                <td>0%</td>
+                <td>40</td>
+                <td>57%</td>
+            </tr>
+            <tr>
+                <td>PMTP</td>
+                <td>60%</td>
+                <td>447</td>
+                <td>0</td>
+                <td>447</td>
+                <td>1,596</td>
+                <td>2</td>
+                <td>(21)</td>
+                <td>(33)</td>
+                <td>(45)</td>
+                <td>(31)</td>
+                <td>(44)</td>
+                <td>(35)</td>
+                <td>-8%</td>
+                <td>0</td>
+                <td>0%</td>
+            </tr>
+            <tr>
+                <td>Laser Game Asia Ltd.</td>
+                <td>30%</td>
+                <td>36</td>
+                <td>(36)</td>
+                <td>0</td>
+                <td>0</td>
+                <td>(2)</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0%</td>
+                <td>0</td>
+                <td>0%</td>
+            </tr>
+            <tr>
+                <td>TTA Mariner</td>
+                <td>100%</td>
+                <td>20</td>
+                <td>0</td>
+                <td>20</td>
+                <td>0</td>
+                <td>(0)</td>
+                <td>(0)</td>
+                <td>(0)</td>
+                <td>(0)</td>
+                <td>(1)</td>
+                <td>(7)</td>
+                <td>(2)</td>
+                <td>-8%</td>
+                <td>0</td>
+                <td>0%</td>
+            </tr>
+            <tr>
+                <td>Praneat</td>
+                <td>51%</td>
+                <td>18</td>
+                <td>0</td>
+                <td>18</td>
+                <td>0</td>
+                <td>0</td>
+                <td>(1)</td>
+                <td>(2)</td>
+                <td>3</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0%</td>
+                <td>0</td>
+                <td>0%</td>
+            </tr>
+            <tr>
+                <td>Thoresen Klong Padung Krungkasem JV</td>
+                <td>100%</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>2</td>
+                <td>(2)</td>
+                <td>(0)</td>
+                <td>1</td>
+                <td>(0)</td>
+                <td>0</td>
+                <td>40%</td>
+                <td>0</td>
+                <td>0%</td>
+            </tr>
+            <tr>
+                <td>Tug Boat (TVT)</td>
+                <td>60%</td>
+                <td>27</td>
+                <td>0</td>
+                <td>27</td>
+                <td>0</td>
+                <td>0</td>
+                <td>(4)</td>
+                <td>(4)</td>
+                <td>(12)</td>
+                <td>(3)</td>
+                <td>9</td>
+                <td>(3)</td>
+                <td>-10%</td>
+                <td>0</td>
+                <td>0%</td>
+            </tr>
+            <tr>
+                <td>V Venture Lab</td>
+                <td>100%</td>
+                <td>48</td>
+                <td>0</td>
+                <td>48</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>(0)</td>
+                <td>0%</td>
+                <td>0</td>
+                <td>0%</td>
+            </tr>
+            <tr>
+                <td>KK Ventures</td>
+                <td>-</td>
+                <td>5</td>
+                <td>(5)</td>
+                <td>0</td>
+                <td>37</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>(0)</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0%</td>
+                <td>0</td>
+                <td>0%</td>
+            </tr>
+            <tr>
+                <td>Strom</td>
+                <td>50%</td>
+                <td>200</td>
+                <td>0</td>
+                <td>200</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>(7)</td>
+                <td>(1)</td>
+                <td>(2)</td>
+                <td>-1%</td>
+                <td>0</td>
+                <td>0%</td>
+            </tr>
+            <tr>
+                <td>V Smart City</td>
+                <td>65%</td>
+                <td>3</td>
+                <td>0</td>
+                <td>3</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>(4)</td>
+                <td>(2)</td>
+                <td>(1)</td>
+                <td>-37%</td>
+                <td>0</td>
+                <td>0%</td>
+            </tr>
+            <tr>
+                <td>P80 Sky</td>
+                <td>100%</td>
+                <td>301</td>
+                <td>0</td>
+                <td>301</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>(87)</td>
+                <td>(72)</td>
+                <td>(32)</td>
+                <td>-11%</td>
+                <td>0</td>
+                <td>0%</td>
+            </tr>
+            <tr>
+                <td>P80 Jet Co., Ltd. </td>
+                <td>100%</td>
+                <td>4</td>
+                <td>0</td>
+                <td>4</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>(0)</td>
+                <td>0</td>
+                <td>(0)</td>
+                <td>0</td>
+                <td>(0)</td>
+                <td>-1%</td>
+                <td>0</td>
+                <td>0%</td>
+            </tr>
+            <tr>
+                <td>Thoresen Jutal Offshore Engineering Heavy Industries (Thailand) Ltd.</td>
+                <td>100%</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>(0)</td>
+                <td>(0)</td>
+                <td>0%</td>
+                <td>0</td>
+                <td>0%</td>
+            </tr>
+            <tr>
+                <td>GRID</td>
+                <td>25%</td>
+                <td>57</td>
+                <td>0</td>
+                <td>57</td>
+                <td>19</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>(6)</td>
+                <td>(1)</td>
+                <td>-2%</td>
+                <td>0</td>
+                <td>0%</td>
             </tr>
           </tbody>
         </table>
