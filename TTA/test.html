@@ -26,11 +26,12 @@
         .home1 {
             border: 2px solid #000000;
             padding: 4%;
+            width: 50%;
         }
         .home2 {
-            width: 150%;  /* ปรับจาก 50% เป็น 80% */
+            width: 20%;  /* ปรับจาก 50% เป็น 80% */
             border: 2px solid #000000;
-            padding: 10%;
+            padding: 4%;
         }
 
         body {
@@ -50,8 +51,8 @@
             background-color: #ffffff;
             border: 1px solid #ddd;
             border-radius: 10px;
-            width: 250px;
-            padding: 20px;
+            width: 240px;
+            padding: 10px;
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
@@ -93,43 +94,7 @@
             <div class="container">
                 <div id="stocksContainer"></div>
 
-                <!-- กล่องอัตราแลกเปลี่ยน -->
                 <div id="exchangeContainer"></div>
-
-                <!-- <div class="stock-box" id="stockBox">
-                    <h3>TTA</h3>
-                    <div class="symbol">TTA</div>
-                    <div class="price" id="stockPrice">Loading...</div>
-                    <div class="change" id="stockChange">...</div>
-                </div>
-        
-                <div class="stock-box" id="pmtaBox">
-                    <h3>PMTA Stock</h3>
-                    <div class="symbol">PMTA</div>
-                    <div class="price" id="pmtaPrice">฿0</div>
-                    <div class="change" id="pmtaChange">0%</div>
-                </div>
-        
-                <div class="stock-box">
-                    <h3>Ripple</h3>
-                    <div class="symbol">XRP</div>
-                    <div class="price">฿30</div>
-                    <div class="change positive">+0.8%</div>
-                </div>
-        
-                <div class="stock-box">
-                    <h3>Cardano</h3>
-                    <div class="symbol">ADA</div>
-                    <div class="price">฿35</div>
-                    <div class="change negative">-0.4%</div>
-                </div>
-
-                <div class="stock-box">
-                    <h3>Cardano</h3>
-                    <div class="symbol">ADA</div>
-                    <div class="price">฿35</div>
-                    <div class="change negative">-0.4%</div>
-                </div> -->
             </div>
         </div>
         <div class="home2">
@@ -146,21 +111,14 @@
     <script>
         // ข้อมูลเริ่มต้นของหุ้น
         const stocks = {
-            TTA: { name: 'TTA Stock', price: 20.5 },
-            PMTA: { name: 'PMTA Stock', price: 15.2 },
-            UMS: { name: 'UMS Stock', price: 12.8 },
-            VLE: { name: 'VLE Stock', price: 18.3 },
-            MML: { name: 'MML Stock', price: 25.7 }
+            TTA: { name: 'TTA.BKK', price: 0 },
+            PMTA: { name: 'PMTA.BKK', price: 0 },
+            UMS: { name: 'UMS.BKK', price: 0 },
+            VLE: { name: 'VLE.BKK', price: 0 },
+            MML: { name: 'MML.BKK', price: 0 }
         };
-        
-        // ข้อมูลเริ่มต้นของอัตราแลกเปลี่ยน
-        const exchangeRates = {
-            USD: { name: 'USD/THB', rate: 35.5 },
-            EUR: { name: 'EUR/THB', rate: 39.2 },
-            JPY: { name: 'JPY/THB', rate: 0.25 }
-        };
-        
-        // ฟังก์ชันสร้างกล่องหุ้น
+
+        // ฟังก์ชันสร้างกล่องหุ้นใน DOM
         function createStockBox(symbol, stockData) {
             const container = document.createElement('div');
             container.className = 'stock-box';
@@ -173,55 +131,31 @@
             `;
             document.getElementById('stocksContainer').appendChild(container);
         }
-        
-        // ฟังก์ชันสร้างกล่องอัตราแลกเปลี่ยน
-        function createExchangeBox(currency, exchangeData) {
-            const container = document.createElement('div');
-            container.className = 'exchange-box';
-            container.id = `${currency}Box`;
-            container.innerHTML = `
-                <h3>${exchangeData.name}</h3>
-                <div class="currency">${currency}</div>
-                <div class="rate" id="${currency}Rate">${exchangeData.rate.toFixed(2)}</div>
-                <div class="rate-change" id="${currency}Change">0%</div>
-            `;
-            document.getElementById('exchangeContainer').appendChild(container);
-        }
-        
+
         // ฟังก์ชันอัปเดตข้อมูลหุ้น
         function updateStockData(symbol) {
             const stock = stocks[symbol];
             const randomChange = (Math.random() * 2 - 1).toFixed(2); // เปลี่ยนแปลงราคาแบบสุ่ม
             stock.price += parseFloat(randomChange);
             const changePercent = ((randomChange / stock.price) * 100).toFixed(2);
-        
+
+            // อัปเดต DOM
             document.getElementById(`${symbol}Price`).textContent = `฿${stock.price.toFixed(2)}`;
             const changeElement = document.getElementById(`${symbol}Change`);
             changeElement.textContent = `${changePercent}%`;
             changeElement.className = changePercent >= 0 ? 'change positive' : 'change negative';
         }
-        
-        // ฟังก์ชันอัปเดตอัตราแลกเปลี่ยน
-        function updateExchangeData(currency) {
-            const rate = exchangeRates[currency];
-            const randomChange = (Math.random() * 0.5 - 0.25).toFixed(2); // เปลี่ยนแปลงแบบสุ่ม
-            rate.rate += parseFloat(randomChange);
-            const changePercent = ((randomChange / rate.rate) * 100).toFixed(2);
-        
-            document.getElementById(`${currency}Rate`).textContent = `${rate.rate.toFixed(2)}`;
-            const changeElement = document.getElementById(`${currency}Change`);
-            changeElement.textContent = `${changePercent}%`;
-            changeElement.className = changePercent >= 0 ? 'rate-change positive' : 'rate-change negative';
+
+        // สร้างกล่องหุ้นเมื่อโหลดหน้าเว็บ
+        for (const symbol in stocks) {
+            createStockBox(symbol, stocks[symbol]);
         }
-        
-        // สร้างกล่องหุ้นและอัตราแลกเปลี่ยน
-        for (const symbol in stocks) createStockBox(symbol, stocks[symbol]);
-        for (const currency in exchangeRates) createExchangeBox(currency, exchangeRates[currency]);
-        
-        // อัปเดตข้อมูลทุก 10 วินาที
+
+        // อัปเดตข้อมูลหุ้นทุก 10 วินาที
         setInterval(() => {
-            for (const symbol in stocks) updateStockData(symbol);
-            for (const currency in exchangeRates) updateExchangeData(currency);
+            for (const symbol in stocks) {
+                updateStockData(symbol);
+            }
         }, 10000);
         </script>
 </body>
