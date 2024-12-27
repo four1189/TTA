@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnQ6rAa2axGMNtSAh5h6EVhgEbspZpdOXt9g&s" type="image/x-icon">
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #f4f5f7;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h4 {
+            color: #1f2937;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .menu-item {
+            display: block;
+            width: 94%;
+            padding: 12px;
+            margin: 10px 0;
+            background-color: rgba(35, 208, 15, 0.867);
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            font-size: 16px;
+            height: 2%;
+        }
+
+        .menu-item:hover {
+            background-color: rgba(53, 202, 37, 0.541);
+            transform: translateY(-4px);
+        }
+
+        .home1, .home2 {
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .home1 {
+            flex: 3;
+        }
+
+        .home2 {
+            flex: 1;
+            text-align: center;
+        }
+
+        .group {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .container {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 3%;
+        }
+
+        .container h3 {
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input, select {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        #result-box {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #495057;
+        }
+
+        #stocksContainer {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .stock-box {
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stock-box:hover {
+            transform: translateY(-5px);
+            background-color: #cacacae3;
+        }
+
+        .stock-box h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #007bff;
+        }
+
+        .stock-box .symbol {
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        .stock-box .price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        @media (max-width: 768px) {
+            .group {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .home1, .home2 {
+                padding: 15px;
+            }
+        }
+
+        .change {
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .change.positive {
+            color: green;
+        }
+        .change.negative {
+            color: red;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%; /* ปรับให้ขนาดของกล่องยืดตามเนื้อหา */
+            padding: 10px;
+            background-color: rgba(182, 182, 182, 0.671);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgb(102, 8, 8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box; /* รวม padding และ border ในขนาดกล่อง */
+            margin: 2% auto; /* ตั้งให้อยู่กึ่งกลางและเพิ่มระยะด้านบน */
+        }
+
+        .amount {
+            display: flex;
+            justify-content: space-around;
+            align-items: baseline;
+            gap: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="group">
+        <div class="home1">
+            <h4>Thoresen Thai Agencies Business Insight Home</h4>
+            <hr>
+            <div id="stocksContainer">
+                <div class="stock-box">
+                    <h3>Bitcoin (BTC)</h3>
+                    <div class="symbol">BTC</div>
+                    <div class="price-container">
+                        <div class="price-source">
+                            <span>Price:</span>
+                            <span class="price" id="${symbol}Price">Loading...</span>
+                            <span class="change" id="${symbol}Change">0.00%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="stock-box">
+                    <h3>Oil Price (WTI)</h3>
+                    <div class="symbol">WTI</div>
+                    <div class="price-container">
+                        <div class="price-source">
+                            <span>Price:</span>
+                            <span class="price" id="${symbol}Price">Loading...</span>
+                            <span class="change" id="${symbol}Change">0.00%</span>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="stock-box">
+                    <h3>Supramax 58 TCE</h3>
+                    <div class="symbol">Supramax 58</div>
+                    <div class="price-container">
+                        <div class="price-source">
+                            <span>Price:</span>
+                            <span class="price" id="${symbol}Price">Loading...</span>
+                            <span class="change" id="${symbol}Change">0.00%</span>
+                        </div>
+                    </div>                    
+                </div>
+                <div class="stock-box">
+                    <h3>Baltic Dry Index (BDI)</h3>
+                    <div class="symbol">BDI</div>
+                    <div class="price-container">
+                        <div class="price-source">
+                            <span>Price:</span>
+                            <span class="price" id="${symbol}Price">Loading...</span>
+                            <span class="change" id="${symbol}Change">0.00%</span>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+            <div class="container">
+                <h3>เครื่องคำนวณอัตราแลกเปลี่ยน</h3>
+                <div class="input-group">
+                    <div class="currency-row">
+                        <select id="fromCurrency">
+                            <option value="THB">THB - บาทไทย</option>
+                            <option value="USD">USD - ดอลลาร์สหรัฐ</option>
+                            <option value="EUR">EUR - ยูโร</option>
+                            <option value="JPY">JPY - เยนญี่ปุ่น</option>
+                            <option value="GBP">GBP - ปอนด์อังกฤษ</option>
+                        </select>
+                        เเปลงเป็น
+                        <select id="toCurrency">
+                            <option value="USD">USD - ดอลลาร์สหรัฐ</option>
+                            <option value="THB">THB - บาทไทย</option>
+                            <option value="EUR">EUR - ยูโร</option>
+                            <option value="JPY">JPY - เยนญี่ปุ่น</option>
+                            <option value="GBP">GBP - ปอนด์อังกฤษ</option>
+                        </select>
+                    </div>
+                    <div class="amount">
+                        <input type="number" id="amount" placeholder="กรอกจำนวนเงิน"/> -
+                        <div id="result-box">ผลลัพธ์จะแสดงที่นี่</div>
+                        <div id="exchangeRate"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="home2">
+            <h4>TTA Groups Business Insight</h4>
+            <h4>Group Financial Info :</h4>
+            <a href="Summary.html" class="menu-item">Summary Financial</a>
+            <a href="Detail.html" class="menu-item">Detail Financial Data</a>
+            <a href="Structure.html" class="menu-item">TTA Group Structure & info</a><br>
+            <a href="Key.html" class="menu-item">TTA Group Key Asset</a>
+            <a href="Forecast.html" class="menu-item">TTA Forecast by Month</a>
+            <a href="Headcont.html" class="menu-item">Headcont and people cost</a>
+        </div>
+    </div>
+</body>
+</html>
+    <script>
+        // ข้อมูลหุ้นเริ่มต้น
+        const stocks = {
+            TTA: { name: 'TTA.BKK', symbol: 'TTA' , price: '$50,000'},
+            PMTA: { name: 'PMTA.BKK', symbol: 'PMTA' , price: '$90,000' },
+            UMS: { name: 'UMS.BKK', symbol: 'UMS' , price: '$8,000' },
+            VLE: { name: 'VLE.BKK', symbol: 'VLE' , price: '$2,000' },
+            MML: { name: 'MML.BKK', symbol: 'MML' , price: '$1,000' }
+        };
+
+        // ฟังก์ชันสำหรับสร้าง HTML ของหุ้นใน stocks
+        function displayStocks() {
+            const stocksContainer = document.getElementById('stocksContainer');
+            
+            // ลบข้อมูลเก่าที่อาจมีอยู่ใน stocksContainer
+            stocksContainer.innerHTML = '';
+
+            // แสดงหุ้นจาก stocks
+            for (const stockKey in stocks) {
+                const stock = stocks[stockKey];
+                const stockBox = document.createElement('div');
+                stockBox.className = 'stock-box';
+                stockBox.innerHTML = `
+                    <h3>${stock.name}</h3>
+                    <div class="symbol">${stock.symbol}</div>
+                    <div class="price">Loading...</div>
+                    <div class="Change">-</div>
+                `;
+                stocksContainer.appendChild(stockBox);
+            }
+
+            // เพิ่มข้อมูลหุ้นอื่น ๆ (Bitcoin, WTI, TCE, BDI)
+            const otherStocks = [
+                { name: 'Bitcoin (BTC)', symbol: 'BTC', price: '$50,000' },
+                { name: 'Oil Price (WTI)', symbol: 'WTI', price: '$75' },
+                { name: 'Supramax 58 TCE', symbol: 'TCE', price: '$15,000' },
+                { name: 'Baltic Dry Index (BDI)', symbol: 'BDI', price: '1,200' }
+            ];
+
+            for (const stock of otherStocks) {
+                const stockBox = document.createElement('div');
+                stockBox.className = 'stock-box';
+                stockBox.innerHTML = `
+                    <h3>${stock.name}</h3>
+                    <div class="symbol">${stock.symbol}</div>
+                    <div class="price">${stock.price}</div>
+                    <div class="Change">-</div>
+                `;
+                stocksContainer.appendChild(stockBox);
+            }
+        }
+
+        // เรียกใช้งานฟังก์ชันเพื่อแสดงหุ้นเมื่อหน้าโหลดเสร็จ
+        window.onload = displayStocks;
+
+        // ฟังก์ชันดึงข้อมูลจาก SET API
+        async function fetchStockData(symbol) {
+            const url = `https://www.set.or.th/api/set/stock/${symbol}/quote`;
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+
+                if (data.marketPrice && data.marketPrice.last !== undefined) {
+                    const price = data.marketPrice.last; // ราคา
+                    const changePercent = data.marketPrice.changePercent || 0; // เปอร์เซ็นต์เปลี่ยนแปลง
+                    updateStockUI(symbol, price, changePercent);
+                } else {
+                    console.error(`Invalid data structure for ${symbol}:`, data);
+                }
+            } catch (error) {
+                console.error(`Error fetching data for ${symbol}:`, error);
+            }
+        }
+
+        // ฟังก์ชันแสดงข้อมูลหุ้น
+        function updateStockUI(symbol, price, changePercent) {
+            const priceElement = document.getElementById(`${symbol}Price`);
+            const changeElement = document.getElementById(`${symbol}Change`);
+
+            if (priceElement && changeElement) {
+                priceElement.textContent = `฿${price.toFixed(2)}`;
+                changeElement.textContent = `${changePercent.toFixed(2)}%`;
+                changeElement.className = changePercent >= 0 ? 'change positive' : 'change negative';
+            }
+        }
+
+
+        // ฟังก์ชันสร้างกล่องหุ้นใน DOM
+        function createStockBox(symbol, stockData) {
+            const container = document.createElement('div');
+            container.className = 'stock-box';
+            container.id = `${symbol}Box`;
+            container.innerHTML = `
+                <h3>${stockData.name}</h3>
+                <div class="symbol">${symbol}</div>
+                <div class="price-container">
+                    <div class="price-source">
+                        <span>SET:</span>
+                        <span class="price" id="${symbol}Price">Loading...</span>
+                        <span class="change" id="${symbol}Change">-</span>
+                    </div>
+                </div>
+            `;
+            document.getElementById('stocksContainer').appendChild(container);
+        }
+
+        
+        // สร้างกล่องหุ้นเมื่อโหลดหน้าเว็บ
+        for (const symbol in stocks) {
+            createStockBox(symbol, stocks[symbol]);
+        }
+
+        // อัปเดตข้อมูลหุ้นทุกตัว
+        function updateAllStocks() {
+            const stockSymbols = Object.keys(stocks);
+            stockSymbols.forEach(symbol => fetchStockData(stocks[symbol].symbol));
+        }
+
+        // อัปเดตข้อมูลทุก 10 นาที
+        setInterval(updateAllStocks, 600000);
+        updateAllStocks();
+
+
+
+
+        
+        // API Key สำหรับการแปลงค่าเงิน
+        const CURRENCY_API_KEY = 'YOUR_API_KEY'; // ใส่ API Key ของคุณที่นี่
+        const API_URL = 'https://api.apilayer.com/exchangerates_data/latest';
+
+        // ฟังก์ชันดึงอัตราแลกเปลี่ยน
+        async function getExchangeRate(from, to) {
+            try {
+                const response = await fetch(`${API_URL}?base=${from}&symbols=${to}`, {
+                    headers: { apikey: CURRENCY_API_KEY }
+                });
+                if (!response.ok) {
+                    throw new Error(`Error ${response.status}: Unable to fetch exchange rate.`);
+                }
+                const data = await response.json();
+                return { rate: data.rates[to], timestamp: data.date };
+            } catch (error) {
+                console.error('Error fetching exchange rate:', error.message);
+                return null;
+            }
+        }
+
+        // ฟังก์ชันแปลงค่าเงิน
+        async function convertCurrency() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            const fromCurrency = document.getElementById('fromCurrency').value;
+            const toCurrency = document.getElementById('toCurrency').value;
+
+            if (isNaN(amount) || amount <= 0) {
+                document.getElementById('result-box').textContent = "กรุณากรอกจำนวนเงินที่ถูกต้อง";
+                document.getElementById('exchangeRate').textContent = '';
+                return;
+            }
+
+            try {
+                const data = await getExchangeRate(fromCurrency, toCurrency);
+                if (data === null) {
+                    throw new Error('ไม่สามารถดึงอัตราแลกเปลี่ยนได้');
+                }
+                const { rate } = data;
+                const convertedAmount = (amount * rate).toFixed(2);
+                document.getElementById('result-box').textContent = `${amount} ${fromCurrency} = ${convertedAmount} ${toCurrency}`;
+                document.getElementById('exchangeRate').textContent = `อัตราแลกเปลี่ยนปัจจุบัน: 1 ${fromCurrency} = ${rate} ${toCurrency}`;
+            } catch (error) {
+                document.getElementById('result-box').textContent = `${error.message}`;
+                document.getElementById('exchangeRate').textContent = '';
+            }
+        }
+        // อัปเดตผลลัพธ์อัตโนมัติเมื่อผู้ใช้กรอกข้อมูลหรือเปลี่ยนค่า
+        document.getElementById('amount').addEventListener('input', convertCurrency);
+        document.getElementById('fromCurrency').addEventListener('change', convertCurrency);
+        document.getElementById('toCurrency').addEventListener('change', convertCurrency);
+
+
+
+
+        // ฟังก์ชันดึงข้อมูลราคาของ Bitcoin
+        async function fetchBitcoinData() {
+            // const url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd';
+            
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if (data.bitcoin) {
+                    const btcPrice = data.bitcoin.usd;
+                    updateBitcoinUI(btcPrice);
+                } else {
+                    console.error('No valid data for Bitcoin');
+                }
+            } catch (error) {
+                console.error('Error fetching Bitcoin data:', error);
+            }
+        }
+        // ฟังก์ชันอัปเดต UI ของ Bitcoin
+        function updateBitcoinUI(price) {
+            const priceElement = document.getElementById('btcPrice');
+            if (priceElement) {
+                priceElement.textContent = `$${price.toFixed(2)}`;
+            }
+        }
+        // เรียกใช้ฟังก์ชันเพื่อดึงข้อมูลของ Bitcoin เมื่อโหลดหน้า
+        fetchBitcoinData();
+        setInterval(fetchBitcoinData, 600000);
+
+
+
+        // API Key สำหรับ EIA
+        const EIA_API_KEY = 'YOUR_EIA_API_KEY';  // ใส่ API Key ของคุณที่นี่
+        // ฟังก์ชันดึงข้อมูลราคาน้ำมัน
+        async function fetchOilPrice() {
+            // const url = `https://api.eia.gov/series/?api_key=${EIA_API_KEY}&series_id=PET.RWTC.D`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if (data.series) {
+                    const latestData = data.series[0].data[0]; // ดึงข้อมูลล่าสุด
+                    const price = latestData[1]; // ราคาน้ำมัน (ในหน่วย USD ต่อบาร์เรล)
+                    updateOilPriceUI(price);
+                } else {
+                    console.error('No valid data for oil price');
+                }
+            } catch (error) {
+                console.error('Error fetching oil price data:', error);
+            }
+        }
+        // ฟังก์ชันอัปเดต UI ของราคาน้ำมัน
+        function updateOilPriceUI(price) {
+            const priceElement = document.getElementById('oilPrice');
+            if (priceElement) {
+                priceElement.textContent = `ราคาน้ำมันดิบ (WTI): $${price.toFixed(2)} ต่อบาร์เรล`;
+            }
+        }
+        // เรียกใช้ฟังก์ชันเพื่อดึงข้อมูลราคาน้ำมันเมื่อโหลดหน้า
+        fetchOilPrice();
+        setInterval(fetchOilPrice, 600000);
+
+
+
+
+        // API Key สำหรับ TCE (สมมติใช้ API ที่สามารถดึงข้อมูล Supramax 58 TCE)
+        const TCE_API_KEY = 'YOUR_API_KEY'; // ใส่ API Key ของคุณที่นี่
+
+        // ฟังก์ชันดึงข้อมูล TCE Supramax 58
+        async function fetchTCEData() {
+            // const url = `https://api.example.com/tce/supramax58?apikey=${TCE_API_KEY}`; // URL API ที่มีข้อมูล TCE Supramax 58
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`Error ${response.status}: Unable to fetch data for Supramax 58 TCE`);
+                }
+
+                const data = await response.json();
+                console.log('Data fetched:', data); // ตรวจสอบข้อมูลที่ได้รับ
+
+                if (data && data.tce) {
+                    const tcePrice = data.tce.price; // ราคาที่ได้จาก API
+                    updateTCEPriceUI(tcePrice);
+                } else {
+                    throw new Error('No valid data for Supramax 58 TCE');
+                }
+            } catch (error) {
+                console.error('Error fetching TCE data:', error);
+            }
+        }
+        // ฟังก์ชันอัปเดต UI สำหรับ Supramax 58 TCE
+        function updateTCEPriceUI(price) {
+            const priceElement = document.getElementById('tcePrice');
+            if (priceElement) {
+                priceElement.textContent = `Supramax 58 TCE: $${price.toFixed(2)} ต่อวัน`;
+            }
+        }
+        // เรียกใช้ฟังก์ชันเพื่อดึงข้อมูล TCE Supramax 58 เมื่อโหลดหน้า
+        fetchTCEData();
+        setInterval(fetchTCEData, 600000);
+
+
+        
+        // ฟังก์ชันดึงข้อมูล BDI
+        async function fetchBDIData() {
+            // const url = 'https://apigw1.bot.or.th/bot/public/financial-market-foreign-exchange-rates/';
+            
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const html = await response.text();
+                
+                // ใช้ regular expression เพื่อหาค่า BDI และวันที่
+                const bdiRegex = /<div\s+class="table-responsive">[^]*?<td[^>]*>BDI<\/td>[^]*?<td[^>]*>([\d,]+)<\/td>[^]*?<td[^>]*>([^<]+)<\/td>/;
+                const match = html.match(bdiRegex);
+                
+                if (match && match[1] && match[2]) {
+                    const bdiValue = match[1].replace(',', '');
+                    const date = match[2].trim();
+                    console.log('BDI Data fetched:', { value: bdiValue, date: date });
+                    updateBDIUI(date, bdiValue);
+                } else {
+                    throw new Error('No valid BDI data found');
+                }
+            } catch (error) {
+                console.error('Error fetching BDI data:', error);
+                updateBDIUI('N/A', 'Error');
+            }
+        }
+
+        // ฟังก์ชันอัปเดต UI สำหรับ BDI
+        function updateBDIUI(date, value) {
+            const bdiElement = document.getElementById('bdiValue');
+            const bdiDateElement = document.getElementById('bdiDate');
+            
+            if (bdiElement && bdiDateElement) {
+                bdiElement.textContent = value;
+                bdiDateElement.textContent = date;
+            }
+        }
+        // เรียกใช้ฟังก์ชันเมื่อโหลดหน้า
+        fetchBDIData();
+        setInterval(fetchBDIData, 600000);
+    </script>
+</body>
+</html>

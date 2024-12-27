@@ -7,6 +7,192 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #0f0f0f;
+    color: #fff;
+    overflow-x: hidden;
+    cursor: none;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #fff;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    color: #00ffff;
+}
+
+#home {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+h1 {
+    font-size: 4em;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(45deg, #00ffff, #00ff00);
+    color: #000;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 30px;
+    transition: 0.3s;
+}
+
+.cta-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+}
+
+.cursor {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #00ffff;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    transition: 0.1s;
+    z-index: 9999;
+}
+
+.cursor-follower {
+    width: 8px;
+    height: 8px;
+    background: #00ffff;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    transition: 0.2s;
+    z-index: 9999;
+}
+
+.glitch {
+    position: relative;
+    color: #fff;
+    letter-spacing: 5px;
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 #00ffff;
+    clip: rect(24px, 550px, 90px, 0);
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+    left: -2px;
+    text-shadow: -2px 0 #ff00ff;
+    clip: rect(85px, 550px, 140px, 0);
+    animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+    0% {
+        clip: rect(17px, 9999px, 94px, 0);
+    }
+    20% {
+        clip: rect(53px, 9999px, 77px, 0);
+    }
+    40% {
+        clip: rect(89px, 9999px, 34px, 0);
+    }
+    60% {
+        clip: rect(41px, 9999px, 15px, 0);
+    }
+    80% {
+        clip: rect(56px, 9999px, 69px, 0);
+    }
+    100% {
+        clip: rect(28px, 9999px, 82px, 0);
+    }
+}
+
+@keyframes glitch-anim-2 {
+    0% {
+        clip: rect(96px, 9999px, 31px, 0);
+    }
+    20% {
+        clip: rect(46px, 9999px, 83px, 0);
+    }
+    40% {
+        clip: rect(24px, 9999px, 62px, 0);
+    }
+    60% {
+        clip: rect(73px, 9999px, 19px, 0);
+    }
+    80% {
+        clip: rect(34px, 9999px, 78px, 0);
+    }
+    100% {
+        clip: rect(58px, 9999px, 42px, 0);
+    }
+}
+</style>
 <body>
     <header>
         <nav>
@@ -24,7 +210,7 @@
         <section id="home">
             <h1 class="glitch" data-text="Welcome to the Future">Welcome to the Future</h1>
             <p>Experience web design like never before</p>
-            <a href="#" class="cta-button">Get Started</a>
+            <a href="main/index.html" class="cta-button">Get Started</a>
         </section>
     </main>
 

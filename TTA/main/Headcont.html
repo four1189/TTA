@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Headcont and people cost</title>
+    <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnQ6rAa2axGMNtSAh5h6EVhgEbspZpdOXt9g&s" type="image/x-icon">
+</head>
+<style>
+        .container {
+            display: flex;               /* ใช้ Flexbox เพื่อจัดตำแหน่ง */
+            align-items: center;         /* จัดตำแหน่งให้อยู่กลางในแนวตั้ง */
+            gap: 6px;                   /* เว้นระยะห่างระหว่าง dropdown */
+            max-width: 800px;
+            margin: inherit;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        label {
+            margin-bottom: 1px; /* เพิ่มระยะห่างระหว่าง label กับ select */
+            font-size: 14px;
+        }
+
+        /* การตั้งค่า select ให้ดูสวยงาม */
+        select {
+            padding: 6px;
+            font-size: 10px;
+            border-radius: 4px;
+            border: 1px solid #8a8989;
+            width: 150px;
+        }
+        .logo-container {
+            display: flex;               /* ใช้ Flexbox เพื่อจัดตำแหน่ง */
+            align-items: center;         /* จัดตำแหน่งให้อยู่กลางในแนวตั้ง */
+        }
+        /* กำหนดรูปแบบของ .nav ให้ยึดตำแหน่งที่ขอบบน */
+        .nav {
+            display: flex;
+            align-items: center;
+            background-color: rgba(35, 208, 15, 0.867);
+            justify-content: space-between;  /* จัดตำแหน่งให้อยู่ขอบทั้งสองข้าง */
+            width: 100%;  /* ใช้พื้นที่ทั้งหมดของ container */
+            /* padding: 10px; เพิ่ม padding ให้น่าดู */
+        }
+
+        /* ปรับการจัดตำแหน่งของ .con1 ให้อยู่กลางหน้าจอ */
+        .main-container {
+            display: flex;
+            justify-content: center;   /* จัดกลางในแนวนอน */
+            align-items: center;       /* จัดกลางในแนวตั้ง */
+            /* height: calc(100vh - 60px); ความสูงของ .con1 จะเต็มหน้าจอลบกับพื้นที่ที่ .nav ใช้ (ประมาณ 60px) */
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            width: 80px; 
+            height: auto;
+            border: 1px solid #040404;
+        }
+
+        .menu-item1 {
+            text-decoration: none;
+            color: white;
+            background-color: rgb(43, 219, 23);
+            padding: 8px 8px;
+            border-radius: 5px;
+            margin-left: 8px;  /* ทำให้ปุ่ม "Go home" ขยับไปทางขวา */
+            margin-right: 8px;
+        }
+        .menu-item1:hover {
+            color: rgb(253, 253, 253);
+            background-color: rgba(135, 228, 125, 0.867);
+        }
+        .table-container {
+            width: 100%; /* ลดความกว้างของตาราง */
+            border-collapse: collapse;
+        }
+
+        .table-container th, .table-container td {
+            padding: 4px; /* ลดการเว้นระยะห่าง */
+            border: 1px solid #000000;
+            text-align: center;
+            font-size: 10px; /* ลดขนาดฟอนต์ */
+        }
+
+        .table-container th {
+            background-color: rgb(230, 227, 227);
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        .table-container td {
+            background-color: #9ca2af;
+            font-family: Arial, sans-serif;
+            font-weight: 600;
+        }
+
+        td p {
+            font-size: 8px; /* ลดขนาดฟอนต์ในเซลล์ */
+        }
+
+        th p {
+            font-size: 8px; /* ขนาดฟอนต์หัวข้อ */
+            display: contents;
+        }
+
+        .item {
+            margin-top: 0.5%;
+        }
+
+        h1, h4 {
+            display: flex;
+            justify-content: center;
+        }
+        .highlight-row td {
+            /* background-color: #858585; สีพื้นหลังเฉพาะแถว */
+            font-size: 14px; /* ขนาดฟอนต์ใหญ่ขึ้น */
+            font-weight: bold; /* ทำตัวหนา */
+            text-align: center; /* จัดกึ่งกลาง */
+            padding: 10px; /* เพิ่มช่องว่าง */
+            width: 5%;
+        }
+
+        .highlight-row td p {
+            margin: 0; /* ลบช่องว่างรอบพารากราฟ */
+            font-size: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        /* ตารางเเรก */
+        .cash-con {
+            text-align: left;
+            margin-top: 20px;
+        }
+        .cash {
+            margin-left: 25px;
+        }
+        .cash h3 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .cash h5 {
+            margin: 2px 0;
+            font-weight: normal;
+        }
+        .table-cash-flow {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .table-summary-1,
+        .table-summary-2,
+        .table-summary-3,
+        .table-summary-4 {
+            width: 17%;
+        }
+        
+        .table-cash-flow th, .table-cash-flow td, .table-summary th, .table-summary td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: center;
+            
+        }
+        /* .red-border */
+        .red-border td {
+            border-top: 2px solid rgb(255, 31, 31);   /* ขอบด้านบนสีแดง */
+            border-bottom: 2px solid rgb(255, 31, 31); /* ขอบด้านล่างสีแดง */
+            border-left: 2px solid rgb(255, 31, 31);   /* ขอบด้านซ้ายสีแดง */
+            border-right: 2px solid rgb(255, 31, 31);  /* ขอบด้านขวาสีแดง */
+        }
+        .red-border-1 td {
+            border-bottom: 2px solid rgb(255, 31, 31); /* ขอบด้านล่างสีแดง */
+        }
+        .green-border td {
+            border-top: 2px solid #00ff80;   /* ขอบด้านบนสีแดง */
+            border-bottom: 2px solid #00ff80; /* ขอบด้านล่างสีแดง */
+            border-left: 2px solid #00ff80;   /* ขอบด้านซ้ายสีแดง */
+            border-right: 2px solid #00ff80;  /* ขอบด้านขวาสีแดง */
+        }
+        .g-border-1 td {
+            border-bottom: 2px solid #00ff80; /* ขอบด้านล่างสีแดง */
+        }
+
+        /* หัวตาราง */
+        .table-cash-flow th, .table-summary th {
+            background-color: #a56abd;
+            color: white;
+            font-weight: bold;
+        }
+        .table-cash-flow td, .table-summary td {
+            background-color: #ffffff;
+            text-align: left; /* ชิดซ้ายข้อความ */
+        }
+        /* จัดตัวเลขในเซลล์ชิดขวา */
+        .table-cash-flow td:nth-child(n+2) {
+            text-align: right; /* ตัวเลขชิดขวา */
+        }
+
+        /* จัดข้อความทั่วไปในเซลล์ชิดซ้าย */
+        .table-cash-flow td {
+            text-align: left; /* ข้อความทั่วไปชิดซ้าย */
+        }
+        /* แถวบนสุด */
+        .table-cash-flow thead tr:first-child th {
+            background-color: #530494; /* สีม่วงเข้ม */
+            color: white;
+            font-weight: bold;
+        }
+
+        /* แถวล่างใน thead */
+        .table-cash-flow thead tr:last-child th {
+            background-color: #9554b1; /* สีม่วงกลาง */
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+        }
+        /* ปรับสีเฉพาะแถวที่ 2 ใน tbody */
+        .table-cash-flow tbody tr:nth-child(1) td {
+            background-color: #006834; /* สีม่วงอ่อน */
+            color: rgb(255, 255, 255); /* สีตัวอักษร */
+            font-weight: bold; /* ตัวหนา */
+        }
+        /* ปรับสีเฉพาะแถวที่ 5 ใน tbody */
+        .table-cash-flow tbody tr:nth-child(5) td {
+            background-color: #830000; /* สีม่วงอ่อน */
+            color: rgb(255, 255, 255); /* สีตัวอักษร */
+            font-weight: bold; /* ตัวหนา */
+        }
+        /* ปรับสีเฉพาะแถวที่ 32 ใน tbody */
+        .table-cash-flow tbody tr:nth-child(32) td {
+            background-color: #9554b1; /* สีม่วงอ่อน */
+            color: rgb(0, 0, 0); /* สีตัวอักษร */
+            font-weight: bold; /* ตัวหนา */
+        }
+        /* ปรับสีเฉพาะแถวที่ 33-34 ใน tbody */
+        .table-cash-flow tbody tr:nth-child(33) td,
+        .table-cash-flow tbody tr:nth-child(34) td {
+            background-color: #67bbea; /* สีม่วงอ่อน */
+            color: rgb(0, 0, 0); /* สีตัวอักษร */
+            font-weight: bold; /* ตัวหนา */
+        }
+        /* ปรับสีเฉพาะแถวที่ 35 ใน tbody */
+        .table-cash-flow tbody tr:nth-child(35) td {
+            background-color: #35a8eb; /* สีม่วงอ่อน */
+            color: rgb(0, 0, 0); /* สีตัวอักษร */
+            font-weight: bold; /* ตัวหนา */
+        }
+        /* ปรับตัวหนังสือในตาราง */
+        .table-cash-flow th, 
+        .table-cash-flow td {
+            font-weight: 300; /* ความหนาของตัวหนังสือ (100-900) */
+            font-family: Arial, sans-serif; /* ฟอนต์ที่ดูบาง */
+        }
+        /* จัดข้อความใน th เฉพาะที่เป็นตัวเลข */
+        .table-cash-flow th:nth-child(n+2) {
+            text-align: right; /* ชิดขวา */
+        }
+        /* ฟอนต์ตัวบาง */
+        .thin-text {
+            font-weight: 300;
+            font-family: Arial, sans-serif;
+        }
+        /* ข้อความเน้น */
+        .highlighted {
+            color: #0307df;
+        }
+
+
+        /* การจัดการตารางในแถวเดียว */
+        .main-container {
+            display: flex;
+            /* gap: 10px; เว้นช่องว่างระหว่างตาราง
+            padding: 12px; */
+            /* justify-content: space-between; จัดตารางให้ห่างกันตามต้องการ */
+        }
+        /* ปรับระยะห่างของตาราง */
+        /* .table-cash-flow-1 {
+            margin-top: 1.5%;
+        } */
+        /* ปรับสีแถวใน thead */
+        .table-cash-flow-1 thead tr th {
+            background-color: #530494; /* สีม่วงเข้ม */
+            color: white;
+            font-weight: bold;
+        }
+        /* ปรับสีแถวใน tbody */
+        .table-cash-flow-1 tbody tr th {
+            background-color: #9554b1; /* สีม่วงกลาง */
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+        }
+        /* ปรับสีเฉพาะแถวที่ 2 ใน tbody */
+        .table-cash-flow-1 tbody tr:nth-child(2) td {
+            background-color: #006834; /* สีม่วงอ่อน */
+            color: rgb(255, 255, 255); /* สีตัวอักษร */
+            font-weight: bold; /* ตัวหนา */
+            height: 10px;
+        }
+        /* ปรับสีเฉพาะแถวที่ 6 ใน tbody */
+        .table-cash-flow-1 tbody tr:nth-child(6) td {
+            background-color: #830000; /* สีม่วงอ่อน */
+            color: rgb(255, 255, 255); /* สีตัวอักษร */
+            font-weight: bold; /* ตัวหนา */
+        }
+        /* ปรับสีเฉพาะแถวที่ 33 ใน tbody */
+        .table-cash-flow-1 tbody tr:nth-child(33) td {
+            background-color: #9554b1; /* สีม่วงอ่อน */
+            color: rgb(0, 0, 0); /* สีตัวอักษร */
+            font-weight: bold; /* ตัวหนา */
+        }
+        /* ปรับสีเฉพาะแถวที่ 34-35 ใน tbody */
+        .table-cash-flow-1 tbody tr:nth-child(34) td,
+        .table-cash-flow-1 tbody tr:nth-child(35) td {
+            background-color: #67bbea; /* สีม่วงอ่อน */
+            color: rgb(0, 0, 0); /* สีตัวอักษร */
+            font-weight: bold; /* ตัวหนา */
+        }
+        /* ปรับสีเฉพาะแถวที่ 36 ใน tbody */
+        .table-cash-flow-1 tbody tr:nth-child(36) td {
+            background-color: #35a8eb; /* สีม่วงอ่อน */
+            color: rgb(0, 0, 0); /* สีตัวอักษร */
+            font-weight: bold; /* ตัวหนา */
+        }
+        /* จัดตัวเลขในเซลล์ชิดขวา */
+        .table-cash-flow-1 td:nth-child(n+1) {
+            text-align: right; /* ตัวเลขชิดขวา */
+        }
+        /* ปรับตัวหนังสือในตาราง */
+        .table-cash-flow-1 th, 
+        .table-cash-flow-1 td {
+            font-weight: 300; /* ความหนาของตัวหนังสือ (100-900) */
+            font-family: Arial, sans-serif; /* ฟอนต์ที่ดูบาง */
+        }
+        /* ปรับความสูงของแถวใน thead */
+        .table-cash-flow-1 thead th {
+            height: 40px; /* ความสูงของเซลล์ */
+            padding: 15px; /* เพิ่มระยะห่างด้านใน */
+            text-align: center; /* จัดข้อความกลางแนวตั้งและแนวนอน */
+        }
+        /* ปรับความสูงของแถวใน tbody */
+        .table-cash-flow-1 tbody th {
+            height: 53px; /* ความสูงของเซลล์ */
+            padding: 17px; /* เพิ่มระยะห่างด้านใน */
+            text-align: center; /* จัดข้อความกลางแนวตั้งและแนวนอน */
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 20%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background: #f2f2f2;
+            font-weight: bold;
+        }
+        .s1 {
+            float: right; 
+            justify-content: space-between;
+            color: #757575;
+        }
+        
+
+    /* ตารางเเรก */
+    .main-container {
+            display: flex;
+            gap: -1%;
+            margin-top: -0.2%;
+        }
+
+        .cash-con {
+            text-align: left;
+            /* margin-top: 20px; */
+            /* border: 1px solid black; */
+        }
+        .cash {
+            margin-left: 25px;
+        }
+        
+        .table-cash-flow, .table-summary {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .table-cash-flow td {
+            background-color: #ffffff;
+            text-align: left; /* ชิดซ้ายข้อความ */
+        }
+        .table-summary td:nth-child(n+2) {
+            text-align: right;
+            width: 9.1%;
+        }
+        .table-summary td:nth-child(n+3) {
+            text-align: right;
+            width: 8.75%;
+        }
+        .table-summary td:nth-child(n+4) {
+            text-align: right;
+            width: 8.2%;
+        }
+        .table-summary td:nth-child(n+5) {
+            text-align: right;
+            width: 9.05%;
+        }
+        .table-summary td:nth-child(n+6) {
+            text-align: right;
+            width: 8.97%;
+        }
+        .table-summary td:nth-child(n+7) {
+            text-align: right;
+            width: 8.6%;
+        }
+        
+        /* จัดตัวเลขในเซลล์ชิดขวา */
+        .table-cash-flow td:nth-child(n+2) {
+            text-align: right; /* ตัวเลขชิดขวา */
+        }
+
+        /* จัดข้อความทั่วไปในเซลล์ชิดซ้าย */
+        .table-cash-flow td {
+            text-align: left; /* ข้อความทั่วไปชิดซ้าย */
+        }
+        
+        /* ปรับตัวหนังสือในตาราง */
+        .table-cash-flow th, 
+        .table-cash-flow td {
+            font-weight: 300; /* ความหนาของตัวหนังสือ (100-900) */
+            font-family: Arial, sans-serif; /* ฟอนต์ที่ดูบาง */
+        }
+        
+        /* ฟอนต์ตัวบาง */
+        .thin-text {
+            font-weight: 300;
+            font-family: Arial, sans-serif;
+        }
+        
+
+        /* ปรับสีแถวใน thead */
+        .table-cash-flow-1 thead tr th {
+            background-color: #530494; /* สีม่วงเข้ม */
+            color: white;
+            font-weight: bold;
+        }
+        /* ปรับสีแถวใน tbody */
+        .table-cash-flow-1 tbody tr th {
+            background-color: #9554b1; /* สีม่วงกลาง */
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+        }
+        
+        /* จัดตัวเลขในเซลล์ชิดขวา */
+        .table-cash-flow-1 td:nth-child(n+1) {
+            text-align: right; /* ตัวเลขชิดขวา */
+        }
+        /* ปรับตัวหนังสือในตาราง */
+        .table-cash-flow-1 th, 
+        .table-cash-flow-1 td {
+            font-weight: 300; /* ความหนาของตัวหนังสือ (100-900) */
+            font-family: Arial, sans-serif; /* ฟอนต์ที่ดูบาง */
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 20%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background: #f2f2f2;
+            font-weight: bold;
+        }
+</style>
+<body>
+    <div class="nav">
+        <div class="logo-container">
+            <img src="data:image/png;base64,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" alt="Logo" class="logo">
+            <p style="color: aliceblue; margin-left: 10px;">TTA Group Conpany information</p>
+        </div>
+        <div class="container">
+            <!-- Dropdowns -->
+            <div class="form-group">
+                <label for="year">Year</label>
+                <select id="year">
+                    <option value=""></option>
+                </select>
+            </div>            
+            
+            <div class="form-group">
+                <label for="quarter">Quarter</label>
+                <select id="quarter">
+                    <option value=""></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="yearCompare">Year Compare</label>
+                <select id="yearCompare">
+                    <option value=""></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="quarterCompare">Quarter Compare</label>
+                <select id="quarterCompare">
+                    <option value=""></option>
+                </select>
+            </div>
+            <a href="../main/index.html" class="menu-item1">Go home</a>
+        </div>
+    </div><br>
+    <table class="table-container">
+        <thead>
+            <tr>
+                <th>Company Name</th>
+                <th>No of Share</th>
+                <th>Capital Register</th>
+                <th>%TTA Holding</th>
+                <th>Country of Register</th>
+                <th></th>
+            </tr>
+            <tbody>
+                <tr>
+                    <td>TTA</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td>MML</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </thead>
+    </table>
+    <div class="item">
+        <h1>การลงทุนในบริษัทต่างประเทศ</h1>
+        <h4>นิติบุคคลที่บริษัท และบริษัทย่อยถือหุ้นตั้งเเต่ร้อยละ 10 ของหุ้นที่ออกเเละชำระเเล้วก็ขึ้นไป ณ วันที่ 31 ธันวาคม พ.ศ.2566</h4>
+        <table class="table-container">
+            <thead>
+                <tr>
+                    <th>ลำดับที่</th>
+                    <th>ชื่อบริษัท</th>
+                    <th>ชื่อย่อ</th>
+                    <th>ลักษณะธุรกิจ</th>
+                    <th colspan="2">ทุนจดทะเบียน / ทุนชำระเเล้ว<br>/ มูลค่าที่ตราหุ่นละ</th>
+                    <th>ชนิดของหุ้น</th>
+                    <th>จำนวนหุ้นที่ออก</th>
+                    <th>จำนวนหุ้นที่ถือ</th>
+                    <th>สัดส่วนการถือหุ้น (%)</th>
+                </tr>
+                <tr class="highlight-row">
+                    <td colspan="10"><p>กลุ่มธุรกิจขนส่งทางเรือ</p></td>
+                </tr>                
+                <tr>
+                    <th>1</th>
+                    <th>บริษัท พรีโม ชิปปิ้ง จำกัด (มหาชน) <br>26/32/34 อาคารอรกานต์ ชั้นที่ 10 ซอยชิดลม<br> ถนนเพลินจิต แขวนลุมพินี เขตปทุมวัน กรุงเทพๆ 10330 <br>โทรศัพท์ : +66 (0) 2250-0569 <br>โทรสาร : +66 (0) 2254-9417</th>
+                    <th>PREMO</th>
+                    <th>บริหารจัดการการเดินเรือทางทะเล</th>
+                    <th>ทุนจดทะเบียน<br>ทุนชำระเเล้ว<br>มูลค่าที่ตราหุ่นละ</th>
+                    <th>2,500,000 <br>2,500,000 <br>100 <br>(บาท)</th>
+                    <th>หุ้นสามัญ</th>
+                    <th>25,000</th>
+                    <th>24,998<p>/TTA 99.99%</p></th>
+                    <th>99.99<p>/TTA</p></th>
+                </tr>
+                <tr>
+                    <th>2</th>
+                    <th>บริษัท โทริเซน ชิปปิ้ง สิงคโปร์ พีทีอี แอลทีดี <br>127A Telok Ayer Street singapore 068596 <br>โทรศัพท์ : +65 (0) 6578-7000 <br>โทรสาร : +65 (0) 6578-7007</th>
+                    <th>TSS</th>
+                    <th>ขนส่งสินค้าระหว่างประเทศทางทะเล</th>
+                    <th>ทุนจดทะเบียน<br>ทุนชำระเเล้ว<br>มูลค่าที่ตราหุ่นละ</th>
+                    <th>614,909,306 <br>614,909,306 <br>- <br>(SGD)</th>
+                    <th>หุ้นสามัญ</th>
+                    <th>614,909,306</th>
+                    <th>614,909,306<p>/TTA 100%</p></th>
+                    <th>100<p>/TTA</p></th>
+                </tr>
+                <tr>
+                    <th>3</th>
+                    <th>บริษัท โทริเซน ชิปปิ้ง คอมพานี พีทีอี แอลทีดี <br>127A Telok Ayer Street singapore 068596 <br>โทรศัพท์ : +65 (0) 6578-7000 <br>โทรสาร : +65 (0) 6578-7007</th>
+                    <th>TSC</th>
+                    <th>ขนส่งสินค้าระหว่างประเทศทางทะเล</th>
+                    <th>ทุนจดทะเบียน<br>ทุนชำระเเล้ว<br>มูลค่าที่ตราหุ่นละ</th>
+                    <th>7,330,000 <br>7,330,000 <br>- <br>(SGD)</th>
+                    <th>หุ้นสามัญ</th>
+                    <th>7,330,000</th>
+                    <th>7,330,000<p>/TSS 100%</p></th>
+                    <th>100<p>/TTA</p></th>
+                </tr>
+                <tr>
+                    <th>4</th>
+                    <th>บริษัท โทริเซน (กรุงเทพ) จำกัด <br>26/32/34 อาคารอรกานต์ ชั้นที่ 10 ซอยชิดลม ถนนเพลินจิต <br>แขวนลุมพินี เขตปทุมวัน กรุงเทพๆ 10330 <br>โทรศัพท์ : +66 (0) 2250-0569 <br>โทรสาร : +66 (0) 2254-9417</th>
+                    <th>TCB</th>
+                    <th>บริหารจัดการเดินเรือทางทะเล</th>
+                    <th>ทุนจดทะเบียน<br>ทุนชำระเเล้ว<br>มูลค่าที่ตราหุ่นละ</th>
+                    <th>125,000,000 <br>125,000,000 <br>10 <br>(บาท)</th>
+                    <th>หุ้นสามัญ <br>หุ้นบุริมสิทธิ กลุ่ม ก <br>กลุ่ม ข</th>
+                    <th>9,470,000 <br>1,529,994 <br>1,500,000<p>/TSS 100%</p></th>
+                    <th>9,470,000 <br>1,529,994 <br>1,500,000<p>/TSS 99.99%</p></th>
+                    <th>99.99<p>/TSS</p></th>
+                </tr>
+                <tr>
+                    <th>5</th>
+                    <th>บริษัท โทริเซน ชิปปิ้ง (ประเทศไทย) จำกัด <br>26/32/34 อาคารอรกานต์ ชั้นที่ 8 ซอยชิดลม ถนนเพลินจิต <br>แขวนลุมพินี เขตปทุมวัน กรุงเทพๆ 10330 <br>โทรศัพท์ : +66 (0) 2250-0569 <br>โทรสาร : +66 (0) 2254-9417</th>
+                    <th>TST</th>
+                    <th>ขนส่งสินค้าระหว่างประเทศทางทะเล</th>
+                    <th>ทุนจดทะเบียน<br>ทุนชำระเเล้ว<br>มูลค่าที่ตราหุ่นละ</th>
+                    <th>120,000,000 <br>120,000,000 <br>10 <br>(บาท)</th>
+                    <th>หุ้นสามัญ</th>
+                    <th>12,000,000</th>
+                    <th>6,120,000<p>/TTA 51.00%</p> <br>5,879,990<p>/TSS 48.99%</p></th>
+                    <th>99.99<p>/TTA TSS</p></th>
+                </tr>
+            </thead>
+        </table>
+    </div><hr>
+    <div class="cash-con">
+        <div class="cash">
+            <h3>CASH FLOW PROJECTION</h3>
+            <h5>THORESEN THAI AGENCIES PCL. (Holding Level)<br>Unit: million Baht<br>Version: EXCOM 4/2024</h5>
+        </div>
+    </div>
+    <div class="main-container">
+        <!-- ตารางซ้าย -->
+        <table class="table-cash-flow">
+            <thead>
+                <tr>
+                    <th style="text-align: left;">Available Cash Forecast - TTA (Holding)<br>
+                    Report date: 24 May 2024<br>Unit: Million Baht</th>
+                    <th>May - 24</th>
+                    <th>Jun - 24</th>
+                    <th>Jul - 24</th>
+                    <th>Aug - 24</th>
+                    <th>Sep - 24</th>
+                    <th>Oct - 24</th>
+                </tr>
+                <tr>
+                    <th style="text-align: left;">
+                        Beginning TTA Cash Available<br>
+                        <label class="thin-text">- TTA (Cash) - as of 17 May 2024</label><br>
+                        <label class="thin-text">- TTA (ST Investment) - as of 30 April 2024</label><br>
+                        <label class="thin-text">- TTA (Cryptocurrency) - as of 24 May 2024</label>
+                    </th>
+                    <th>
+                        12,042<br>
+                        <em class="highlighted">3,555</em><br>
+                        <em class="highlighted">1,087</em><br>
+                        <em class="highlighted">7,401</em>
+                    </th>
+                                    
+                    <th>11,938</th>
+                    <th>11,584</th>
+                    <th>11,509</th>
+                    <th>11,614</th>
+                    <th>11,538</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="green-border">
+                    <td>Cash Inflow</td>
+                    <td>23</td>
+                    <td>375</td>
+                    <td>200</td>
+                    <td>470</td>
+                    <td>30</td>
+                    <td>-</td>
+                </tr>
+                <tr class="green-border">
+                    <td>Dividend</td>
+                    <td>23</td>
+                    <td>175</td>
+                    <td>-</td>
+                    <td>470</td>
+                    <td>30</td>
+                    <td>-</td>
+                </tr>
+                <tr class="green-border">
+                    <td>Loan and Loan Repayment from Sub/Asso/JV</td>
+                    <td>-</td>
+                    <td>100</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>Debenture Issuance</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr class="red-border">
+                    <td>Cash Outflow</td>
+                    <td>127</td>
+                    <td>729</td>
+                    <td>275</td>
+                    <td>365</td>
+                    <td>106</td>
+                    <td>123</td>
+                </tr>
+                <tr class="red-border">
+                    <td>TTA - G&A<span class="s1">THB</span></td>
+                    <td>26</td>
+                    <td>26</td>
+                    <td>26</td>
+                    <td>27</td>
+                    <td>26</td>
+                    <td>26</td>
+                </tr>
+                <tr class="red-border">
+                    <td>TTA - Dividend Payment<span class="s1">THB</span></td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>TTA - Bond Repayment (Principal)<span class="s1">THB</span></td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr class="red-border-1">
+                    <td>TTA - Bond Interest payment<span class="s1">THB</span></td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>44</td>
+                    <td>69</td>
+                    <td>-</td>
+                    <td>44</td>
+                </tr>
+                <tr class="red-border">
+                    <td style="font-weight: 700;">New Investment (Financing by TTA)</td>
+                    <td>101</td>
+                    <td>704</td>
+                    <td>205</td>
+                    <td>269</td>
+                    <td>80</td>
+                    <td>53</td>
+                </tr>                
+                <tr>
+                    <td>AIM - Svay Rieng Project<span class="s1">THB</span></td>
+                    <td>-</td>
+                    <td>60</td>
+                    <td>10</td>
+                    <td>-</td>
+                    <td>60</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>AIM - Mahasawat Project<span class="s1">THB</span></td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>30</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>AIM - National Zoo<span class="s1">THB</span></td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>40</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>TTA - Capital Retern Note<span class="s1">THB</span></td>
+                    <td>-</td>
+                    <td>35</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>TTA - P80 Airline (Aircraft Chartered & W/C)<span class="s1">USD</span></td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>100</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>TTA - Storm - EV Motorcycle (BrigdeLoan)<span class="s1">THB</span></td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>25</td>
+                    <td>-</td>
+                    <td>25</td>
+                </tr>
+                <tr>
+                    <td>TTA - P80 Sky (W/C)<span class="s1">USD</span></td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>TTA - Cool Lab Exchange<span class="s1">THB</span></td>
+                    <td>-</td>
+                    <td>100</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>TTA - EV Truck<span class="s1">THB</span></td>
+                    <td>43</td>
+                    <td>102</td>
+                    <td>60</td>
+                    <td>8</td>
+                    <td>15</td>
+                    <td>23</td>
+                </tr>
+                <tr>
+                    <td>TTA - RML Stock<span class="s1">THB</span></td>
+                    <td>-</td>
+                    <td>30</td>
+                    <td>30</td>
+                    <td>40</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>Titan - Vessels Purchase & W/C<span class="s1">USD</span></td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>VVT - V Smart City<span class="s1">USD</span></td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>VVT - Oska Battery<span class="s1">THB</span></td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>100</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>VVI - Hanaco<span class="s1">USD</span></td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>21</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>VVI - Spotitearly<span class="s1">USD</span></td>
+                    <td>-</td>
+                    <td>175</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>VVI - 1686 Partner fund<span class="s1">USD</span></td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>VVI - Wonder Art Music Sport Entertainment Project<span class="s1">USD</span></td>
+                    <td>53</td>
+                    <td>70</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>STC - Loan for Working Capital<span class="s1">THB</span></td>
+                    <td>-</td>
+                    <td>7</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>STC - Outlet Expansion<span class="s1">THB</span></td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>PMTP - Condo - Construction<span class="s1">THB</span></td>
+                    <td>-</td>
+                    <td>120</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>Others<span class="s1">THB</span></td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 700;">Net Cashflow</td>
+                    <td style="font-weight: 300;">(104)</td>
+                    <td style="font-weight: 300;">(354)</td>
+                    <td style="font-weight: 300;">(75)</td>
+                    <td style="font-weight: 300;">104</td>
+                    <td style="font-weight: 300;">(76)</td>
+                    <td style="font-weight: 300;">(123)</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 700;">Ending TTA Available Cash Balance</td>
+                    <td>11,938</td>
+                    <td>11,584</td>
+                    <td>11,509</td>
+                    <td>11,614</td>
+                    <td>11,538</td>
+                    <td>11,414</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 700;">Ending TSS Available Cash Balance</td>
+                    <td>2,692</td>
+                    <td>2,463</td>
+                    <td>2,539</td>
+                    <td>2,108</td>
+                    <td>2,054</td>
+                    <td>2,131</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 700;">Ending TTA & TSS Available Cash balance</td>
+                    <td>14,630</td>
+                    <td>14,047</td>
+                    <td>14,048</td>
+                    <td>13,722</td>
+                    <td>13,592</td>
+                    <td>13,545</td>
+                </tr>
+            </tbody>
+        </table>
+    
+        <!-- ตารางบนขวา -->
+        <div class="table-cash-flow-1">
+            <table>
+                <thead>
+                    <tr>
+                        <th>May - Dec2024</th>
+                        <th>2025</th>
+                        <th>2026</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>######</th>
+                        <th>######</th>
+                        <th>######</th>
+                    </tr>
+                    <tr class="green-border">
+                        <td>1,195</td>
+                        <td>1,690</td>
+                        <td>4,788</td>
+                    </tr>
+                    <tr class="green-border">
+                        <td>697</td>
+                        <td>890</td>
+                        <td>814</td>
+                    </tr>
+                    <tr class="green-border">
+                        <td>100</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>-</td>
+                        <td>800</td>
+                        <td>3,974</td>
+                    </tr>
+                    <tr class="red-border">
+                        <td>1,980</td>
+                        <td>2,511</td>
+                        <td>5,455</td>
+                    </tr>
+                    <tr class="red-border">
+                        <td>209</td>
+                        <td>359</td>
+                        <td>377</td>
+                    </tr>
+                    <tr class="red-border">
+                        <td>-</td>
+                        <td>550</td>
+                        <td>550</td>
+                    </tr>
+                    <tr>
+                        <td>-</td>
+                        <td>800</td>
+                        <td>3,974</td>
+                    </tr>
+                    <tr class="red-border-1">
+                        <td>226</td>
+                        <td>453</td>
+                        <td>437</td>
+                    </tr>
+                    <tr class="red-border">
+                        <td>1,546</td>
+                        <td>349</td>
+                        <td>130</td>
+                    </tr>
+                    <tr>
+                        <td>180</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>30</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>40</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>35</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>100</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>50</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>40</td>
+                        <td>60</td>
+                        <td>60</td>
+                    </tr>
+                    <tr>
+                        <td>100</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>325</td>
+                        <td>73</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>100</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>-</td>
+                        <td>74</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>-</td>
+                        <td>27</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>100</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>21</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>175</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>-</td>
+                        <td>53</td>
+                        <td>70</td>
+                    </tr>
+                    <tr>
+                        <td>123</td>
+                        <td>53</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>-</td>
+                        <td>11</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>120</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 300;">(883)</td>
+                        <td style="font-weight: 300;">(821)</td>
+                        <td style="font-weight: 300;">(667)</td>
+                    </tr>
+                    <tr>
+                        <td>11,159</td>
+                        <td>10,338</td>
+                        <td>9,671</td>
+                    </tr>
+                    <tr>
+                        <td>2,010</td>
+                        <td>1,773</td>
+                        <td>1,762</td>
+                    </tr>
+                    <tr>
+                        <td>13,170</td>
+                        <td>12,111</td>
+                        <td>11,433</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="main-container">
+        <table class="table-summary">
+            <thead>
+                <tr>
+                    <td style="font-weight: 700; background-color: #35a8eb;">TTA Ending Cash Balance</td>
+                    <td style="font-weight: 700; background-color: #35a8eb;">May-24</td>
+                    <td style="font-weight: 700; background-color: #35a8eb;">Jun-24</td>
+                    <td style="font-weight: 700; background-color: #35a8eb;">Jul-24</td>
+                    <td style="font-weight: 700; background-color: #35a8eb;">Aug-24</td>
+                    <td style="font-weight: 700; background-color: #35a8eb;">Sep-24</td>
+                    <td style="font-weight: 700; background-color: #35a8eb;">Oct-24</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="table-summary1">Cash only</td>
+                    <td>3,451</td>
+                    <td>3,097</td>
+                    <td>3,022</td>
+                    <td>3,126</td>
+                    <td>3,050</td>
+                    <td>2,927</td>
+                </tr>
+                <tr>
+                    <td class="table-summary2">Cash + Short Term Investment</td>
+                    <td>4,538</td>
+                    <td>4,184</td>
+                    <td>4,109</td>
+                    <td>4,213</td>
+                    <td>4,137</td>
+                    <td>4,014</td>
+                </tr>
+                <tr>
+                    <td class="table-summary3">Cash + Cryptocurrency</td>
+                    <td>10,852</td>
+                    <td>10,497</td>
+                    <td>10,422</td>
+                    <td>10,527</td>
+                    <td>10,451</td>
+                    <td>10,327</td>
+                </tr>
+                <tr>
+                    <td class="table-summary4">Cash + Short Term Investment. + Cryptocurrency</td>
+                    <td>11,938</td>
+                    <td>11,584</td>
+                    <td>11,509</td>
+                    <td>11,614</td>
+                    <td>11,538</td>
+                    <td>11,414</td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table-summary-1">
+            <thead>
+                <tr style="background-color: #35a8eb;">
+                    <td style="font-weight: 700;">2024</td>
+                    <td style="font-weight: 700;">2025</td>
+                    <td style="font-weight: 700;">2026</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2,672</td>
+                    <td>1,851</td>
+                    <td>1,184</td>
+                </tr>
+                <tr>
+                    <td>3,759</td>
+                    <td>2,938</td>
+                    <td>2,271</td>
+                </tr>
+                <tr>
+                    <td>10,073</td>
+                    <td>9,251</td>
+                    <td>8,585</td>
+                </tr>
+                <tr>
+                    <td>11,159</td>
+                    <td>10,338</td>
+                    <td>9,671</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

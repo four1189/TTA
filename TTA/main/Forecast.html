@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTA CASH FORECAST BY MONTH</title>
+    <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnQ6rAa2axGMNtSAh5h6EVhgEbspZpdOXt9g&s" type="image/x-icon">
+</head>
+<style>
+        .logo-container {
+            display: flex;               /* ใช้ Flexbox เพื่อจัดตำแหน่ง */
+            align-items: center;         /* จัดตำแหน่งให้อยู่กลางในแนวตั้ง */
+        }
+        /* กำหนดรูปแบบของ .nav ให้ยึดตำแหน่งที่ขอบบน */
+        .nav {
+            display: flex;
+            align-items: center;
+            background-color: rgba(35, 208, 15, 0.867);
+            justify-content: space-between;  /* จัดตำแหน่งให้อยู่ขอบทั้งสองข้าง */
+            width: 100%;  /* ใช้พื้นที่ทั้งหมดของ container */
+            /* padding: 10px; เพิ่ม padding ให้น่าดู */
+        }
+
+        /* ปรับการจัดตำแหน่งของ .con1 ให้อยู่กลางหน้าจอ */
+        .main-container {
+            display: flex;
+            justify-content: center;   /* จัดกลางในแนวนอน */
+            align-items: center;       /* จัดกลางในแนวตั้ง */
+            /* height: calc(100vh - 60px); ความสูงของ .con1 จะเต็มหน้าจอลบกับพื้นที่ที่ .nav ใช้ (ประมาณ 60px) */
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            width: 80px; 
+            height: auto;
+            border: 1px solid #040404;
+        }
+
+        .menu-item1 {
+            text-decoration: none;
+            color: white;
+            background-color: rgb(43, 219, 23);
+            padding: 8px 8px;
+            border-radius: 5px;
+            margin-left: 8px;  /* ทำให้ปุ่ม "Go home" ขยับไปทางขวา */
+            margin-right: 8px;
+        }
+        .menu-item1:hover {
+            color: rgb(253, 253, 253);
+            background-color: rgba(135, 228, 125, 0.867);
+        }
+</style>
+<body>
+    <div class="nav">
+        <div class="logo-container">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQgAAAC/CAMAAAA1kLK0AAAAsVBMVEX///9AQEI4s0nt9+4orzyj2Kk8PD4brjU2NjhBQUIwMDJlZWaxsbE8PD+QkJFaWlslJSfN6dHS0tIxsUNQul5YvGf2/PiPz5Z4yIKGhoff8uJTU1QpKSwzMzXu7u4gICJJSUur27C9vb3e3t6enp7x8fHl9Oe84sC+vr5vb3B5eXmXl5fJyckAqSLX7dkMqixuxHnZ2dmpqalEtVKV0ZuCyovF5sl7x4Ryxn2u3LMZGRtg3K4zAAAHd0lEQVR4nO2aaXuiPBSGZWojICrVjjMMcalLW7VTWztr//8Pe5WchBBwoS3gvNdzf6lAckgek7PE1moAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA/wf9ixz09Z55Ol4cG8YtUdxEj3H5vXEy3y/1nk/rHD0fD4/ijkbx/a7IuR7kpv7pZOo3es/fvdN7Ng4LcdGQDdf9gw0L5CyE+KxM9T4XOtsDnIMQlw2t5d9i57uXMxDidh216Ql7jYoc5hkI8RIZ6j09ib/XBc94Dzfruomat8k6ETX+NPb17KUeHIoaP0S3Rv+CPlzub1sgj5cmNy9iOtepJ5dXes+79HPS4ekm9WR/IvEoNkZjGzj/Cl/R+Fb4rE/jWizRN/hvsVnqP/L0keLtPovN8ekl/5sL4c1C9EmILzn6/BT7oRflD31xUf+Z+9WFUKYQv2g30Kb7JfbJ+upwr5IoUQjZQy0BCkW9yhJMnRKF+FM3nQIJ8Tv3ywugPCHuxMZYa8H1ijbHr9xv/3hKE6K/zogyX8hhnsHmKE0IqrVebr9p3L5o8bRayhLiRtZaybMLebOq6iumJCFutZozi8bRY62iKUmI6yNFW1XVlznCooW4PFr2VlR9xZQixLcjG2PHusKz3B2lCCG/9cY6A+kxK66+yhCCaq1PV3ugZCJXHfvhlCDE0fyRcs4jh74FU4IQxyuKr7RkqkwwX3o76vmjV78e9WwcFeKraFg/ZKsnbFVZff38GpHneEXQFx3/HMsJH5+idk8H1/3VKY0AAAAAAAAAAPyDzJ/vPW/SHb7HxPTdJqpmOAs5d7dw7gRd4+Ek7Gg0Vw+ZJuZex1Umno2HnjCxVDeex9GNkC5n+iuawWT+YTPLxTDgLrOIlu2Hyal6nLUUbPvc8lIm5m03NmHZfiep5sbdmbCb6kZ3xLZ3GKfL9iB+BWM2d4MqpPC4bSVo+Qt9HJ5rGfCOMc4He5Bo4LBRoD/fRI+ZJoQftXPpsm2MwLLd7HVXJEvfnKfl2INp3CAthMVYQonVyDRgWQNHa5IhhHNQCMt6nRQ56Qyag9QYdvixEkIIR00xmtNYMxGkpdw1cWOv+QYhrFfT0RTLMtZhuznjbW756gvNWBHbKayUiZmfbYIx1eQtQlhO8bOP8eQkmM8WQbAMfTkkN1RthBDM3jHgNNNXKVRX7gvGB82diZE0YS+kiROFEK+QQ3DTPrkwhpzGzJvk5oeryPszf6kWthCiRbPojoUS7oYeO0q5e3Fj2pZicbpzohBMONhhQMqPi5l0FgGJzzXPNOzY27CgbVAhRDwL1tKv5cbhs7jHdNyiRUI3cgmhhsVLS83kguDJWNUZJDy2KYQn3IotrkhKP7GO504rsSRyCjF3s4ZVIBt64SZ520gSTCGmwin40QUlBHaQ7ENtZKfThIiNdFi5TiIUezk83OqgEHIVm53I/ZFLPXMhaAUee19qa7ja1hiLz22z0/BVqCVWd04h5Na4r5XDMz/JJ5lCiDDBRGwUq4ObhZpSSLjQnD5iJbyQX5aznAjhx+rGrJkgFNllUohpx9bW0VAIMUoPOdC/5FxCzFfkw8e1kqAZdtSNYNDSGT1rzSxnHKFyhOgZ+YtR2vhKn9uJCZV4hUvJrrtJWy0Gc82rtILwE0Ik8UWE/VghktjFzDqD1NY4XQiXzlg+dGskeS2vEO+Ss1R5gymE7iOST9RZE4XS/M7SOiLEqOxKw9GiVMAHETLxFgopIWRVYdnx7hX3MsJnpJDD94bPw0KwUanHEaJ+aqnx3c8ENK6xuCuFcF1XJM564kGLyK0ZrI4lVPuFaDHXX5R7AjwT/pmb6lM0o/VPQoSe5zVFyNBOCh7E9hoYS2IoJiojUi4hxotN2QfhUzqN4NPEbTphkPpowYWChHYqUxNaOn5STKrVYxPRForjwCZRuKVS7NJZ0jeR2JHypEXWD3qUTRfIVLhZIy3qD0kHNVFaN/HSG0cOh8kqx8gsy2coD6h4UwarqTzMHcivXReCqoD47KlWkyva7ZCJYduXSdck+R7HFX55uBB6Kh9b+Yqobbg8jeV2M1i1F2N1tu/LNom8ixaAFi/VUV2Ls0V7tQyVBe13jFBKM16u2k35E4gqUaoXorbQDm9t247CQqTNSAXVZAIq8gP9GG3GdROMqZNu7cx/wvUm8rMycgZC1DrZx/k8DgNJIR7EKud6COVZFpiru+AOS7cYqdzxHISoLbKm4Wvh0ChJKIT6mom2+QPPblZ2IgYO3ZQSPI49ZyFEzRul8zo9vzWEoCOXRDJ5b5hw2Ehzp6KbbbzlVTNwHkLU5oFPOWMU0+zRMvFleny73VmcDQWD3SV7nRomtJ92RmFGxbR8JSmcnW9meot2ZLJyIbbz2DRdn0e/6fNwZeR13jjcEX/FTnQdLg0THR79awH3nWW6BtsxDRzxEt9tJkuqVfSKcapiqYLoH0W8Sfcdv8fPu5OtiYfpgSbTB2/zvpcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/kX+AxL8rppyBXCpAAAAAElFTkSuQmCC" alt="Logo" class="logo">
+            <p style="color: aliceblue; margin-left: 10px;">TTA CASH FORECAST BY MONTH</p>
+        </div>
+        <div class="container">
+            <a href="https://drive.google.com" target="_blank" class="menu-item1">Google Drive</a>
+            <a href="../main/index.html" class="menu-item1">Go home</a>
+        </div>
+    </div>
+    <iframe 
+        src="https://docs.google.com/forms/d/e/FORM_ID/viewform?embedded=true" 
+        width="100%" 
+        height="1000" 
+        frameborder="0" 
+        marginheight="0" 
+        marginwidth="0">
+        กำลังโหลด...
+    </iframe>
+
+</body>
+</html>
