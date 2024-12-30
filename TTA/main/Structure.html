@@ -102,18 +102,16 @@
         .menu-container {
             display: flex;
             background: linear-gradient(45deg, #cdccff, #cce5ff, #d9f7be, #fff2cc, #e6e6e6); /* ใช้ linear-gradient สำหรับหลายๆ สี */
-            padding: 2px;
             border-radius: 10px;
-            width: 30%;
+            width: 100%;
             cursor: pointer;
             justify-content: center;
             align-items: center; /* จัดกลางแนวตั้ง */
-            /* margin: auto; จัดกลางแนวนอน */
             font-size: 12px;
             position: absolute;
-            top: 30%;
-            left: 50%;
-            transform: translate(-50%, -50%); /* จัดกลางจอ */
+            /* top: 30%;
+            left: 50%; */
+            /* transform: translate(-50%, -50%); จัดกลางจอ */
         }
 
         .menu-item {
@@ -130,16 +128,17 @@
             border-radius: 5px;
             position: absolute;
             top: 105%;
-            left: -50%;
+            left: -55%;
             width: 210%;
-            min-width: 100px;
-            padding: 8px;
+            min-width: 10px;
+            /* padding: 8px; */
             white-space: nowrap;
-            gap: 4%;
             flex-direction: row;
-            justify-content: space-between;
+            justify-content: center;
             align-items: stretch;
+            gap: 120px; /* เพิ่มระยะห่างระหว่างปุ่มในแนวนอน */
         }
+
 
         .submenu button {
             padding: 8px;
@@ -148,51 +147,40 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            /* width: 100%; ให้ปุ่มขยายเต็มความกว้างของเมนู */
-            white-space: nowrap; /* ป้องกันการตัดคำในปุ่ม */
-            margin-bottom: 10px; /* เพิ่มระยะห่างระหว่างปุ่มแต่ละอัน */
+            white-space: nowrap;
+            margin: 10px 8px; /* ระยะห่าง: บน/ล่าง 10px, ซ้าย/ขวา 8px */
         }
 
+
         /* การจัดระเบียบปุ่มภายในเมนูย่อย */
-        .submenu-buttons,
-        .submenu-buttons2,
-        .submenu-buttons3,
-        .submenu-buttons4,
-        .submenu-buttons5,
-        .submenu-buttons6,
-        .submenu-buttons7,
-        .submenu-buttons8 {
-            display: block;
+        .submenu-buttons,.submenu-buttons2,
+        .submenu-buttons3,.submenu-buttons4,.submenu-buttons5,
+        .submenu-buttons6,.submenu-buttons7,.submenu-buttons8 {
+            display: flex;
             flex-direction: column;
+            gap: 10px; /* เพิ่มระยะห่างระหว่างปุ่ม */
             align-items: stretch;
         }
 
-        .submenu-buttons button, 
-        .submenu-buttons2 button, 
-        .submenu-buttons3 button,
-        .submenu-buttons4 button,
-        .submenu-buttons5 button,
-        .submenu-buttons6 button,
-        .submenu-buttons7 button,
-        .submenu-buttons8 button {
+        .submenu-buttons button, .submenu-buttons2 button, 
+        .submenu-buttons3 button,.submenu-buttons4 button,
+        .submenu-buttons5 button,.submenu-buttons6 button,
+        .submenu-buttons7 button,.submenu-buttons8 button {
             padding: 4px;
             background-color: #5cc95f;
             color: rgb(255, 255, 255);
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            height: 50px; /* Adjust the height as needed */
+            height: 50px; /* ปรับขนาดปุ่ม */
+            margin-bottom: 10px; /* เพิ่มระยะห่างด้านล่างระหว่างปุ่ม */
             flex-shrink: 0;
         }
 
-        .submenu-buttons button:hover, 
-        .submenu-buttons2 button:hover, 
-        .submenu-buttons3 button:hover,
-        .submenu-buttons4 button:hover,
-        .submenu-buttons5 button:hover,
-        .submenu-buttons6 button:hover,
-        .submenu-buttons7 button:hover,
-        .submenu-buttons8 button:hover {
+        .submenu-buttons button:hover, .submenu-buttons2 button:hover, 
+        .submenu-buttons3 button:hover,.submenu-buttons4 button:hover,
+        .submenu-buttons5 button:hover,.submenu-buttons6 button:hover,
+        .submenu-buttons7 button:hover,.submenu-buttons8 button:hover {
             background-color: #3e8e41;
         }
 

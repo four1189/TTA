@@ -326,13 +326,14 @@
 
 
 
-    // จำลองอัตราแลกเปลี่ยน
+
     const fromCurrency = document.getElementById('fromCurrency');
     const toCurrency = document.getElementById('toCurrency');
     const amountInput = document.getElementById('amount');
     const resultBox = document.getElementById('result-box');
     const exchangeRateBox = document.getElementById('exchangeRate');
 
+    // จำลองอัตราแลกเปลี่ยน
     const exchangeRates = {
         THB: { USD: 0.03, EUR: 0.028, JPY: 3.5, GBP: 0.025 },
         USD: { THB: 33.5, EUR: 0.94, JPY: 135.0, GBP: 0.75 },
@@ -343,6 +344,7 @@
 
     function formatNumber(number) {
         return number.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        return new Intl.NumberFormat().format(number);
     }
 
     function updateCurrencyOptions() {
@@ -376,7 +378,9 @@
         const convertedAmount = (amount * rate).toFixed(2);
 
         // แสดงผลพร้อมจัดรูปแบบตัวเลข
-        resultBox.textContent = `${formatNumber(amount)} ${fromValue} = ${formatNumber(convertedAmount)} ${toValue}`;
+        resultBox.textContent = `= ${formatNumber(convertedAmount)} ${toValue}`;
+
+        // ${formatNumber(amount)} ${fromValue} ส่วนที่ตัดออกเป็นเเสดงยอดที่กรอก
 
         // แสดงอัตราแลกเปลี่ยน
         // exchangeRateBox.textContent = `อัตราแลกเปลี่ยน: 1 ${fromValue} = ${formatNumber(rate)} ${toValue}`;
@@ -395,6 +399,7 @@
 
     // เรียกใช้ครั้งแรกเมื่อโหลดหน้าเว็บ
     updateCurrencyOptions();
+
 </script>
 </body>
 </html>
