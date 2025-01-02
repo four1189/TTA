@@ -1,183 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        /* ตารางเเรก */
-        .main-container {
-            display: flex;
-        }
-
-        .cash-con {
-            text-align: left;
-            margin-top: 20px;
-            /* border: 1px solid black; */
-        }
-        .cash {
-            margin-left: 25px;
-        }
-        
-        .table-cash-flow, .table-summary {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        
-        .table-cash-flow td, .table-summary td {
-            background-color: #ffffff;
-            text-align: left; /* ชิดซ้ายข้อความ */
-        }
-        /* จัดตัวเลขในเซลล์ชิดขวา */
-        .table-cash-flow td:nth-child(n+2) {
-            text-align: right; /* ตัวเลขชิดขวา */
-        }
-
-        /* จัดข้อความทั่วไปในเซลล์ชิดซ้าย */
-        .table-cash-flow td {
-            text-align: left; /* ข้อความทั่วไปชิดซ้าย */
-        }
-        
-        /* ปรับตัวหนังสือในตาราง */
-        .table-cash-flow th, 
-        .table-cash-flow td {
-            font-weight: 300; /* ความหนาของตัวหนังสือ (100-900) */
-            font-family: Arial, sans-serif; /* ฟอนต์ที่ดูบาง */
-        }
-        
-        /* ฟอนต์ตัวบาง */
-        .thin-text {
-            font-weight: 300;
-            font-family: Arial, sans-serif;
-        }
-        
-
-        /* ปรับสีแถวใน thead */
-        .table-cash-flow-1 thead tr th {
-            background-color: #530494; /* สีม่วงเข้ม */
-            color: white;
-            font-weight: bold;
-        }
-        /* ปรับสีแถวใน tbody */
-        .table-cash-flow-1 tbody tr th {
-            background-color: #9554b1; /* สีม่วงกลาง */
-            color: rgb(0, 0, 0);
-            font-weight: bold;
-        }
-        
-        /* จัดตัวเลขในเซลล์ชิดขวา */
-        .table-cash-flow-1 td:nth-child(n+1) {
-            text-align: right; /* ตัวเลขชิดขวา */
-        }
-        /* ปรับตัวหนังสือในตาราง */
-        .table-cash-flow-1 th, 
-        .table-cash-flow-1 td {
-            font-weight: 300; /* ความหนาของตัวหนังสือ (100-900) */
-            font-family: Arial, sans-serif; /* ฟอนต์ที่ดูบาง */
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 20%;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background: #f2f2f2;
-            font-weight: bold;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bar Chart Grouped by Year</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="main-container">
-        <!-- Table Summary -->
-        <table class="table-cash-flow">
-            <thead>
-                <tr>
-                    <td>TTA Ending Cash Balance</td>
-                    <td>May-24</td>
-                    <td>Jun-24</td>
-                    <td>Jul-24</td>
-                    <td>Aug-24</td>
-                    <td>Sep-24</td>
-                    <td>Oct-24</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Cash only</td>
-                    <td>3,451</td>
-                    <td>3,097</td>
-                    <td>3,022</td>
-                    <td>3,126</td>
-                    <td>3,050</td>
-                    <td>2,927</td>
-                </tr>
-                <tr>
-                    <td>Cash + Short Term Investment</td>
-                    <td>4,538</td>
-                    <td>4,184</td>
-                    <td>4,109</td>
-                    <td>4,213</td>
-                    <td>4,137</td>
-                    <td>4,014</td>
-                </tr>
-                <tr>
-                    <td>Cash + Cryptocurrency</td>
-                    <td>10,852</td>
-                    <td>10,497</td>
-                    <td>10,422</td>
-                    <td>10,527</td>
-                    <td>10,451</td>
-                    <td>10,327</td>
-                </tr>
-                <tr>
-                    <td>Cash + Short Term Investment + Cryptocurrency</td>
-                    <td>11,938</td>
-                    <td>11,584</td>
-                    <td>11,509</td>
-                    <td>11,614</td>
-                    <td>11,538</td>
-                    <td>11,414</td>
-                </tr>
-            </tbody>
-        </table>
+  <h1>Bar Chart Grouped by Year</h1>
 
-        <!-- Table Summary 1 -->
-        <table class="table-cash-flow-1">
-            <thead>
-                <tr>
-                    <td>2024</td>
-                    <td>2025</td>
-                    <td>2026</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>2,672</td>
-                    <td>1,851</td>
-                    <td>1,184</td>
-                </tr>
-                <tr>
-                    <td>3,759</td>
-                    <td>2,938</td>
-                    <td>2,271</td>
-                </tr>
-                <tr>
-                    <td>10,073</td>
-                    <td>9,251</td>
-                    <td>8,585</td>
-                </tr>
-                <tr>
-                    <td>11,159</td>
-                    <td>10,338</td>
-                    <td>9,671</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+  <!-- ฟอร์มกรอกข้อมูล -->
+  <form id="userInputForm">
+    <h3>Enter data for 2021</h3>
+    <input type="number" placeholder="Value 1" name="Value 1:2021" required>
+    <input type="number" placeholder="Value 2" name="Value 2:2021" required>
+    <input type="number" placeholder="Value 3" name="Value 3:2021" required>
+
+    <h3>Enter data for 2022</h3>
+    <input type="number" placeholder="Value 1" name="Value 1:2022" required>
+    <input type="number" placeholder="Value 2" name="Value 2:2022" required>
+    <input type="number" placeholder="Value 3" name="Value 3:2022" required>
+
+    <h3>Enter data for 2023</h3>
+    <input type="number" placeholder="Value 1" name="Value 1:2023" required>
+    <input type="number" placeholder="Value 2" name="Value 2:2023" required>
+    <input type="number" placeholder="Value 3" name="Value 3:2023" required>
+
+    <button type="submit">Generate Graph</button>
+  </form>
+
+  <!-- พื้นที่แสดงกราฟ -->
+  <canvas id="userGraph" width="800" height="400"></canvas>
+
+  <script>
+    let userChart;
+
+    // ฟังก์ชันสร้างกราฟ
+    function createGraph(data, years) {
+      const ctx = document.getElementById('userGraph').getContext('2d');
+
+      // ลบกราฟเก่าออกถ้ามีอยู่แล้ว
+      if (userChart) {
+        userChart.destroy();
+      }
+
+      // สร้างกราฟใหม่
+      userChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: years, // ปีเป็นแกน X
+          datasets: [
+            {
+              label: 'Value 1',
+              data: data.map(d => d[0]),
+              backgroundColor: 'rgba(255, 99, 132, 0.7)',
+              borderColor: 'rgba(255, 99, 132, 1)',
+              borderWidth: 1,
+            },
+            {
+              label: 'Value 2',
+              data: data.map(d => d[1]),
+              backgroundColor: 'rgba(54, 162, 235, 0.7)',
+              borderColor: 'rgba(54, 162, 235, 1)',
+              borderWidth: 1,
+            },
+            {
+              label: 'Value 3',
+              data: data.map(d => d[2]),
+              backgroundColor: 'rgba(75, 192, 192, 0.7)',
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 1,
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top',
+            },
+          },
+          scales: {
+            x: {
+              beginAtZero: true,
+            },
+            y: {
+              beginAtZero: true,
+            }
+          }
+        }
+      });
+    }
+
+    // จัดการการส่งฟอร์ม
+    document.getElementById('userInputForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // ดึงข้อมูลจากฟอร์ม
+      const formData = new FormData(e.target);
+      const data = [];
+      const years = ['2021', '2022', '2023'];
+
+      // แปลงข้อมูลให้อยู่ในรูปแบบ Array ของแต่ละปี
+      years.forEach(year => {
+        const values = [];
+        for (let i = 1; i <= 3; i++) {
+          const value = parseFloat(formData.get(`Value ${i}:${year}`));
+          values.push(value);
+        }
+        data.push(values);
+      });
+
+      // สร้างกราฟ
+      createGraph(data, years);
+    });
+  </script>
 </body>
 </html>

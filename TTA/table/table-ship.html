@@ -9,6 +9,7 @@
         .con-1{
             display: flex;
             justify-content: flex-end;
+            gap: 10px;
         }
         .menu-item1 {
             text-decoration: none;
@@ -16,6 +17,7 @@
             background-color: #5b79db;
             padding: 8px;
             border-radius: 5px;
+            border: 1px solid white;
         }
         .menu-item1:hover {
             color: rgb(253, 253, 253);
@@ -71,10 +73,134 @@
         }
 
 
+
+        /* Styles for overlay */
+        .overlay {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            visibility: hidden; /* ซ่อนเริ่มต้น */
+            opacity: 0; /* โปร่งใส */
+            transition: visibility 0s, opacity 0.3s; /* สร้างเอฟเฟกต์การแสดง/ซ่อน */
+        }
+
+        .overlay.active {
+            visibility: visible; /* แสดง */
+            opacity: 1; /* มองเห็น */
+        }
+
+        .form-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            width: 400px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* .form-row {
+            margin-bottom: 15px;
+        } */
+
+        .form-row label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-row input {
+            width: 95%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-row button {
+            width: 80%;
+            padding: 10px;
+            background-color: #02a027;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-row button:hover {
+            background-color: #00dc28;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
 </style>
 <body>
     <div class="con-1">
-        <a href="../Key.html" class="menu-item1">Go home</a>
+        <button class="menu-item1" id="openOverlay">Add Form</button>
+        <a href="../main/Key.html" class="menu-item1">Go home</a>
+    </div>
+    <div id="overlay" class="overlay">
+        <div>
+            <div class="form-container">
+                <button class="close-btn" id="closeOverlay">&times;</button>
+                <form action="" method="POST">
+                    <div class="form-row">
+                        <label for="vessel_name">Vessel Name:</label>
+                        <input type="text" id="vessel_name" name="vessel_name" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="year_built">Year Built:</label>
+                        <input type="date" id="year_built" name="year_built" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="year_delivered">Year Delivered:</label>
+                        <input type="date" id="year_delivered" name="year_delivered" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="status">Status:</label>
+                        <input type="text" id="status" name="status" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="classification">Classification:</label>
+                        <input type="text" id="classification" name="classification" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="type">Type:</label>
+                        <input type="text" id="type" name="type" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="dwt">Dwt:</label>
+                        <input type="number" id="dwt" name="dwt" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="lightship">Lightship (MT):</label>
+                        <input type="number" id="lightship" name="lightship" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="age">Age:</label>
+                        <input type="number" id="age" name="age" required>
+                    </div>
+                    <div class="form-row">
+                        <button type="submit">Insert Data</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
     <h2>SHIPPING - Vessel</h2>
     <div class="table-container">
@@ -397,5 +523,18 @@
           </tbody>
         </table>
     </div>
+    <script>
+        const overlay = document.getElementById('overlay');
+        const closeOverlayButton = document.getElementById('closeOverlay');
+        const openOverlayButton = document.getElementById('openOverlay');
+
+        openOverlayButton.addEventListener('click', () => {
+            overlay.classList.add('active');
+        });
+
+        closeOverlayButton.addEventListener('click', () => {
+            overlay.classList.remove('active');
+        });
+    </script>
 </body>
 </html>

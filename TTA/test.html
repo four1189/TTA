@@ -1,154 +1,65 @@
-<?php
-// เชื่อมต่อฐานข้อมูล
-$servername = "localhost";
-$username = "root";
-$password = ""; // รหัสผ่านของ MySQL (ถ้าไม่มี ให้ปล่อยว่าง)
-$dbname = "mydata"; // ใช้ชื่อฐานข้อมูลที่คุณสร้าง
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// รับข้อมูลจาก HTML (ใส่ HTML ที่คุณต้องการดึงข้อมูลจากที่นี่)
-$html = <<<HTML
-<!-- ใส่ HTML ของคุณที่นี่ -->
-HTML;
-
-// ใช้ DOMDocument เพื่อแยกข้อมูลจาก HTML
-$dom = new DOMDocument();
-libxml_use_internal_errors(true);
-$dom->loadHTML($html);
-libxml_clear_errors();
-
-$xpath = new DOMXPath($dom);
-
-// ดึงข้อมูลจากตารางแรก (tta_cash_flow)
-$rows = $xpath->query('//table[@class="table-summary"]/tbody/tr');
-foreach ($rows as $row) {
-    $cells = $row->getElementsByTagName('td');
-    if ($cells->length == 7) { // ตรวจสอบว่ามีคอลัมน์ครบ
-        $category = $cells->item(0)->nodeValue;
-        $may24 = $cells->item(1)->nodeValue;
-        $jun24 = $cells->item(2)->nodeValue;
-        $jul24 = $cells->item(3)->nodeValue;
-        $aug24 = $cells->item(4)->nodeValue;
-        $sep24 = $cells->item(5)->nodeValue;
-        $oct24 = $cells->item(6)->nodeValue;
-
-        // บันทึกข้อมูลลงในฐานข้อมูล
-        $sql = "INSERT INTO tta_cash_flow (category, may_24, jun_24, jul_24, aug_24, sep_24, oct_24) 
-                VALUES ('$category', '$may24', '$jun24', '$jul24', '$aug24', '$sep24', '$oct24')";
-        if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully in tta_cash_flow<br>";
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
-    }
-}
-
-// ดึงข้อมูลจากตารางที่สอง (tta_cash_summary)
-$rows = $xpath->query('//table[@class="table-summary-1"]/tbody/tr');
-foreach ($rows as $row) {
-    $cells = $row->getElementsByTagName('td');
-    if ($cells->length == 3) { // ตรวจสอบว่ามีคอลัมน์ครบ
-        $year2024 = $cells->item(0)->nodeValue;
-        $year2025 = $cells->item(1)->nodeValue;
-        $year2026 = $cells->item(2)->nodeValue;
-
-        // บันทึกข้อมูลลงในฐานข้อมูล
-        $sql = "INSERT INTO tta_cash_summary (year_2024, year_2025, year_2026) 
-                VALUES ('$year2024', '$year2025', '$year2026')";
-        if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully in tta_cash_summary<br>";
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
-    }
-}
-
-// ปิดการเชื่อมต่อฐานข้อมูล
-$conn->close();
-
-// แสดงข้อความเมื่อดำเนินการสำเร็จ
-echo "Data inserted successfully.";
-?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Headcont and people cost</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Summary Financial</title>
     <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnQ6rAa2axGMNtSAh5h6EVhgEbspZpdOXt9g&s" type="image/x-icon">
 </head>
 <style>
-        .container {
-            display: flex;               /* ใช้ Flexbox เพื่อจัดตำแหน่ง */
-            align-items: center;         /* จัดตำแหน่งให้อยู่กลางในแนวตั้ง */
-            gap: 6px;                   /* เว้นระยะห่างระหว่าง dropdown */
-            max-width: 800px;
-            margin: inherit;
-        }
+    .container {
+        display: flex;
+        align-items: flex-start;
+        margin-top: 6px;
+    }
 
-        .form-group {
+    .logo-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .logo {
+        width: 80px;
+        height: auto;
+        border: 1px solid #040404;
+    }
+
+    .nav {
+        display: flex;
+        align-items: center;
+        background-color: rgba(35, 208, 15, 0.867);
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .group2 {
+        border: 1px solid #040404;
+        background-color: rgba(172, 172, 172, 0.274);
+        width: 48%;
+        padding: 1%;
+        margin-right: 0.2%;
+    }
+
+    .group3 {
+        border: 1px solid #000000;
+        width: 48%;
+        padding: 1%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .menu-item {
             display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        label {
-            margin-bottom: 1px; /* เพิ่มระยะห่างระหว่าง label กับ select */
-            font-size: 14px;
-        }
-
-        /* การตั้งค่า select ให้ดูสวยงาม */
-        select {
-            padding: 6px;
-            font-size: 10px;
-            border-radius: 4px;
-            border: 1px solid #8a8989;
-            width: 150px;
-        }
-        .logo-container {
-            display: flex;               /* ใช้ Flexbox เพื่อจัดตำแหน่ง */
-            align-items: center;         /* จัดตำแหน่งให้อยู่กลางในแนวตั้ง */
-        }
-        /* กำหนดรูปแบบของ .nav ให้ยึดตำแหน่งที่ขอบบน */
-        .nav {
-            display: flex;
-            align-items: center;
-            background-color: rgba(35, 208, 15, 0.867);
-            justify-content: space-between;  /* จัดตำแหน่งให้อยู่ขอบทั้งสองข้าง */
-            width: 100%;  /* ใช้พื้นที่ทั้งหมดของ container */
-            /* padding: 10px; เพิ่ม padding ให้น่าดู */
-        }
-
-        /* ปรับการจัดตำแหน่งของ .con1 ให้อยู่กลางหน้าจอ */
-        .main-container {
-            display: flex;
-            justify-content: center;   /* จัดกลางในแนวนอน */
-            align-items: center;       /* จัดกลางในแนวตั้ง */
-            /* height: calc(100vh - 60px); ความสูงของ .con1 จะเต็มหน้าจอลบกับพื้นที่ที่ .nav ใช้ (ประมาณ 60px) */
-        }
-
-        .logo-container {
-            display: flex;
+            justify-content: flex-end;
             align-items: center;
         }
-
-        .logo {
-            width: 80px; 
-            height: auto;
-            border: 1px solid #040404;
-        }
-
         .menu-item1 {
             text-decoration: none;
             color: white;
-            background-color: rgb(43, 219, 23);
+            background-color: rgba(35, 208, 15, 0.867);
+            border: 0px solid rgba(35, 208, 15, 0.867);;
             padding: 8px 8px;
             border-radius: 5px;
             margin-left: 8px;  /* ทำให้ปุ่ม "Go home" ขยับไปทางขวา */
@@ -156,1053 +67,426 @@ echo "Data inserted successfully.";
         }
         .menu-item1:hover {
             color: rgb(253, 253, 253);
-            background-color: rgba(135, 228, 125, 0.867);
-        }
-        .table-container {
-            width: 100%; /* ลดความกว้างของตาราง */
-            border-collapse: collapse;
+            background-color: rgba(140, 204, 132, 0.867);
         }
 
-        .table-container th, .table-container td {
-            padding: 4px; /* ลดการเว้นระยะห่าง */
-            border: 1px solid #000000;
-            text-align: center;
-            font-size: 10px; /* ลดขนาดฟอนต์ */
+    .table-container {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table-container th, .table-container td {
+        padding: 15px;
+        border: 1px solid #000000;
+        text-align: center;
+    }
+
+    .table-container th {
+        background-color: #ffffff;
+        font-weight: bold;
+    }
+
+    .table-container td {
+        background-color: #ffffffd0;
+    }
+
+    .table-container tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .table-container tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .chart-container {
+        display: flex;
+        gap: 6px;
+        justify-content: space-around;
+        width: 100%;
+        margin: 0.2%;
+    }
+
+    .chart-box {
+        width: 24%;
+        border: 1px solid #000000;
+        padding: 2%;
+        box-sizing: border-box;
+    }
+
+    .main1 {
+        width: 300%;
+        height: 200%;
+    }
+    .main2 {
+        width: 100%;
+        height: 100%;
+    }
+
+    .menu-con {
+        border: 1px solid black;
+        background-color: #ffffff;
+        padding: 6px;
+        margin-top: 6px;
+    }
+
+    .head {
+        display: flex;
+        align-items: center;
+        padding: 6px;
+        gap: 16px;
+        font-size: 18px;
+        font-weight: bold;
+        justify-content: space-between;
+    }
+        .menu-item-1 {
+            font-size: 14px;            /* ขนาดตัวอักษรสำหรับเมนูย่อย */
+            color: black;             /* สีลิงก์ */
+            text-decoration: none;      /* เอาเส้นใต้ลิงก์ออก */
+        }
+        .menu-item-1:hover {
+            text-decoration: underline; /* เพิ่มเส้นใต้เมื่อวางเมาส์ */
+            text-decoration: none;
+        }
+        a {
+            font-size: 12px;
+            padding: 0.8%;
+            /* border: 1px solid #000000; */
+            background-color: #f1f1f1;
+            border-radius: 20px;
+        }
+        a:hover {
+            color: rgb(6, 6, 6);
+            background-color: #d6d6d6;
         }
 
-        .table-container th {
-            background-color: rgb(230, 227, 227);
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-        }
-
-        .table-container td {
-            background-color: #9ca2af;
-            font-family: Arial, sans-serif;
-            font-weight: 600;
-        }
-
-        td p {
-            font-size: 8px; /* ลดขนาดฟอนต์ในเซลล์ */
-        }
-
-        th p {
-            font-size: 8px; /* ขนาดฟอนต์หัวข้อ */
-            display: contents;
-        }
-
-        .item {
-            margin-top: 0.5%;
-        }
-
-        h1, h4 {
+        .chart-description {
+            /* margin-top: 25px; ช่องว่างระหว่างกราฟและคำอธิบาย */
             display: flex;
-            justify-content: center;
-        }
-        .highlight-row td {
-            /* background-color: #858585; สีพื้นหลังเฉพาะแถว */
-            font-size: 14px; /* ขนาดฟอนต์ใหญ่ขึ้น */
-            font-weight: bold; /* ทำตัวหนา */
-            text-align: center; /* จัดกึ่งกลาง */
-            padding: 10px; /* เพิ่มช่องว่าง */
-            width: 5%;
+            justify-content: space-evenly;
+            width: 100%;
         }
 
-        .highlight-row td p {
-            margin: 0; /* ลบช่องว่างรอบพารากราฟ */
-            font-size: 90%;
+        .label {
             display: flex;
             align-items: center;
-            justify-content: flex-start;
+            /* gap: 16px; ระยะห่างระหว่างแต่ละกลุ่มคำอธิบาย */
+            flex-wrap: wrap; /* แยกบรรทัดถ้าพื้นที่ไม่พอ */
         }
 
-        /* ตารางเเรก */
-        .cash-con {
-            text-align: left;
-            margin-top: 20px;
-        }
-        .cash {
-            margin-left: 25px;
-        }
-        .cash h3 {
-            margin: 0;
-            font-size: 24px;
-        }
-        .cash h5 {
-            margin: 2px 0;
-            font-weight: normal;
-        }
-        .table-cash-flow {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        
-        .table-summary-1,
-        .table-summary-2,
-        .table-summary-3,
-        .table-summary-4 {
-            width: 17%;
-        }
-        
-        .table-cash-flow th, .table-cash-flow td, .table-summary th, .table-summary td {
-            border: 1px solid #000;
-            padding: 8px;
-            text-align: center;
-            
-        }
-        /* .red-border */
-        .red-border td {
-            border-top: 2px solid rgb(255, 31, 31);   /* ขอบด้านบนสีแดง */
-            border-bottom: 2px solid rgb(255, 31, 31); /* ขอบด้านล่างสีแดง */
-            border-left: 2px solid rgb(255, 31, 31);   /* ขอบด้านซ้ายสีแดง */
-            border-right: 2px solid rgb(255, 31, 31);  /* ขอบด้านขวาสีแดง */
-        }
-        .red-border-1 td {
-            border-bottom: 2px solid rgb(255, 31, 31); /* ขอบด้านล่างสีแดง */
-        }
-        .green-border td {
-            border-top: 2px solid #00ff80;   /* ขอบด้านบนสีแดง */
-            border-bottom: 2px solid #00ff80; /* ขอบด้านล่างสีแดง */
-            border-left: 2px solid #00ff80;   /* ขอบด้านซ้ายสีแดง */
-            border-right: 2px solid #00ff80;  /* ขอบด้านขวาสีแดง */
-        }
-        .g-border-1 td {
-            border-bottom: 2px solid #00ff80; /* ขอบด้านล่างสีแดง */
-        }
-
-        /* หัวตาราง */
-        .table-cash-flow th, .table-summary th {
-            background-color: #a56abd;
-            color: white;
-            font-weight: bold;
-        }
-        .table-cash-flow td, .table-summary td {
-            background-color: #ffffff;
-            text-align: left; /* ชิดซ้ายข้อความ */
-        }
-        /* จัดตัวเลขในเซลล์ชิดขวา */
-        .table-cash-flow td:nth-child(n+2) {
-            text-align: right; /* ตัวเลขชิดขวา */
-        }
-
-        /* จัดข้อความทั่วไปในเซลล์ชิดซ้าย */
-        .table-cash-flow td {
-            text-align: left; /* ข้อความทั่วไปชิดซ้าย */
-        }
-        /* แถวบนสุด */
-        .table-cash-flow thead tr:first-child th {
-            background-color: #530494; /* สีม่วงเข้ม */
-            color: white;
-            font-weight: bold;
-        }
-
-        /* แถวล่างใน thead */
-        .table-cash-flow thead tr:last-child th {
-            background-color: #9554b1; /* สีม่วงกลาง */
-            color: rgb(0, 0, 0);
-            font-weight: bold;
-        }
-        /* ปรับสีเฉพาะแถวที่ 2 ใน tbody */
-        .table-cash-flow tbody tr:nth-child(1) td {
-            background-color: #006834; /* สีม่วงอ่อน */
-            color: rgb(255, 255, 255); /* สีตัวอักษร */
-            font-weight: bold; /* ตัวหนา */
-        }
-        /* ปรับสีเฉพาะแถวที่ 5 ใน tbody */
-        .table-cash-flow tbody tr:nth-child(5) td {
-            background-color: #830000; /* สีม่วงอ่อน */
-            color: rgb(255, 255, 255); /* สีตัวอักษร */
-            font-weight: bold; /* ตัวหนา */
-        }
-        /* ปรับสีเฉพาะแถวที่ 32 ใน tbody */
-        .table-cash-flow tbody tr:nth-child(32) td {
-            background-color: #9554b1; /* สีม่วงอ่อน */
-            color: rgb(0, 0, 0); /* สีตัวอักษร */
-            font-weight: bold; /* ตัวหนา */
-        }
-        /* ปรับสีเฉพาะแถวที่ 33-34 ใน tbody */
-        .table-cash-flow tbody tr:nth-child(33) td,
-        .table-cash-flow tbody tr:nth-child(34) td {
-            background-color: #67bbea; /* สีม่วงอ่อน */
-            color: rgb(0, 0, 0); /* สีตัวอักษร */
-            font-weight: bold; /* ตัวหนา */
-        }
-        /* ปรับสีเฉพาะแถวที่ 35 ใน tbody */
-        .table-cash-flow tbody tr:nth-child(35) td {
-            background-color: #35a8eb; /* สีม่วงอ่อน */
-            color: rgb(0, 0, 0); /* สีตัวอักษร */
-            font-weight: bold; /* ตัวหนา */
-        }
-        /* ปรับตัวหนังสือในตาราง */
-        .table-cash-flow th, 
-        .table-cash-flow td {
-            font-weight: 300; /* ความหนาของตัวหนังสือ (100-900) */
-            font-family: Arial, sans-serif; /* ฟอนต์ที่ดูบาง */
-        }
-        /* จัดข้อความใน th เฉพาะที่เป็นตัวเลข */
-        .table-cash-flow th:nth-child(n+2) {
-            text-align: right; /* ชิดขวา */
-        }
-        /* ฟอนต์ตัวบาง */
-        .thin-text {
-            font-weight: 300;
-            font-family: Arial, sans-serif;
-        }
-        /* ข้อความเน้น */
-        .highlighted {
-            color: #0307df;
-        }
-
-
-        /* การจัดการตารางในแถวเดียว */
-        .main-container {
-            display: flex;
-            /* gap: 10px; เว้นช่องว่างระหว่างตาราง
-            padding: 12px; */
-            /* justify-content: space-between; จัดตารางให้ห่างกันตามต้องการ */
-        }
-        /* ปรับระยะห่างของตาราง */
-        /* .table-cash-flow-1 {
-            margin-top: 1.5%;
-        } */
-        /* ปรับสีแถวใน thead */
-        .table-cash-flow-1 thead tr th {
-            background-color: #530494; /* สีม่วงเข้ม */
-            color: white;
-            font-weight: bold;
-        }
-        /* ปรับสีแถวใน tbody */
-        .table-cash-flow-1 tbody tr th {
-            background-color: #9554b1; /* สีม่วงกลาง */
-            color: rgb(0, 0, 0);
-            font-weight: bold;
-        }
-        /* ปรับสีเฉพาะแถวที่ 2 ใน tbody */
-        .table-cash-flow-1 tbody tr:nth-child(2) td {
-            background-color: #006834; /* สีม่วงอ่อน */
-            color: rgb(255, 255, 255); /* สีตัวอักษร */
-            font-weight: bold; /* ตัวหนา */
-            height: 10px;
-        }
-        /* ปรับสีเฉพาะแถวที่ 6 ใน tbody */
-        .table-cash-flow-1 tbody tr:nth-child(6) td {
-            background-color: #830000; /* สีม่วงอ่อน */
-            color: rgb(255, 255, 255); /* สีตัวอักษร */
-            font-weight: bold; /* ตัวหนา */
-        }
-        /* ปรับสีเฉพาะแถวที่ 33 ใน tbody */
-        .table-cash-flow-1 tbody tr:nth-child(33) td {
-            background-color: #9554b1; /* สีม่วงอ่อน */
-            color: rgb(0, 0, 0); /* สีตัวอักษร */
-            font-weight: bold; /* ตัวหนา */
-        }
-        /* ปรับสีเฉพาะแถวที่ 34-35 ใน tbody */
-        .table-cash-flow-1 tbody tr:nth-child(34) td,
-        .table-cash-flow-1 tbody tr:nth-child(35) td {
-            background-color: #67bbea; /* สีม่วงอ่อน */
-            color: rgb(0, 0, 0); /* สีตัวอักษร */
-            font-weight: bold; /* ตัวหนา */
-        }
-        /* ปรับสีเฉพาะแถวที่ 36 ใน tbody */
-        .table-cash-flow-1 tbody tr:nth-child(36) td {
-            background-color: #35a8eb; /* สีม่วงอ่อน */
-            color: rgb(0, 0, 0); /* สีตัวอักษร */
-            font-weight: bold; /* ตัวหนา */
-        }
-        /* จัดตัวเลขในเซลล์ชิดขวา */
-        .table-cash-flow-1 td:nth-child(n+1) {
-            text-align: right; /* ตัวเลขชิดขวา */
-        }
-        /* ปรับตัวหนังสือในตาราง */
-        .table-cash-flow-1 th, 
-        .table-cash-flow-1 td {
-            font-weight: 300; /* ความหนาของตัวหนังสือ (100-900) */
-            font-family: Arial, sans-serif; /* ฟอนต์ที่ดูบาง */
-        }
-        /* ปรับความสูงของแถวใน thead */
-        .table-cash-flow-1 thead th {
-            height: 40px; /* ความสูงของเซลล์ */
-            padding: 15px; /* เพิ่มระยะห่างด้านใน */
-            text-align: center; /* จัดข้อความกลางแนวตั้งและแนวนอน */
-        }
-        /* ปรับความสูงของแถวใน tbody */
-        .table-cash-flow-1 tbody th {
-            height: 53px; /* ความสูงของเซลล์ */
-            padding: 17px; /* เพิ่มระยะห่างด้านใน */
-            text-align: center; /* จัดข้อความกลางแนวตั้งและแนวนอน */
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 20%;
-        }
-        th, td {
+        .color-box {
+            width: 12px; /* ขนาดกล่องสี */
+            height: 12px;
+            display: inline-block;
+            border-radius: 2px; /* ปรับมุมกล่อง */
             border: 1px solid black;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background: #f2f2f2;
-            font-weight: bold;
-        }
-        .s1 {
-            float: right; 
-            justify-content: space-between;
-            color: #757575;
-        }
-        
-
-    /* ตารางเเรก */
-    .main-container {
-            display: flex;
-            gap: -1%;
-            margin-top: -0.2%;
         }
 
-        .cash-con {
-            text-align: left;
-            /* margin-top: 20px; */
-            /* border: 1px solid black; */
+        .label p {
+            margin: 0 60px 0 2px; /*ระยะห่างระหว่างกล่องสีและข้อความ */
+            font-size: 12px; /* ปรับขนาดตัวอักษร */
+            font-weight: 400; /* ตัวหนา */
+            font-family: sans-serif;
         }
-        .cash {
-            margin-left: 25px;
-        }
-        
-        .table-cash-flow, .table-summary {
+
+        #tableContainer, #chartContainer {
             width: 100%;
-            border-collapse: collapse;
-        }
-        
-        .table-cash-flow td {
-            background-color: #ffffff;
-            text-align: left; /* ชิดซ้ายข้อความ */
-        }
-        .table-summary td:nth-child(n+2) {
-            text-align: right;
-            width: 9.1%;
-        }
-        .table-summary td:nth-child(n+3) {
-            text-align: right;
-            width: 8.75%;
-        }
-        .table-summary td:nth-child(n+4) {
-            text-align: right;
-            width: 8.2%;
-        }
-        .table-summary td:nth-child(n+5) {
-            text-align: right;
-            width: 9.05%;
-        }
-        .table-summary td:nth-child(n+6) {
-            text-align: right;
-            width: 8.97%;
-        }
-        .table-summary td:nth-child(n+7) {
-            text-align: right;
-            width: 8.6%;
-        }
-        
-        /* จัดตัวเลขในเซลล์ชิดขวา */
-        .table-cash-flow td:nth-child(n+2) {
-            text-align: right; /* ตัวเลขชิดขวา */
+            margin-top: 10px;
+            height: 293px;
         }
 
-        /* จัดข้อความทั่วไปในเซลล์ชิดซ้าย */
-        .table-cash-flow td {
-            text-align: left; /* ข้อความทั่วไปชิดซ้าย */
-        }
-        
-        /* ปรับตัวหนังสือในตาราง */
-        .table-cash-flow th, 
-        .table-cash-flow td {
-            font-weight: 300; /* ความหนาของตัวหนังสือ (100-900) */
-            font-family: Arial, sans-serif; /* ฟอนต์ที่ดูบาง */
-        }
-        
-        /* ฟอนต์ตัวบาง */
-        .thin-text {
-            font-weight: 300;
-            font-family: Arial, sans-serif;
-        }
-        
-
-        /* ปรับสีแถวใน thead */
-        .table-cash-flow-1 thead tr th {
-            background-color: #530494; /* สีม่วงเข้ม */
+        button#toggleView {
+            padding: 8px 16px;
+            margin: 10px 0;
+            background-color: #02a027;
             color: white;
-            font-weight: bold;
-        }
-        /* ปรับสีแถวใน tbody */
-        .table-cash-flow-1 tbody tr th {
-            background-color: #9554b1; /* สีม่วงกลาง */
-            color: rgb(0, 0, 0);
-            font-weight: bold;
-        }
-        
-        /* จัดตัวเลขในเซลล์ชิดขวา */
-        .table-cash-flow-1 td:nth-child(n+1) {
-            text-align: right; /* ตัวเลขชิดขวา */
-        }
-        /* ปรับตัวหนังสือในตาราง */
-        .table-cash-flow-1 th, 
-        .table-cash-flow-1 td {
-            font-weight: 300; /* ความหนาของตัวหนังสือ (100-900) */
-            font-family: Arial, sans-serif; /* ฟอนต์ที่ดูบาง */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
-        table {
-            border-collapse: collapse;
-            width: 20%;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background: #f2f2f2;
-            font-weight: bold;
+        button#toggleView:hover {
+            background-color: #00dc28;
         }
 </style>
 <body>
-    <div class="cash-con">
-        <div class="cash">
-            <h3>CASH FLOW PROJECTION</h3>
-            <h5>THORESEN THAI AGENCIES PCL. (Holding Level)<br>Unit: million Baht<br>Version: EXCOM 4/2024</h5>
+    <div class="nav">
+        <div class="logo-container">
+            <img src="data:image/png;base64,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" alt="Logo" class="logo">
+            <p style="color: aliceblue; margin-left: 10px;">TTA Group Structure & info</p>
+        </div>
+        <div class="container">
+            <a href="../main/index.html" class="menu-item1">Go home</a>
         </div>
     </div>
-    <div class="main-container">
-        <!-- ตารางซ้าย -->
-        <table class="table-cash-flow">
-            <thead>
-                <tr>
-                    <th style="text-align: left;">Available Cash Forecast - TTA (Holding)<br>
-                    Report date: 24 May 2024<br>Unit: Million Baht</th>
-                    <th>May - 24</th>
-                    <th>Jun - 24</th>
-                    <th>Jul - 24</th>
-                    <th>Aug - 24</th>
-                    <th>Sep - 24</th>
-                    <th>Oct - 24</th>
-                </tr>
-                <tr>
-                    <th style="text-align: left;">
-                        Beginning TTA Cash Available<br>
-                        <label class="thin-text">- TTA (Cash) - as of 17 May 2024</label><br>
-                        <label class="thin-text">- TTA (ST Investment) - as of 30 April 2024</label><br>
-                        <label class="thin-text">- TTA (Cryptocurrency) - as of 24 May 2024</label>
-                    </th>
-                    <th>
-                        12,042<br>
-                        <em class="highlighted">3,555</em><br>
-                        <em class="highlighted">1,087</em><br>
-                        <em class="highlighted">7,401</em>
-                    </th>
-                                    
-                    <th>11,938</th>
-                    <th>11,584</th>
-                    <th>11,509</th>
-                    <th>11,614</th>
-                    <th>11,538</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="green-border">
-                    <td>Cash Inflow</td>
-                    <td>23</td>
-                    <td>375</td>
-                    <td>200</td>
-                    <td>470</td>
-                    <td>30</td>
-                    <td>-</td>
-                </tr>
-                <tr class="green-border">
-                    <td>Dividend</td>
-                    <td>23</td>
-                    <td>175</td>
-                    <td>-</td>
-                    <td>470</td>
-                    <td>30</td>
-                    <td>-</td>
-                </tr>
-                <tr class="green-border">
-                    <td>Loan and Loan Repayment from Sub/Asso/JV</td>
-                    <td>-</td>
-                    <td>100</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>Debenture Issuance</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr class="red-border">
-                    <td>Cash Outflow</td>
-                    <td>127</td>
-                    <td>729</td>
-                    <td>275</td>
-                    <td>365</td>
-                    <td>106</td>
-                    <td>123</td>
-                </tr>
-                <tr class="red-border">
-                    <td>TTA - G&A<span class="s1">THB</span></td>
-                    <td>26</td>
-                    <td>26</td>
-                    <td>26</td>
-                    <td>27</td>
-                    <td>26</td>
-                    <td>26</td>
-                </tr>
-                <tr class="red-border">
-                    <td>TTA - Dividend Payment<span class="s1">THB</span></td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>TTA - Bond Repayment (Principal)<span class="s1">THB</span></td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr class="red-border-1">
-                    <td>TTA - Bond Interest payment<span class="s1">THB</span></td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>44</td>
-                    <td>69</td>
-                    <td>-</td>
-                    <td>44</td>
-                </tr>
-                <tr class="red-border">
-                    <td style="font-weight: 700;">New Investment (Financing by TTA)</td>
-                    <td>101</td>
-                    <td>704</td>
-                    <td>205</td>
-                    <td>269</td>
-                    <td>80</td>
-                    <td>53</td>
-                </tr>                
-                <tr>
-                    <td>AIM - Svay Rieng Project<span class="s1">THB</span></td>
-                    <td>-</td>
-                    <td>60</td>
-                    <td>10</td>
-                    <td>-</td>
-                    <td>60</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>AIM - Mahasawat Project<span class="s1">THB</span></td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>30</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>AIM - National Zoo<span class="s1">THB</span></td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>40</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>TTA - Capital Retern Note<span class="s1">THB</span></td>
-                    <td>-</td>
-                    <td>35</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>TTA - P80 Airline (Aircraft Chartered & W/C)<span class="s1">USD</span></td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>100</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>TTA - Storm - EV Motorcycle (BrigdeLoan)<span class="s1">THB</span></td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>25</td>
-                    <td>-</td>
-                    <td>25</td>
-                </tr>
-                <tr>
-                    <td>TTA - P80 Sky (W/C)<span class="s1">USD</span></td>
-                    <td>5</td>
-                    <td>5</td>
-                    <td>5</td>
-                    <td>5</td>
-                    <td>5</td>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>TTA - Cool Lab Exchange<span class="s1">THB</span></td>
-                    <td>-</td>
-                    <td>100</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>TTA - EV Truck<span class="s1">THB</span></td>
-                    <td>43</td>
-                    <td>102</td>
-                    <td>60</td>
-                    <td>8</td>
-                    <td>15</td>
-                    <td>23</td>
-                </tr>
-                <tr>
-                    <td>TTA - RML Stock<span class="s1">THB</span></td>
-                    <td>-</td>
-                    <td>30</td>
-                    <td>30</td>
-                    <td>40</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>Titan - Vessels Purchase & W/C<span class="s1">USD</span></td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>VVT - V Smart City<span class="s1">USD</span></td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>VVT - Oska Battery<span class="s1">THB</span></td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>100</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>VVI - Hanaco<span class="s1">USD</span></td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>21</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>VVI - Spotitearly<span class="s1">USD</span></td>
-                    <td>-</td>
-                    <td>175</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>VVI - 1686 Partner fund<span class="s1">USD</span></td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>VVI - Wonder Art Music Sport Entertainment Project<span class="s1">USD</span></td>
-                    <td>53</td>
-                    <td>70</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>STC - Loan for Working Capital<span class="s1">THB</span></td>
-                    <td>-</td>
-                    <td>7</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>STC - Outlet Expansion<span class="s1">THB</span></td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>PMTP - Condo - Construction<span class="s1">THB</span></td>
-                    <td>-</td>
-                    <td>120</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>Others<span class="s1">THB</span></td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td style="font-weight: 700;">Net Cashflow</td>
-                    <td style="font-weight: 300;">(104)</td>
-                    <td style="font-weight: 300;">(354)</td>
-                    <td style="font-weight: 300;">(75)</td>
-                    <td style="font-weight: 300;">104</td>
-                    <td style="font-weight: 300;">(76)</td>
-                    <td style="font-weight: 300;">(123)</td>
-                </tr>
-                <tr>
-                    <td style="font-weight: 700;">Ending TTA Available Cash Balance</td>
-                    <td>11,938</td>
-                    <td>11,584</td>
-                    <td>11,509</td>
-                    <td>11,614</td>
-                    <td>11,538</td>
-                    <td>11,414</td>
-                </tr>
-                <tr>
-                    <td style="font-weight: 700;">Ending TSS Available Cash Balance</td>
-                    <td>2,692</td>
-                    <td>2,463</td>
-                    <td>2,539</td>
-                    <td>2,108</td>
-                    <td>2,054</td>
-                    <td>2,131</td>
-                </tr>
-                <tr>
-                    <td style="font-weight: 700;">Ending TTA & TSS Available Cash balance</td>
-                    <td>14,630</td>
-                    <td>14,047</td>
-                    <td>14,048</td>
-                    <td>13,722</td>
-                    <td>13,592</td>
-                    <td>13,545</td>
-                </tr>
-            </tbody>
-        </table>
+
+    <div class="menu-con">
+        <p>As of 31 December 2023</p>
+        <div class="container">
+            <div class="group2">
+                <div class="head">
+                    <span>TTA Group Revenue</span>
+                    <p class="menu-item-1">In Million Bath</p>
+                    <a href="Detail.html" class="menu-item-1">Go to Detail</a>
+                </div>
+                <!-- ตารางข้อมูลที่ต้องการดึงมาใช้ในกราฟ -->
+                <table class="table-container" style="height: 320px;" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>Group</th>
+                            <th>2021</th>
+                            <th>2022</th>
+                            <th>2023</th>
+                            <th>Change</th>
+                            <th>%Change</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Shipping</td>
+                            <td>117,185M</td>
+                            <td>140,167M</td>
+                            <td>73,696M</td>
+                            <td>-66,471M</td>
+                            <td>-47.42%</td>
+                        </tr>
+                        <tr>
+                            <td>Mermaid</td>
+                            <td>36,053M</td>
+                            <td>79,058M</td>
+                            <td>96,286M</td>
+                            <td>17,228M</td>
+                            <td>21.79%</td>
+                        </tr>
+                        <tr>
+                            <td>PMTA</td>
+                            <td>39,325M</td>
+                            <td>42,463M</td>
+                            <td>37,788M</td>
+                            <td>-4,675M</td>
+                            <td>-11.01%</td>
+                        </tr>
+                        <tr>
+                            <td>Pizza</td>
+                            <td>19,347M</td>
+                            <td>19,797M</td>
+                            <td>20,738M</td>
+                            <td>941M</td>
+                            <td>4.75%</td>
+                        </tr>
+                        <tr>
+                            <td>Others</td>
+                            <td>9,371M</td>
+                            <td>11,720M</td>
+                            <td>11,247M</td>
+                            <td>-473M</td>
+                            <td>-4.04%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="group3">
+                <div>
+                    <p style="display: flex; justify-content: space-between; align-items: center;">
+                        Proportion Revenue
+                        <button id="toggleView">Switch to Table</button>
+                    </p>
+                    <!-- กราฟที่จะถูกแสดง -->
+                    <div id="chartContainer">
+                        <canvas id="myBarChart" class="main1"></canvas>
+                    </div>
+                    <!-- ตารางข้อมูลที่จะถูกแสดงเมื่อเลือก "Switch to Table" -->
+                    <div id="tableContainer" style="display: none;">
+                        <table class="table-container">
+                            <thead>
+                                <tr>
+                                    <th>Group</th>
+                                    <th>2021</th>
+                                    <th>2022</th>
+                                    <th>2023</th>
+                                    <th>Change</th>
+                                    <th>%Change</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableData">
+                                <!-- ข้อมูลจะถูกแทรกที่นี่ -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="chart-container">
+                <div class="chart-box">
+                    <p>Revenue</p>
+                    <canvas id="Revenue" class="main2"></canvas>
+                </div>
+                <div class="chart-box">
+                    <p>Net Profit</p>
+                    <canvas id="Net Profit" class="main2"></canvas>
+                </div>
+                <div class="chart-box">
+                    <p>EBITDA</p>
+                    <canvas id="EBITDA" class="main2"></canvas>
+                </div>
+                <div class="chart-box">
+                    <p>Net Profit to TTA</p>
+                    <canvas id="Net Profit to TTA" class="main2"></canvas>
+                </div>
+            </div>
+            <div class="chart-description">
+                <div class="chart-description">
+                    <div class="label">
+                        <span class="color-box" style="background-color: #02a027;"></span>
+                        <p>Shipping</p>
+                        <span class="color-box" style="background-color: #00dc28;"></span>
+                        <p>Mermaid</p>
+                        <span class="color-box" style="background-color: #02dbb7;"></span>
+                        <p>PMTA</p>
+                        <span class="color-box" style="background-color: #eaff00;"></span>
+                        <p>Pizza</p>
+                        <span class="color-box" style="background-color: #feae00;"></span>
+                        <p>Other</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     
-        <!-- ตารางบนขวา -->
-        <div class="table-cash-flow-1">
-            <table>
-                <thead>
-                    <tr>
-                        <th>May - Dec2024</th>
-                        <th>2025</th>
-                        <th>2026</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th>######</th>
-                        <th>######</th>
-                        <th>######</th>
-                    </tr>
-                    <tr class="green-border">
-                        <td>1,195</td>
-                        <td>1,690</td>
-                        <td>4,788</td>
-                    </tr>
-                    <tr class="green-border">
-                        <td>697</td>
-                        <td>890</td>
-                        <td>814</td>
-                    </tr>
-                    <tr class="green-border">
-                        <td>100</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>-</td>
-                        <td>800</td>
-                        <td>3,974</td>
-                    </tr>
-                    <tr class="red-border">
-                        <td>1,980</td>
-                        <td>2,511</td>
-                        <td>5,455</td>
-                    </tr>
-                    <tr class="red-border">
-                        <td>209</td>
-                        <td>359</td>
-                        <td>377</td>
-                    </tr>
-                    <tr class="red-border">
-                        <td>-</td>
-                        <td>550</td>
-                        <td>550</td>
-                    </tr>
-                    <tr>
-                        <td>-</td>
-                        <td>800</td>
-                        <td>3,974</td>
-                    </tr>
-                    <tr class="red-border-1">
-                        <td>226</td>
-                        <td>453</td>
-                        <td>437</td>
-                    </tr>
-                    <tr class="red-border">
-                        <td>1,546</td>
-                        <td>349</td>
-                        <td>130</td>
-                    </tr>
-                    <tr>
-                        <td>180</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>30</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>40</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>35</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>100</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>50</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>40</td>
-                        <td>60</td>
-                        <td>60</td>
-                    </tr>
-                    <tr>
-                        <td>100</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>325</td>
-                        <td>73</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>100</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>-</td>
-                        <td>74</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>-</td>
-                        <td>27</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>100</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>21</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>175</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>-</td>
-                        <td>53</td>
-                        <td>70</td>
-                    </tr>
-                    <tr>
-                        <td>123</td>
-                        <td>53</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>-</td>
-                        <td>11</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>120</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 300;">(883)</td>
-                        <td style="font-weight: 300;">(821)</td>
-                        <td style="font-weight: 300;">(667)</td>
-                    </tr>
-                    <tr>
-                        <td>11,159</td>
-                        <td>10,338</td>
-                        <td>9,671</td>
-                    </tr>
-                    <tr>
-                        <td>2,010</td>
-                        <td>1,773</td>
-                        <td>1,762</td>
-                    </tr>
-                    <tr>
-                        <td>13,170</td>
-                        <td>12,111</td>
-                        <td>11,433</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="main-container">
-        <table class="table-summary">
-            <thead>
-                <tr>
-                    <td style="font-weight: 700; background-color: #35a8eb;">TTA Ending Cash Balance</td>
-                    <td style="font-weight: 700; background-color: #35a8eb;">May-24</td>
-                    <td style="font-weight: 700; background-color: #35a8eb;">Jun-24</td>
-                    <td style="font-weight: 700; background-color: #35a8eb;">Jul-24</td>
-                    <td style="font-weight: 700; background-color: #35a8eb;">Aug-24</td>
-                    <td style="font-weight: 700; background-color: #35a8eb;">Sep-24</td>
-                    <td style="font-weight: 700; background-color: #35a8eb;">Oct-24</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="table-summary1">Cash only</td>
-                    <td>3,451</td>
-                    <td>3,097</td>
-                    <td>3,022</td>
-                    <td>3,126</td>
-                    <td>3,050</td>
-                    <td>2,927</td>
-                </tr>
-                <tr>
-                    <td class="table-summary2">Cash + Short Term Investment</td>
-                    <td>4,538</td>
-                    <td>4,184</td>
-                    <td>4,109</td>
-                    <td>4,213</td>
-                    <td>4,137</td>
-                    <td>4,014</td>
-                </tr>
-                <tr>
-                    <td class="table-summary3">Cash + Cryptocurrency</td>
-                    <td>10,852</td>
-                    <td>10,497</td>
-                    <td>10,422</td>
-                    <td>10,527</td>
-                    <td>10,451</td>
-                    <td>10,327</td>
-                </tr>
-                <tr>
-                    <td class="table-summary4">Cash + Short Term Investment. + Cryptocurrency</td>
-                    <td>11,938</td>
-                    <td>11,584</td>
-                    <td>11,509</td>
-                    <td>11,614</td>
-                    <td>11,538</td>
-                    <td>11,414</td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table-summary-1">
-            <thead>
-                <tr style="background-color: #35a8eb;">
-                    <td style="font-weight: 700;">2024</td>
-                    <td style="font-weight: 700;">2025</td>
-                    <td style="font-weight: 700;">2026</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>2,672</td>
-                    <td>1,851</td>
-                    <td>1,184</td>
-                </tr>
-                <tr>
-                    <td>3,759</td>
-                    <td>2,938</td>
-                    <td>2,271</td>
-                </tr>
-                <tr>
-                    <td>10,073</td>
-                    <td>9,251</td>
-                    <td>8,585</td>
-                </tr>
-                <tr>
-                    <td>11,159</td>
-                    <td>10,338</td>
-                    <td>9,671</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // ดึงข้อมูลจากตาราง
+        const table = document.getElementById('dataTable');
+        const rows = table.querySelectorAll('tbody tr');
+
+        // แปลงข้อมูลจากตารางไปยัง array สำหรับกราฟ
+        const tableChartData = [];
+        rows.forEach(row => {
+            const cells = row.querySelectorAll('td');
+            const group = cells[0].innerText;
+            const data = [
+                parseInt(cells[1].innerText.replace('M', '').replace(',', '')),
+                parseInt(cells[2].innerText.replace('M', '').replace(',', '')),
+                parseInt(cells[3].innerText.replace('M', '').replace(',', ''))
+            ];
+            tableChartData.push({ group, data });
+        });
+
+        // สร้างกราฟหลัก
+        const chart = new Chart(document.getElementById('myBarChart'), {
+            type: 'bar',
+            data: {
+                labels: ['2021', '2022', '2023'], // ชื่อปี
+                datasets: tableChartData.map((item, datasetIndex) => ({
+                    label: item.group, // ชื่อกลุ่ม
+                    data: item.data,  // ข้อมูลของกลุ่มนี้ในแต่ละปี
+                    backgroundColor: Array(item.data.length).fill(['#02a027', '#00dc28', '#02dbb7', '#eaff00', '#feae00'][datasetIndex % 5]),
+                    borderColor: Array(item.data.length).fill(['#02a027', '#00dc28', '#02dbb7', '#eaff00', '#feae00'][datasetIndex % 5]),
+                    borderWidth: 1
+                }))
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true } // เริ่มต้นแกน Y ที่ 0
+                },
+                plugins: {
+                    legend: { display: true } // แสดงคำอธิบายกราฟ
+                }
+            }
+        });
+
+
+        // ข้อมูลสำหรับกราฟย่อย
+        const chartData = [
+            {
+                element: 'Revenue',
+                labels: ['2021', '2022', '2023'],
+                data: [100, 4000, 600],
+                backgroundColor: 'rgba(255, 99, 132, 0.5)'
+            },
+            {
+                element: 'Net Profit',
+                labels: ['2021', '2022', '2023'],
+                data: [2000, 250, 500],
+                backgroundColor: 'rgba(54, 162, 235, 0.5)'
+            },
+            {
+                element: 'EBITDA',
+                labels: ['2021', '2022', '2023'],
+                data: [200, 300, -600],
+                backgroundColor: 'rgba(75, 192, 192, 0.5)'
+            },
+            {
+                element: 'Net Profit to TTA',
+                labels: ['2021', '2022', '2023'],
+                data: [250, 350, 450],
+                backgroundColor: 'rgba(255, 206, 86, 0.5)'
+            }
+        ];
+
+        // สร้างกราฟใน chart-container สำหรับกราฟย่อย (ไม่ยุ่งกับ myBarChart)
+        chartData.forEach(chart => {
+            new Chart(document.getElementById(chart.element), {
+                type: 'bar',
+                data: {
+                    labels: chart.labels,
+                    datasets: [{
+                        label: chart.element,
+                        data: chart.data,
+                        backgroundColor: chart.backgroundColor,
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false // ปิดการแสดง legend
+                        }
+                    }
+                }
+            });
+        });
+        
+        // ฟังก์ชั่นสลับระหว่างกราฟและตาราง
+        document.getElementById("toggleView").addEventListener("click", function () {
+        const chartContainer = document.getElementById("chartContainer");
+        const tableContainer = document.getElementById("tableContainer");
+        const button = document.getElementById("toggleView");
+
+        if (chartContainer.style.display === "none") {
+            chartContainer.style.display = "block";
+            tableContainer.style.display = "none";
+            button.textContent = "Switch to Table";
+        } else {
+            chartContainer.style.display = "none";
+            tableContainer.style.display = "block";
+            button.textContent = "Switch to Chart";
+        }
+
+        // อัปเดตข้อมูลในตารางเมื่อสลับไปยังตาราง
+        if (tableContainer.style.display === "block") {
+            const tableData = document.getElementById('tableData');
+            tableData.innerHTML = ''; // เคลียร์ข้อมูลเดิม
+            tableChartData.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.group}</td>
+                    <td>${item.data[0]}M</td>
+                    <td>${item.data[1]}M</td>
+                    <td>${item.data[2]}M</td>
+                    <td>Calculated</td>
+                    <td>Calculated%</td>
+                `;
+                tableData.appendChild(row);
+            });
+        }
+    });
+    </script>
 </body>
 </html>

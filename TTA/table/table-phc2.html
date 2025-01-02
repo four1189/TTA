@@ -9,6 +9,7 @@
     .con-1{
         display: flex;
         justify-content: flex-end;
+        gap: 10px;
     }
     .menu-item1 {
         text-decoration: none;
@@ -16,6 +17,7 @@
         background-color: #5b79db;
         padding: 8px;
         border-radius: 5px;
+        border: 1px solid white;
     }
     .menu-item1:hover {
         color: rgb(253, 253, 253);
@@ -112,10 +114,175 @@
     .table-cash-flow td:nth-child(n+2) {
         text-align: center;
     }
+
+
+        /* Styles for overlay */
+        .overlay {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            visibility: hidden; /* ซ่อนเริ่มต้น */
+            opacity: 0; /* โปร่งใส */
+            transition: visibility 0s, opacity 0.3s; /* สร้างเอฟเฟกต์การแสดง/ซ่อน */
+        }
+
+        .overlay.active {
+            visibility: visible; /* แสดง */
+            opacity: 1; /* มองเห็น */
+        }
+
+
+        .form-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            width: 600px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-row {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-row label {
+            font-weight: bold;
+            /* margin-bottom: 5px; */
+        }
+
+        .form-row input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 0px;
+            right: 4px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #000000;
+        }
+
+        .form-row button {
+            grid-column: span 2; /* Make button span both columns */
+            padding: 10px;
+            background-color: #8fa6f0;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 4%;
+            font-size: 14px;
+        }
+
+        .form-row button:hover {
+            background-color: #8fa6f0;
+        }
+
+        .c1 {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            align-items: baseline;
+        }
 </style>
 <body>
     <div class="con-1">
-        <a href="../Key.html" class="menu-item1">Go home</a>
+        <button class="menu-item1" id="openOverlay">Add Form</button>
+        <a href="../main/Key.html" class="menu-item1">Go home</a>
+    </div>
+    <div id="overlay" class="overlay">
+        <div class="form-container">
+        <button class="close-btn" id="closeOverlay">&times;</button>
+            <form action="" method="POST" class="c1">
+                <div class="r1">
+                    <div class="form-row">
+                        <label for="Company Name">Company Name :</label>
+                        <input type="text" id="Company Name" name="Company Name" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="Shareholding">% Shareholding :</label>
+                        <input type="number" id="Shareholding" name="Shareholding" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="Before">Investment Cost Before Impairment :</label>
+                        <input type="number" id="Before" name="Before" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="Impairment">Impairment :</label>
+                        <input type="number" id="Impairment" name="Impairment" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="After">Investment Cost After Impairment :</label>
+                        <input type="number" id="After" name="After" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="TTA Loan">TTA Loan:</label>
+                        <input type="number" id="TTA Loan" name="TTA Loan" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="FY19">Act FY19 :</label>
+                        <input type="number" id="FY19" name="FY19" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="FY20">Act FY20 :</label>
+                        <input type="number" id="FY20" name="FY20" required>
+                    </div>
+                </div>
+                <div class="r2">
+                    <div class="form-row">
+                        <label for="FY21">Act FY21 :</label>
+                        <input type="number" id="FY21" name="FY21" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="FY22">Act FY22 :</label>
+                        <input type="number" id="FY22" name="FY22" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="FY23">Act FY23 :</label>
+                        <input type="number" id="FY23" name="FY23" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="FY24">Act FY24 :</label>
+                        <input type="number" id="FY24" name="FY24" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="years">Avg 5 years :</label>
+                        <input type="number" id="years" name="years" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="After">% Ang Return of Inv. After :</label>
+                        <input type="number" id="After" name="After" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="Received">Accu. Div. Received :</label>
+                        <input type="number" id="Received" name="Received" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="Act FY19">% Accu. Div. Yield :</label>
+                        <input type="number" id="Act FY19" name="Act FY19" required>
+                    </div>
+                </div>
+            </form>
+            <div class="form-row">
+                <button type="submit">Insert Data</button>
+            </div>
+        </div>
     </div>
     <div class="table-container-1">
         <h1>Land</h1>
@@ -788,5 +955,18 @@
           </tbody>
         </table>
     </div>
+    <script>
+        const overlay = document.getElementById('overlay');
+        const closeOverlayButton = document.getElementById('closeOverlay');
+        const openOverlayButton = document.getElementById('openOverlay');
+
+        openOverlayButton.addEventListener('click', () => {
+            overlay.classList.add('active');
+        });
+
+        closeOverlayButton.addEventListener('click', () => {
+            overlay.classList.remove('active');
+        });
+    </script>
 </body>
 </html>
