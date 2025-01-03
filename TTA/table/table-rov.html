@@ -143,7 +143,7 @@
         .form-row button {
             width: 100%;
             padding: 10px;
-            background-color: #02a027;
+            background-color: #8fa6f0;
             color: white;
             border: none;
             border-radius: 4px;
@@ -151,7 +151,7 @@
         }
 
         .form-row button:hover {
-            background-color: #00dc28;
+            background-color: #3b62e2;
         }
 
         .close-btn {
@@ -172,18 +172,18 @@
     <div id="overlay" class="overlay">
         <div class="form-container">
             <button class="close-btn" id="closeOverlay">&times;</button>
-            <form action="" method="POST">
+            <form action="insert_rov.php" method="POST">
                 <div class="form-row">
-                    <label for="vessel_name">Name of vessels :</label>
-                    <input type="text" id="vessel_name" name="vessel_name" required>
+                    <label for="name_of_vessels">Name of vessels :</label>
+                    <input type="text" id="name_of_vessels" name="name_of_vessels" required>
                 </div>
                 <div class="form-row">
-                    <label for="Vessel Type">Vessel Type :</label>
-                    <input type="text" id="Vessel Type" name="Vessel Type" required>
+                    <label for="vessel_Type">Vessel Type :</label>
+                    <input type="text" id="vessel_Type" name="vessel_Type" required>
                 </div>
                 <div class="form-row">
-                    <label for="Purchase year">Purchase year :</label>
-                    <input type="date" id="Purchase year" name="Purchase year" required>
+                    <label for="purchase_year">Purchase year :</label>
+                    <input type="date" id="purchase_year" name="purchase_year" required>
                 </div>
                 <div class="form-row">
                     <button type="submit">Insert Data</button>

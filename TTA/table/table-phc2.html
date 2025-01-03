@@ -179,7 +179,7 @@
         }
 
         .form-row button {
-            grid-column: span 2; /* Make button span both columns */
+            /* grid-column: span 2; Make button span both columns */
             padding: 10px;
             background-color: #8fa6f0;
             color: white;
@@ -191,14 +191,14 @@
         }
 
         .form-row button:hover {
-            background-color: #8fa6f0;
+            background-color: #3b62e2;
         }
 
         .c1 {
             display: flex;
             gap: 12px;
             justify-content: center;
-            align-items: baseline;
+            align-items: flex-end;
         }
 </style>
 <body>
@@ -209,79 +209,79 @@
     <div id="overlay" class="overlay">
         <div class="form-container">
         <button class="close-btn" id="closeOverlay">&times;</button>
-            <form action="" method="POST" class="c1">
+            <form action="insert_phc2.php" method="POST" class="c1">
                 <div class="r1">
                     <div class="form-row">
-                        <label for="Company Name">Company Name :</label>
-                        <input type="text" id="Company Name" name="Company Name" required>
+                        <label for="company_name">Company name :</label>
+                        <input type="text" id="company_name" name="company_name" required>
                     </div>
                     <div class="form-row">
-                        <label for="Shareholding">% Shareholding :</label>
-                        <input type="number" id="Shareholding" name="Shareholding" required>
+                        <label for="shareholding">Shareholding :</label>
+                        <input type="text" id="shareholding" name="shareholding" required>
                     </div>
                     <div class="form-row">
-                        <label for="Before">Investment Cost Before Impairment :</label>
-                        <input type="number" id="Before" name="Before" required>
+                        <label for="before_s">Investment Cost Before Impairment :</label>
+                        <input type="number" id="before_s" name="before_s" required>
                     </div>
                     <div class="form-row">
-                        <label for="Impairment">Impairment :</label>
-                        <input type="number" id="Impairment" name="Impairment" required>
+                        <label for="impairment">Impairment :</label>
+                        <input type="number" id="impairment" name="impairment" required>
                     </div>
                     <div class="form-row">
-                        <label for="After">Investment Cost After Impairment :</label>
-                        <input type="number" id="After" name="After" required>
+                        <label for="after_c">Investment Cost After Impairment :</label>
+                        <input type="number" id="after_c" name="after_c" required>
                     </div>
                     <div class="form-row">
-                        <label for="TTA Loan">TTA Loan:</label>
-                        <input type="number" id="TTA Loan" name="TTA Loan" required>
+                        <label for="tta_Loan">TTA Loan:</label>
+                        <input type="number" id="tta_Loan" name="tta_Loan" required>
                     </div>
                     <div class="form-row">
-                        <label for="FY19">Act FY19 :</label>
-                        <input type="number" id="FY19" name="FY19" required>
+                        <label for="fy19">Act FY19 :</label>
+                        <input type="number" id="fy19" name="fy19" required>
                     </div>
                     <div class="form-row">
-                        <label for="FY20">Act FY20 :</label>
-                        <input type="number" id="FY20" name="FY20" required>
+                        <label for="fy20">Act FY20 :</label>
+                        <input type="number" id="fy20" name="fy20" required>
                     </div>
                 </div>
                 <div class="r2">
                     <div class="form-row">
-                        <label for="FY21">Act FY21 :</label>
-                        <input type="number" id="FY21" name="FY21" required>
+                        <label for="fy21">Act FY21 :</label>
+                        <input type="number" id="fy21" name="fy21" required>
                     </div>
                     <div class="form-row">
-                        <label for="FY22">Act FY22 :</label>
-                        <input type="number" id="FY22" name="FY22" required>
+                        <label for="fy22">Act FY22 :</label>
+                        <input type="number" id="fy22" name="fy22" required>
                     </div>
                     <div class="form-row">
-                        <label for="FY23">Act FY23 :</label>
-                        <input type="number" id="FY23" name="FY23" required>
+                        <label for="fy23">Act FY23 :</label>
+                        <input type="number" id="fy23" name="fy23" required>
                     </div>
                     <div class="form-row">
-                        <label for="FY24">Act FY24 :</label>
-                        <input type="number" id="FY24" name="FY24" required>
+                        <label for="fy24">Act FY24 :</label>
+                        <input type="number" id="fy24" name="fy24" required>
                     </div>
                     <div class="form-row">
                         <label for="years">Avg 5 years :</label>
                         <input type="number" id="years" name="years" required>
                     </div>
                     <div class="form-row">
-                        <label for="After">% Ang Return of Inv. After :</label>
-                        <input type="number" id="After" name="After" required>
+                        <label for="after_r">% Ang Return of Inv. After :</label>
+                        <input type="text" id="after_r" name="after_r" required>
                     </div>
                     <div class="form-row">
-                        <label for="Received">Accu. Div. Received :</label>
-                        <input type="number" id="Received" name="Received" required>
+                        <label for="received">Accu. Div. Received :</label>
+                        <input type="number" id="received" name="received" required>
                     </div>
                     <div class="form-row">
-                        <label for="Act FY19">% Accu. Div. Yield :</label>
-                        <input type="number" id="Act FY19" name="Act FY19" required>
+                        <label for="act_FY19">% Accu. Div. Yield :</label>
+                        <input type="text" id="act_FY19" name="act_FY19" required>
                     </div>
                 </div>
+                <div class="form-row">
+                    <button type="submit">Insert Data</button>
+                </div>
             </form>
-            <div class="form-row">
-                <button type="submit">Insert Data</button>
-            </div>
         </div>
     </div>
     <div class="table-container-1">

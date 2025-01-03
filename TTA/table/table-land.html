@@ -151,7 +151,7 @@
         }
 
         .form-row button:hover {
-            background-color: #8fa6f0;
+            background-color: #3b62e2;
         }
 
         .close-btn {
@@ -172,23 +172,23 @@
     <div id="overlay" class="overlay">
         <div class="form-container">
             <button class="close-btn" id="closeOverlay">&times;</button>
-            <form action="" method="POST">
+            <form action="insert_land.php" method="POST">
                 <div class="form-row">
-                    <label for="Location">Location :</label>
-                    <input type="text" id="Location" name="Location" required>
+                    <label for="location">location :</label>
+                    <input type="text" id="location" name="location" required>
                 </div>
                 <div class="form-row">
-                    <label for="Province">Province :</label>
-                    <input type="text" id="Province" name="Province" required>
+                    <label for="province">province :</label>
+                    <input type="text" id="province" name="province" required>
                 </div>
                 <div class="form-row">
-                    <label for="Area">Area :</label>
-                    <input type="text" id="Area" name="Area" required>
+                    <label for="area">area :</label>
+                    <input type="text" id="area" name="area" required>
+                </div>
+                <div class="form-row">
+                    <button type="submit">Insert Data</button>
                 </div>
             </form>
-            <div class="form-row">
-                <button type="submit">Insert Data</button>
-            </div>
         </div>
     </div>
     <div class="table-container-1">
